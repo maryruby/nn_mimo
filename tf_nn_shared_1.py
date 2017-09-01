@@ -7,8 +7,8 @@ import tensorflow as tf
 
 
 def main():
-    ideal_output = pd.read_csv('/Users/mir/b.csv', header = None).as_matrix()
-    x = pd.read_csv('/Users/mir/y.csv', header = None)
+    ideal_output = pd.read_csv('data/1/b.csv', header = None).as_matrix()
+    x = pd.read_csv('data/1/y.csv', header = None)
 
     Y_matrix = np.zeros([ideal_output.shape[1], 4], dtype=int)
     for i in xrange(ideal_output.shape[1]):
@@ -28,8 +28,8 @@ def main():
     Y_2 = sess.run(Y_2_)
     Y_3 = sess.run(Y_3_)
 
-    ideal_output_test = pd.read_csv('/Users/mir/btest.csv', header = None).as_matrix()
-    X_test_matrix = pd.read_csv('/Users/mir/ytest.csv', header = None).as_matrix().T
+    ideal_output_test = pd.read_csv('data/1/btest.csv', header = None).as_matrix()
+    X_test_matrix = pd.read_csv('data/1/ytest.csv', header = None).as_matrix().T
     Y_test_matrix = np.zeros([ideal_output_test.shape[1], 4], dtype=int)
 
     for i in xrange(ideal_output.shape[1]):
