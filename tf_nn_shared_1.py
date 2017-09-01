@@ -108,5 +108,23 @@ def main():
                                                         y_2_: Y_test_2, 
                                                         y_3_: Y_test_3})
 
+
+def convert_row(x):
+    i = x.argmax(axis=0)
+    i0 = i / 2
+    i1 = i % 2
+    return [i0, i1]
+
+
+def accuracy(nn_out_layers, session, feed_dict, ideal_output_test):
+    nn_outputs = session.run(nn_out_layers, feed_dict)
+
+    predicted_y_matrix = np.hstack(map(
+        lambda matrix: np.apply_along_axis(convert_row, 1, matrix), 
+        nn_outputs)).T
+    total_elems = (ideal_output_test.shape[0] * ideal_output_test.shape[1])
+    return np.sum(predicted_y_matrix == ideal_output_test) / float(total_elems)
+
+
 if __name__ == '__main__':
     main()
