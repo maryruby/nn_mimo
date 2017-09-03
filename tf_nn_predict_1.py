@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import argparse
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -17,29 +17,7 @@ def read_data(x_filename, y_filename):
     return X, Y, ideal_output_data
 
 
-def main():
-    # saver = tf.train.Saver()
-    sess = tf.Session()
-
-    print 'Reading train data...'
-    X_matrix, Y_matrix, ideal_output_train = read_data('data/1/y.csv', 'data/1/b.csv')
-
-    Y_0 = sess.run(tf.one_hot(Y_matrix[:,0], depth=4))
-    Y_1 = sess.run(tf.one_hot(Y_matrix[:,1], depth=4))
-    Y_2 = sess.run(tf.one_hot(Y_matrix[:,2], depth=4))
-    Y_3 = sess.run(tf.one_hot(Y_matrix[:,3], depth=4))
-
-    print 'Reading test data...'
-    X_test_matrix, Y_test_matrix, ideal_output_test = read_data('data/1/ytest.csv', 'data/1/btest.csv')
-    
-    Y_test_0 = sess.run(tf.one_hot(Y_test_matrix[:,0], depth=4))
-    Y_test_1 = sess.run(tf.one_hot(Y_test_matrix[:,1], depth=4))
-    Y_test_2 = sess.run(tf.one_hot(Y_test_matrix[:,2], depth=4))
-    Y_test_3 = sess.run(tf.one_hot(Y_test_matrix[:,3], depth=4))
-
-    print 'Creating model...'
-
-
+def main(x_filename, y_filename, model_filename):
     x_ = tf.placeholder(dtype = tf.float32, shape = (None, 8))
     y_0_ = tf.placeholder(dtype = tf.float32, shape = (None, 4))
     y_1_ = tf.placeholder(dtype = tf.float32, shape = (None, 4))
@@ -81,45 +59,26 @@ def main():
     saver = tf.train.Saver()
     sess = tf.Session()
 
-    print 'Initialize model...'
     sess.run(init)
 
-    print 'Training...'
-    # max_iterations = 100000
-    max_iterations = 13200  # дальше мы не обучились
-    batch_size = 100
-    for i in xrange(max_iterations):
-        for b in xrange(X_matrix.shape[0] / batch_size):
-            batch_x = X_matrix[batch_size * b:batch_size * (b + 1),:]
-            batch_y_0 = Y_0[batch_size * b:batch_size * (b + 1),:]
-            batch_y_1 = Y_1[batch_size * b:batch_size * (b + 1),:]
-            batch_y_2 = Y_2[batch_size * b:batch_size * (b + 1),:]
-            batch_y_3 = Y_3[batch_size * b:batch_size * (b + 1),:]
-            feed_dict={x_: batch_x, 
-                       y_0_: batch_y_0, 
-                       y_1_: batch_y_1, 
-                       y_2_: batch_y_2, 
-                       y_3_: batch_y_3}
-            sess.run(train_, feed_dict=feed_dict)
-        if i % 10 == 0:
-            test_feed_dict = {x_: X_test_matrix, y_0_: Y_test_0, y_1_: Y_test_1, y_2_: Y_test_2, y_3_: Y_test_3}
-            ce = sess.run(general_loss_, test_feed_dict)
-            acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess, test_feed_dict,ideal_output_test)
-            print 'Step: %d CE: %.5f ACC: %.5f' % (i, ce, acc)
-                    
-        if i % 100 == 0 and i > 0:
-            print 'Saving model at step %d' % i
-            save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-1.ckpt', global_step = i)
+    saver.restore(sess, model_filename)
+    print 'Model loaded'
 
-    print 'Done training!'
+    print 'Loading test data'
 
-    acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess,
+    X_test_matrix, Y_test_matrix, ideal_output_test = read_data(x_filename, y_filename)
+    
+    Y_test_0 = sess.run(tf.one_hot(Y_test_matrix[:,0], depth=4))
+    Y_test_1 = sess.run(tf.one_hot(Y_test_matrix[:,1], depth=4))
+    Y_test_2 = sess.run(tf.one_hot(Y_test_matrix[:,2], depth=4))
+    Y_test_3 = sess.run(tf.one_hot(Y_test_matrix[:,3], depth=4))
+
+
+    acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess, 
         {x_: X_test_matrix, y_0_: Y_test_0, y_1_: Y_test_1, y_2_: Y_test_2, y_3_: Y_test_3},
         ideal_output_test)
-    print 'Model final accuracy: %.5f' % acc
+    print 'Model accuracy: %.4f' % acc
 
-    save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-1.ckpt', global_step = max_iterations)
-    print 'Model stored in %s' % save_path
 
 
 def convert_row(x):
@@ -140,5 +99,10 @@ def accuracy(nn_out_layers, session, feed_dict, ideal_output_test):
 
 
 if __name__ == '__main__':
-    print 'Start'
-    main()
+	parser = argparse.ArgumentParser()
+	parser.add_argument('X', help = 'Data from output antennas (CSV)')
+	parser.add_argument('Y', help = 'Data from input antennas (CSV)')
+	parser.add_argument('model', help = 'Trained model path')
+	args = parser.parse_args()
+
+	main(args.X, args.Y, args.model)
