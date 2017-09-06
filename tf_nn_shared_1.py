@@ -86,8 +86,8 @@ def main():
 
     print 'Training...'
     # max_iterations = 13200
-    max_iterations = 100  # дальше мы не обучились
-    batch_size = 300
+    max_iterations = 300  # дальше мы не обучились
+    batch_size = 100
     for i in xrange(max_iterations):
         for b in xrange(X_matrix.shape[0] / batch_size):
             batch_x = X_matrix[batch_size * b:batch_size * (b + 1),:]
@@ -107,7 +107,7 @@ def main():
             acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess, test_feed_dict,ideal_output_test)
             print 'Step: %d CE: %.5f ACC: %.5f' % (i, ce, acc)
                     
-        if i % 10 == 0 and i > 0:
+        if i % 100 == 0 and i > 0:
             print 'Saving model at step %d' % i
             save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-2.ckpt', global_step = i)
 
