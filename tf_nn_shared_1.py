@@ -46,7 +46,7 @@ def main():
     y_2_ = tf.placeholder(dtype = tf.float32, shape = (None, 4))
     y_3_ = tf.placeholder(dtype = tf.float32, shape = (None, 4))
 
-    n_shared = 8
+    n_shared = 32
     shared_hidden_ = tf.contrib.layers.fully_connected(x_, n_shared, 
                                                       activation_fn=tf.nn.relu,
                                                       biases_initializer=tf.zeros_initializer())
@@ -85,9 +85,9 @@ def main():
     sess.run(init)
 
     print 'Training...'
-    # max_iterations = 100000
-    max_iterations = 13200  # дальше мы не обучились
-    batch_size = 100
+    # max_iterations = 13200
+    max_iterations = 100  # дальше мы не обучились
+    batch_size = 300
     for i in xrange(max_iterations):
         for b in xrange(X_matrix.shape[0] / batch_size):
             batch_x = X_matrix[batch_size * b:batch_size * (b + 1),:]
@@ -107,9 +107,9 @@ def main():
             acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess, test_feed_dict,ideal_output_test)
             print 'Step: %d CE: %.5f ACC: %.5f' % (i, ce, acc)
                     
-        if i % 100 == 0 and i > 0:
+        if i % 10 == 0 and i > 0:
             print 'Saving model at step %d' % i
-            save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-1.ckpt', global_step = i)
+            save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-2.ckpt', global_step = i)
 
     print 'Done training!'
 
@@ -118,7 +118,7 @@ def main():
         ideal_output_test)
     print 'Model final accuracy: %.5f' % acc
 
-    save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-1.ckpt', global_step = max_iterations)
+    save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-2.ckpt', global_step = max_iterations)
     print 'Model stored in %s' % save_path
 
 
