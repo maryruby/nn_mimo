@@ -1,9 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import logging
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+
+
+logger = logging.getLogger(__name__)
+
+
+model_filename = '/Users/mir/tf-models/mimo-1-3.ckpt'
 
 
 def read_data(x_filename, y_filename):
@@ -21,7 +27,7 @@ def main():
     # saver = tf.train.Saver()
     sess = tf.Session()
 
-    print 'Reading train data...'
+    logger.info('Reading train data...')
     X_matrix, Y_matrix, ideal_output_train = read_data('data/1/y.csv', 'data/1/b.csv')
 
     Y_0 = sess.run(tf.one_hot(Y_matrix[:,0], depth=4))
@@ -29,15 +35,16 @@ def main():
     Y_2 = sess.run(tf.one_hot(Y_matrix[:,2], depth=4))
     Y_3 = sess.run(tf.one_hot(Y_matrix[:,3], depth=4))
 
-    print 'Reading test data...'
-    X_test_matrix, Y_test_matrix, ideal_output_test = read_data('data/1/ytest.csv', 'data/1/btest.csv')
+    logger.info('Reading test data...')
+    # X_test_matrix, Y_test_matrix, ideal_output_test = read_data('data/1/ytest.csv', 'data/1/btest.csv')
+    X_test_matrix, Y_test_matrix, ideal_output_test = read_data('~/y.csv1', '~/b.csv1')
     
     Y_test_0 = sess.run(tf.one_hot(Y_test_matrix[:,0], depth=4))
     Y_test_1 = sess.run(tf.one_hot(Y_test_matrix[:,1], depth=4))
     Y_test_2 = sess.run(tf.one_hot(Y_test_matrix[:,2], depth=4))
     Y_test_3 = sess.run(tf.one_hot(Y_test_matrix[:,3], depth=4))
 
-    print 'Creating model...'
+    logger.info('Creating model...')
 
 
     x_ = tf.placeholder(dtype = tf.float32, shape = (None, 8))
@@ -51,25 +58,40 @@ def main():
                                                       activation_fn=tf.nn.relu,
                                                       biases_initializer=tf.zeros_initializer())
 
-    n_hidden = 4
-    activation_hidden = tf.nn.softmax
-    hidden_0_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
+    n_hidden = 16
+    activation_hidden = tf.nn.relu
+    inner_0_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
                                                  activation_fn=activation_hidden,
                                                  biases_initializer=tf.zeros_initializer())
-    hidden_1_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
+    inner_1_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
                                                  activation_fn=activation_hidden,
                                                  biases_initializer=tf.zeros_initializer())
-    hidden_2_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
+    inner_2_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
                                                  activation_fn=activation_hidden,
                                                  biases_initializer=tf.zeros_initializer())
-    hidden_3_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
+    inner_3_ = tf.contrib.layers.fully_connected(shared_hidden_, n_hidden, 
                                                  activation_fn=activation_hidden,
                                                  biases_initializer=tf.zeros_initializer())
 
-    loss_0_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_0_, logits = hidden_0_))
-    loss_1_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_1_, logits = hidden_1_))
-    loss_2_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_2_, logits = hidden_2_))
-    loss_3_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_3_, logits = hidden_3_))
+    n_output = 4
+    activation_output = tf.nn.softmax
+    output_0_ = tf.contrib.layers.fully_connected(inner_0_, n_output, 
+                                                 activation_fn=activation_output,
+                                                 biases_initializer=tf.zeros_initializer())
+    output_1_ = tf.contrib.layers.fully_connected(inner_1_, n_output, 
+                                                 activation_fn=activation_output,
+                                                 biases_initializer=tf.zeros_initializer())
+    output_2_ = tf.contrib.layers.fully_connected(inner_2_, n_output, 
+                                                 activation_fn=activation_output,
+                                                 biases_initializer=tf.zeros_initializer())
+    output_3_ = tf.contrib.layers.fully_connected(inner_3_, n_output, 
+                                                 activation_fn=activation_output,
+                                                 biases_initializer=tf.zeros_initializer())
+
+    loss_0_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_0_, logits = output_0_))
+    loss_1_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_1_, logits = output_1_))
+    loss_2_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_2_, logits = output_2_))
+    loss_3_ = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_3_, logits = output_3_))
 
     general_loss_ = loss_0_ + loss_1_ + loss_2_ + loss_3_
 
@@ -81,20 +103,30 @@ def main():
     saver = tf.train.Saver()
     sess = tf.Session()
 
-    print 'Initialize model...'
+    logger.info('Initialize model...')
     sess.run(init)
 
-    print 'Training...'
+    logger.info('Restore model...')
+    min_iterations = 0
+    # saver.restore(sess, '%s-%s' % (model_filename, min_iterations))
+
+    logger.info('Training...')
     # max_iterations = 13200
-    max_iterations = 300  # дальше мы не обучились
+    max_iterations = 10000
     batch_size = 100
-    for i in xrange(max_iterations):
+    for i in xrange(min_iterations, max_iterations):
+        perm = np.random.permutation(X_matrix.shape[0])
+        X_matrix_p = X_matrix[perm, :]
+        Y_0_p = Y_0[perm, :]
+        Y_1_p = Y_1[perm, :]
+        Y_2_p = Y_2[perm, :]
+        Y_3_p = Y_3[perm, :]
         for b in xrange(X_matrix.shape[0] / batch_size):
-            batch_x = X_matrix[batch_size * b:batch_size * (b + 1),:]
-            batch_y_0 = Y_0[batch_size * b:batch_size * (b + 1),:]
-            batch_y_1 = Y_1[batch_size * b:batch_size * (b + 1),:]
-            batch_y_2 = Y_2[batch_size * b:batch_size * (b + 1),:]
-            batch_y_3 = Y_3[batch_size * b:batch_size * (b + 1),:]
+            batch_x = X_matrix_p[batch_size * b:batch_size * (b + 1),:]
+            batch_y_0 = Y_0_p[batch_size * b:batch_size * (b + 1),:]
+            batch_y_1 = Y_1_p[batch_size * b:batch_size * (b + 1),:]
+            batch_y_2 = Y_2_p[batch_size * b:batch_size * (b + 1),:]
+            batch_y_3 = Y_3_p[batch_size * b:batch_size * (b + 1),:]
             feed_dict={x_: batch_x, 
                        y_0_: batch_y_0, 
                        y_1_: batch_y_1, 
@@ -102,24 +134,28 @@ def main():
                        y_3_: batch_y_3}
             sess.run(train_, feed_dict=feed_dict)
         if i % 10 == 0:
+            train_feed_dict = {x_: X_matrix, y_0_: Y_0, y_1_: Y_1, y_2_: Y_2, y_3_: Y_3}
+            train_ce = sess.run(general_loss_, train_feed_dict)
+            train_acc = accuracy([output_0_, output_1_, output_2_, output_3_], sess, train_feed_dict, ideal_output_train)
             test_feed_dict = {x_: X_test_matrix, y_0_: Y_test_0, y_1_: Y_test_1, y_2_: Y_test_2, y_3_: Y_test_3}
-            ce = sess.run(general_loss_, test_feed_dict)
-            acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess, test_feed_dict,ideal_output_test)
-            print 'Step: %d CE: %.5f ACC: %.5f' % (i, ce, acc)
+            test_ce = sess.run(general_loss_, test_feed_dict)
+            test_acc = accuracy([output_0_, output_1_, output_2_, output_3_], sess, test_feed_dict, ideal_output_test)
+            logger.info('Step: %d train CE: %.5f train ACC: %.5f test CE: %.5f test ACC: %.5f' % (i, train_ce, train_acc, test_ce, test_acc))
                     
-        if i % 100 == 0 and i > 0:
-            print 'Saving model at step %d' % i
-            save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-2.ckpt', global_step = i)
+        if i % 100 == 0 and i > min_iterations:
+            logger.info('Saving model at step %d .......' % i,)
+            save_path = saver.save(sess, model_filename, global_step = i)
+            logger.info('ok')
 
-    print 'Done training!'
+    logger.info('Done training!')
 
-    acc = accuracy([hidden_0_, hidden_1_, hidden_2_, hidden_3_], sess,
+    acc = accuracy([output_0_, output_1_, output_2_, output_3_], sess,
         {x_: X_test_matrix, y_0_: Y_test_0, y_1_: Y_test_1, y_2_: Y_test_2, y_3_: Y_test_3},
         ideal_output_test)
-    print 'Model final accuracy: %.5f' % acc
+    logger.info('Model final accuracy: %.5f' % acc)
 
-    save_path = saver.save(sess, '/Users/mir/tf-models/mimo-1-2.ckpt', global_step = max_iterations)
-    print 'Model stored in %s' % save_path
+    save_path = saver.save(sess, model_filename, global_step = max_iterations)
+    logger.info('Model stored in %s' % save_path)
 
 
 def convert_row(x):
@@ -140,5 +176,6 @@ def accuracy(nn_out_layers, session, feed_dict, ideal_output_test):
 
 
 if __name__ == '__main__':
-    print 'Start'
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s: %(message)s')
+    logger.info('Start')
     main()

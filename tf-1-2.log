@@ -1,0 +1,1057 @@
+Start
+2017-09-07 00:24:44.743140: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-09-07 00:24:44.743231: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-09-07 00:24:44.743361: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+Reading train data...
+Reading test data...
+Creating model...
+Initialize model...
+Restore model...
+Training...
+Step: 500 train CE: 3.01591 train ACC: 0.99854 test CE: 3.01566 test ACC: 0.99857
+Step: 510 train CE: 3.01536 train ACC: 0.99854 test CE: 3.01511 test ACC: 0.99857
+Step: 520 train CE: 3.01484 train ACC: 0.99855 test CE: 3.01459 test ACC: 0.99857
+Step: 530 train CE: 3.01434 train ACC: 0.99855 test CE: 3.01409 test ACC: 0.99857
+Step: 540 train CE: 3.01386 train ACC: 0.99856 test CE: 3.01360 test ACC: 0.99858
+Step: 550 train CE: 3.01340 train ACC: 0.99855 test CE: 3.01314 test ACC: 0.99858
+Step: 560 train CE: 3.01295 train ACC: 0.99856 test CE: 3.01269 test ACC: 0.99858
+Step: 570 train CE: 3.01253 train ACC: 0.99855 test CE: 3.01227 test ACC: 0.99858
+Step: 580 train CE: 3.01211 train ACC: 0.99855 test CE: 3.01185 test ACC: 0.99858
+Step: 590 train CE: 3.01172 train ACC: 0.99856 test CE: 3.01145 test ACC: 0.99858
+Step: 600 train CE: 3.01133 train ACC: 0.99856 test CE: 3.01107 test ACC: 0.99858
+Saving model at step 600 ....... ok
+Step: 610 train CE: 3.01097 train ACC: 0.99856 test CE: 3.01070 test ACC: 0.99858
+Step: 620 train CE: 3.01061 train ACC: 0.99856 test CE: 3.01034 test ACC: 0.99858
+Step: 630 train CE: 3.01026 train ACC: 0.99856 test CE: 3.01000 test ACC: 0.99858
+Step: 640 train CE: 3.00993 train ACC: 0.99856 test CE: 3.00966 test ACC: 0.99858
+Step: 650 train CE: 3.00960 train ACC: 0.99856 test CE: 3.00934 test ACC: 0.99858
+Step: 660 train CE: 3.00929 train ACC: 0.99856 test CE: 3.00902 test ACC: 0.99858
+Step: 670 train CE: 3.00899 train ACC: 0.99855 test CE: 3.00872 test ACC: 0.99858
+Step: 680 train CE: 3.00870 train ACC: 0.99855 test CE: 3.00842 test ACC: 0.99858
+Step: 690 train CE: 3.00841 train ACC: 0.99856 test CE: 3.00814 test ACC: 0.99858
+Step: 700 train CE: 3.00814 train ACC: 0.99856 test CE: 3.00786 test ACC: 0.99858
+Saving model at step 700 ....... ok
+Step: 710 train CE: 3.00787 train ACC: 0.99856 test CE: 3.00760 test ACC: 0.99859
+Step: 720 train CE: 3.00761 train ACC: 0.99857 test CE: 3.00734 test ACC: 0.99859
+Step: 730 train CE: 3.00736 train ACC: 0.99857 test CE: 3.00708 test ACC: 0.99859
+Step: 740 train CE: 3.00711 train ACC: 0.99856 test CE: 3.00684 test ACC: 0.99859
+Step: 750 train CE: 3.00687 train ACC: 0.99857 test CE: 3.00659 test ACC: 0.99859
+Step: 760 train CE: 3.00664 train ACC: 0.99856 test CE: 3.00636 test ACC: 0.99859
+Step: 770 train CE: 3.00641 train ACC: 0.99856 test CE: 3.00613 test ACC: 0.99859
+Step: 780 train CE: 3.00619 train ACC: 0.99856 test CE: 3.00591 test ACC: 0.99859
+Step: 790 train CE: 3.00598 train ACC: 0.99856 test CE: 3.00570 test ACC: 0.99859
+Step: 800 train CE: 3.00577 train ACC: 0.99856 test CE: 3.00549 test ACC: 0.99859
+Saving model at step 800 ....... ok
+Step: 810 train CE: 3.00556 train ACC: 0.99856 test CE: 3.00528 test ACC: 0.99859
+Step: 820 train CE: 3.00536 train ACC: 0.99856 test CE: 3.00508 test ACC: 0.99859
+Step: 830 train CE: 3.00517 train ACC: 0.99857 test CE: 3.00489 test ACC: 0.99859
+Step: 840 train CE: 3.00498 train ACC: 0.99857 test CE: 3.00470 test ACC: 0.99859
+Step: 850 train CE: 3.00479 train ACC: 0.99857 test CE: 3.00451 test ACC: 0.99859
+Step: 860 train CE: 3.00461 train ACC: 0.99857 test CE: 3.00433 test ACC: 0.99859
+Step: 870 train CE: 3.00444 train ACC: 0.99857 test CE: 3.00415 test ACC: 0.99859
+Step: 880 train CE: 3.00426 train ACC: 0.99857 test CE: 3.00398 test ACC: 0.99860
+Step: 890 train CE: 3.00409 train ACC: 0.99857 test CE: 3.00381 test ACC: 0.99859
+Step: 900 train CE: 3.00393 train ACC: 0.99857 test CE: 3.00365 test ACC: 0.99859
+Saving model at step 900 ....... ok
+Step: 910 train CE: 3.00377 train ACC: 0.99857 test CE: 3.00349 test ACC: 0.99859
+Step: 920 train CE: 3.00361 train ACC: 0.99857 test CE: 3.00333 test ACC: 0.99859
+Step: 930 train CE: 3.00346 train ACC: 0.99857 test CE: 3.00317 test ACC: 0.99859
+Step: 940 train CE: 3.00330 train ACC: 0.99858 test CE: 3.00302 test ACC: 0.99859
+Step: 950 train CE: 3.00315 train ACC: 0.99858 test CE: 3.00287 test ACC: 0.99859
+Step: 960 train CE: 3.00301 train ACC: 0.99858 test CE: 3.00273 test ACC: 0.99859
+Step: 970 train CE: 3.00287 train ACC: 0.99858 test CE: 3.00259 test ACC: 0.99859
+Step: 980 train CE: 3.00273 train ACC: 0.99858 test CE: 3.00245 test ACC: 0.99859
+Step: 990 train CE: 3.00259 train ACC: 0.99858 test CE: 3.00231 test ACC: 0.99859
+Step: 1000 train CE: 3.00246 train ACC: 0.99858 test CE: 3.00218 test ACC: 0.99859
+Saving model at step 1000 ....... ok
+Step: 1010 train CE: 3.00233 train ACC: 0.99859 test CE: 3.00205 test ACC: 0.99859
+Step: 1020 train CE: 3.00220 train ACC: 0.99859 test CE: 3.00192 test ACC: 0.99859
+Step: 1030 train CE: 3.00207 train ACC: 0.99859 test CE: 3.00179 test ACC: 0.99859
+Step: 1040 train CE: 3.00195 train ACC: 0.99858 test CE: 3.00167 test ACC: 0.99859
+Step: 1050 train CE: 3.00183 train ACC: 0.99858 test CE: 3.00155 test ACC: 0.99859
+Step: 1060 train CE: 3.00171 train ACC: 0.99859 test CE: 3.00143 test ACC: 0.99859
+Step: 1070 train CE: 3.00159 train ACC: 0.99859 test CE: 3.00131 test ACC: 0.99859
+Step: 1080 train CE: 3.00148 train ACC: 0.99859 test CE: 3.00120 test ACC: 0.99859
+Step: 1090 train CE: 3.00137 train ACC: 0.99859 test CE: 3.00108 test ACC: 0.99859
+Step: 1100 train CE: 3.00125 train ACC: 0.99859 test CE: 3.00097 test ACC: 0.99859
+Saving model at step 1100 ....... ok
+Step: 1110 train CE: 3.00115 train ACC: 0.99859 test CE: 3.00086 test ACC: 0.99859
+Step: 1120 train CE: 3.00104 train ACC: 0.99859 test CE: 3.00076 test ACC: 0.99859
+Step: 1130 train CE: 3.00094 train ACC: 0.99859 test CE: 3.00065 test ACC: 0.99859
+Step: 1140 train CE: 3.00083 train ACC: 0.99859 test CE: 3.00055 test ACC: 0.99859
+Step: 1150 train CE: 3.00073 train ACC: 0.99859 test CE: 3.00045 test ACC: 0.99859
+Step: 1160 train CE: 3.00063 train ACC: 0.99859 test CE: 3.00035 test ACC: 0.99859
+Step: 1170 train CE: 3.00053 train ACC: 0.99859 test CE: 3.00025 test ACC: 0.99859
+Step: 1180 train CE: 3.00044 train ACC: 0.99859 test CE: 3.00016 test ACC: 0.99859
+Step: 1190 train CE: 3.00034 train ACC: 0.99859 test CE: 3.00006 test ACC: 0.99859
+Step: 1200 train CE: 3.00025 train ACC: 0.99859 test CE: 2.99997 test ACC: 0.99859
+Saving model at step 1200 ....... ok
+Step: 1210 train CE: 3.00016 train ACC: 0.99859 test CE: 2.99988 test ACC: 0.99859
+Step: 1220 train CE: 3.00007 train ACC: 0.99860 test CE: 2.99979 test ACC: 0.99859
+Step: 1230 train CE: 2.99998 train ACC: 0.99860 test CE: 2.99970 test ACC: 0.99859
+Step: 1240 train CE: 2.99989 train ACC: 0.99860 test CE: 2.99961 test ACC: 0.99859
+Step: 1250 train CE: 2.99980 train ACC: 0.99860 test CE: 2.99952 test ACC: 0.99860
+Step: 1260 train CE: 2.99972 train ACC: 0.99860 test CE: 2.99944 test ACC: 0.99860
+Step: 1270 train CE: 2.99963 train ACC: 0.99860 test CE: 2.99935 test ACC: 0.99860
+Step: 1280 train CE: 2.99955 train ACC: 0.99860 test CE: 2.99927 test ACC: 0.99860
+Step: 1290 train CE: 2.99947 train ACC: 0.99860 test CE: 2.99919 test ACC: 0.99860
+Step: 1300 train CE: 2.99939 train ACC: 0.99860 test CE: 2.99911 test ACC: 0.99860
+Saving model at step 1300 ....... ok
+Step: 1310 train CE: 2.99931 train ACC: 0.99860 test CE: 2.99903 test ACC: 0.99860
+Step: 1320 train CE: 2.99923 train ACC: 0.99860 test CE: 2.99895 test ACC: 0.99860
+Step: 1330 train CE: 2.99916 train ACC: 0.99860 test CE: 2.99888 test ACC: 0.99860
+Step: 1340 train CE: 2.99908 train ACC: 0.99860 test CE: 2.99880 test ACC: 0.99860
+Step: 1350 train CE: 2.99901 train ACC: 0.99860 test CE: 2.99873 test ACC: 0.99860
+Step: 1360 train CE: 2.99893 train ACC: 0.99860 test CE: 2.99865 test ACC: 0.99860
+Step: 1370 train CE: 2.99886 train ACC: 0.99860 test CE: 2.99858 test ACC: 0.99860
+Step: 1380 train CE: 2.99879 train ACC: 0.99860 test CE: 2.99851 test ACC: 0.99860
+Step: 1390 train CE: 2.99872 train ACC: 0.99860 test CE: 2.99844 test ACC: 0.99860
+Step: 1400 train CE: 2.99865 train ACC: 0.99860 test CE: 2.99837 test ACC: 0.99860
+Saving model at step 1400 ....... ok
+Step: 1410 train CE: 2.99858 train ACC: 0.99860 test CE: 2.99830 test ACC: 0.99860
+Step: 1420 train CE: 2.99851 train ACC: 0.99860 test CE: 2.99823 test ACC: 0.99860
+Step: 1430 train CE: 2.99845 train ACC: 0.99860 test CE: 2.99817 test ACC: 0.99860
+Step: 1440 train CE: 2.99838 train ACC: 0.99860 test CE: 2.99810 test ACC: 0.99860
+Step: 1450 train CE: 2.99831 train ACC: 0.99861 test CE: 2.99804 test ACC: 0.99860
+Step: 1460 train CE: 2.99825 train ACC: 0.99860 test CE: 2.99797 test ACC: 0.99860
+Step: 1470 train CE: 2.99819 train ACC: 0.99861 test CE: 2.99791 test ACC: 0.99860
+Step: 1480 train CE: 2.99812 train ACC: 0.99860 test CE: 2.99785 test ACC: 0.99860
+Step: 1490 train CE: 2.99806 train ACC: 0.99861 test CE: 2.99778 test ACC: 0.99861
+Step: 1500 train CE: 2.99800 train ACC: 0.99861 test CE: 2.99773 test ACC: 0.99861
+Saving model at step 1500 ....... ok
+Step: 1510 train CE: 2.99794 train ACC: 0.99861 test CE: 2.99766 test ACC: 0.99861
+Step: 1520 train CE: 2.99788 train ACC: 0.99861 test CE: 2.99761 test ACC: 0.99861
+Step: 1530 train CE: 2.99782 train ACC: 0.99861 test CE: 2.99755 test ACC: 0.99861
+Step: 1540 train CE: 2.99776 train ACC: 0.99861 test CE: 2.99749 test ACC: 0.99861
+Step: 1550 train CE: 2.99771 train ACC: 0.99861 test CE: 2.99743 test ACC: 0.99861
+Step: 1560 train CE: 2.99765 train ACC: 0.99861 test CE: 2.99738 test ACC: 0.99861
+Step: 1570 train CE: 2.99759 train ACC: 0.99861 test CE: 2.99732 test ACC: 0.99861
+Step: 1580 train CE: 2.99754 train ACC: 0.99861 test CE: 2.99727 test ACC: 0.99860
+Step: 1590 train CE: 2.99748 train ACC: 0.99861 test CE: 2.99721 test ACC: 0.99861
+Step: 1600 train CE: 2.99743 train ACC: 0.99860 test CE: 2.99716 test ACC: 0.99861
+Saving model at step 1600 ....... ok
+Step: 1610 train CE: 2.99738 train ACC: 0.99861 test CE: 2.99711 test ACC: 0.99861
+Step: 1620 train CE: 2.99732 train ACC: 0.99861 test CE: 2.99705 test ACC: 0.99861
+Step: 1630 train CE: 2.99727 train ACC: 0.99861 test CE: 2.99700 test ACC: 0.99861
+Step: 1640 train CE: 2.99722 train ACC: 0.99861 test CE: 2.99695 test ACC: 0.99861
+Step: 1650 train CE: 2.99717 train ACC: 0.99861 test CE: 2.99690 test ACC: 0.99861
+Step: 1660 train CE: 2.99712 train ACC: 0.99861 test CE: 2.99685 test ACC: 0.99861
+Step: 1670 train CE: 2.99707 train ACC: 0.99861 test CE: 2.99680 test ACC: 0.99861
+Step: 1680 train CE: 2.99702 train ACC: 0.99861 test CE: 2.99675 test ACC: 0.99861
+Step: 1690 train CE: 2.99697 train ACC: 0.99861 test CE: 2.99670 test ACC: 0.99861
+Step: 1700 train CE: 2.99692 train ACC: 0.99861 test CE: 2.99665 test ACC: 0.99861
+Saving model at step 1700 ....... ok
+Step: 1710 train CE: 2.99687 train ACC: 0.99861 test CE: 2.99660 test ACC: 0.99861
+Step: 1720 train CE: 2.99683 train ACC: 0.99861 test CE: 2.99656 test ACC: 0.99861
+Step: 1730 train CE: 2.99678 train ACC: 0.99862 test CE: 2.99651 test ACC: 0.99861
+Step: 1740 train CE: 2.99673 train ACC: 0.99861 test CE: 2.99646 test ACC: 0.99861
+Step: 1750 train CE: 2.99669 train ACC: 0.99861 test CE: 2.99642 test ACC: 0.99861
+Step: 1760 train CE: 2.99664 train ACC: 0.99861 test CE: 2.99637 test ACC: 0.99861
+Step: 1770 train CE: 2.99660 train ACC: 0.99861 test CE: 2.99633 test ACC: 0.99861
+Step: 1780 train CE: 2.99655 train ACC: 0.99861 test CE: 2.99629 test ACC: 0.99861
+Step: 1790 train CE: 2.99651 train ACC: 0.99861 test CE: 2.99624 test ACC: 0.99861
+Step: 1800 train CE: 2.99647 train ACC: 0.99861 test CE: 2.99620 test ACC: 0.99861
+Saving model at step 1800 ....... ok
+Step: 1810 train CE: 2.99642 train ACC: 0.99862 test CE: 2.99616 test ACC: 0.99861
+Step: 1820 train CE: 2.99638 train ACC: 0.99862 test CE: 2.99611 test ACC: 0.99861
+Step: 1830 train CE: 2.99634 train ACC: 0.99862 test CE: 2.99607 test ACC: 0.99861
+Step: 1840 train CE: 2.99630 train ACC: 0.99862 test CE: 2.99603 test ACC: 0.99861
+Step: 1850 train CE: 2.99626 train ACC: 0.99862 test CE: 2.99599 test ACC: 0.99861
+Step: 1860 train CE: 2.99621 train ACC: 0.99862 test CE: 2.99595 test ACC: 0.99861
+Step: 1870 train CE: 2.99617 train ACC: 0.99862 test CE: 2.99591 test ACC: 0.99861
+Step: 1880 train CE: 2.99613 train ACC: 0.99862 test CE: 2.99587 test ACC: 0.99861
+Step: 1890 train CE: 2.99609 train ACC: 0.99862 test CE: 2.99583 test ACC: 0.99861
+Step: 1900 train CE: 2.99605 train ACC: 0.99862 test CE: 2.99579 test ACC: 0.99861
+Saving model at step 1900 ....... ok
+Step: 1910 train CE: 2.99602 train ACC: 0.99862 test CE: 2.99575 test ACC: 0.99861
+Step: 1920 train CE: 2.99598 train ACC: 0.99862 test CE: 2.99571 test ACC: 0.99861
+Step: 1930 train CE: 2.99594 train ACC: 0.99862 test CE: 2.99567 test ACC: 0.99861
+Step: 1940 train CE: 2.99590 train ACC: 0.99862 test CE: 2.99564 test ACC: 0.99861
+Step: 1950 train CE: 2.99586 train ACC: 0.99862 test CE: 2.99560 test ACC: 0.99861
+Step: 1960 train CE: 2.99583 train ACC: 0.99862 test CE: 2.99556 test ACC: 0.99861
+Step: 1970 train CE: 2.99579 train ACC: 0.99862 test CE: 2.99553 test ACC: 0.99861
+Step: 1980 train CE: 2.99575 train ACC: 0.99862 test CE: 2.99549 test ACC: 0.99861
+Step: 1990 train CE: 2.99572 train ACC: 0.99862 test CE: 2.99545 test ACC: 0.99861
+Step: 2000 train CE: 2.99568 train ACC: 0.99862 test CE: 2.99542 test ACC: 0.99861
+Saving model at step 2000 ....... ok
+Step: 2010 train CE: 2.99564 train ACC: 0.99862 test CE: 2.99538 test ACC: 0.99861
+Step: 2020 train CE: 2.99561 train ACC: 0.99862 test CE: 2.99535 test ACC: 0.99861
+Step: 2030 train CE: 2.99557 train ACC: 0.99862 test CE: 2.99531 test ACC: 0.99861
+Step: 2040 train CE: 2.99554 train ACC: 0.99862 test CE: 2.99528 test ACC: 0.99861
+Step: 2050 train CE: 2.99551 train ACC: 0.99862 test CE: 2.99525 test ACC: 0.99861
+Step: 2060 train CE: 2.99547 train ACC: 0.99862 test CE: 2.99521 test ACC: 0.99861
+Step: 2070 train CE: 2.99544 train ACC: 0.99863 test CE: 2.99518 test ACC: 0.99861
+Step: 2080 train CE: 2.99540 train ACC: 0.99862 test CE: 2.99515 test ACC: 0.99861
+Step: 2090 train CE: 2.99537 train ACC: 0.99862 test CE: 2.99511 test ACC: 0.99862
+Step: 2100 train CE: 2.99534 train ACC: 0.99862 test CE: 2.99508 test ACC: 0.99862
+Saving model at step 2100 ....... ok
+Step: 2110 train CE: 2.99530 train ACC: 0.99862 test CE: 2.99505 test ACC: 0.99862
+Step: 2120 train CE: 2.99527 train ACC: 0.99862 test CE: 2.99502 test ACC: 0.99862
+Step: 2130 train CE: 2.99524 train ACC: 0.99862 test CE: 2.99499 test ACC: 0.99862
+Step: 2140 train CE: 2.99521 train ACC: 0.99862 test CE: 2.99495 test ACC: 0.99862
+Step: 2150 train CE: 2.99518 train ACC: 0.99863 test CE: 2.99492 test ACC: 0.99862
+Step: 2160 train CE: 2.99515 train ACC: 0.99863 test CE: 2.99489 test ACC: 0.99862
+Step: 2170 train CE: 2.99512 train ACC: 0.99863 test CE: 2.99486 test ACC: 0.99862
+Step: 2180 train CE: 2.99509 train ACC: 0.99863 test CE: 2.99483 test ACC: 0.99862
+Step: 2190 train CE: 2.99506 train ACC: 0.99863 test CE: 2.99480 test ACC: 0.99862
+Step: 2200 train CE: 2.99503 train ACC: 0.99863 test CE: 2.99477 test ACC: 0.99862
+Saving model at step 2200 ....... ok
+Step: 2210 train CE: 2.99500 train ACC: 0.99863 test CE: 2.99474 test ACC: 0.99862
+Step: 2220 train CE: 2.99497 train ACC: 0.99863 test CE: 2.99471 test ACC: 0.99862
+Step: 2230 train CE: 2.99494 train ACC: 0.99863 test CE: 2.99468 test ACC: 0.99862
+Step: 2240 train CE: 2.99491 train ACC: 0.99863 test CE: 2.99465 test ACC: 0.99862
+Step: 2250 train CE: 2.99488 train ACC: 0.99863 test CE: 2.99462 test ACC: 0.99862
+Step: 2260 train CE: 2.99485 train ACC: 0.99863 test CE: 2.99460 test ACC: 0.99862
+Step: 2270 train CE: 2.99482 train ACC: 0.99863 test CE: 2.99457 test ACC: 0.99862
+Step: 2280 train CE: 2.99479 train ACC: 0.99863 test CE: 2.99454 test ACC: 0.99862
+Step: 2290 train CE: 2.99477 train ACC: 0.99863 test CE: 2.99451 test ACC: 0.99862
+Step: 2300 train CE: 2.99474 train ACC: 0.99863 test CE: 2.99449 test ACC: 0.99862
+Saving model at step 2300 ....... ok
+Step: 2310 train CE: 2.99471 train ACC: 0.99863 test CE: 2.99446 test ACC: 0.99862
+Step: 2320 train CE: 2.99468 train ACC: 0.99864 test CE: 2.99443 test ACC: 0.99862
+Step: 2330 train CE: 2.99466 train ACC: 0.99863 test CE: 2.99440 test ACC: 0.99862
+Step: 2340 train CE: 2.99463 train ACC: 0.99863 test CE: 2.99438 test ACC: 0.99862
+Step: 2350 train CE: 2.99460 train ACC: 0.99864 test CE: 2.99435 test ACC: 0.99862
+Step: 2360 train CE: 2.99458 train ACC: 0.99863 test CE: 2.99432 test ACC: 0.99862
+Step: 2370 train CE: 2.99455 train ACC: 0.99863 test CE: 2.99430 test ACC: 0.99862
+Step: 2380 train CE: 2.99452 train ACC: 0.99863 test CE: 2.99427 test ACC: 0.99862
+Step: 2390 train CE: 2.99450 train ACC: 0.99864 test CE: 2.99425 test ACC: 0.99862
+Step: 2400 train CE: 2.99447 train ACC: 0.99864 test CE: 2.99422 test ACC: 0.99862
+Saving model at step 2400 ....... ok
+Step: 2410 train CE: 2.99445 train ACC: 0.99864 test CE: 2.99419 test ACC: 0.99862
+Step: 2420 train CE: 2.99442 train ACC: 0.99864 test CE: 2.99417 test ACC: 0.99862
+Step: 2430 train CE: 2.99440 train ACC: 0.99864 test CE: 2.99414 test ACC: 0.99862
+Step: 2440 train CE: 2.99437 train ACC: 0.99864 test CE: 2.99412 test ACC: 0.99862
+Step: 2450 train CE: 2.99435 train ACC: 0.99864 test CE: 2.99410 test ACC: 0.99862
+Step: 2460 train CE: 2.99432 train ACC: 0.99864 test CE: 2.99407 test ACC: 0.99862
+Step: 2470 train CE: 2.99430 train ACC: 0.99864 test CE: 2.99405 test ACC: 0.99862
+Step: 2480 train CE: 2.99427 train ACC: 0.99864 test CE: 2.99402 test ACC: 0.99862
+Step: 2490 train CE: 2.99425 train ACC: 0.99864 test CE: 2.99400 test ACC: 0.99862
+Step: 2500 train CE: 2.99422 train ACC: 0.99864 test CE: 2.99397 test ACC: 0.99862
+Saving model at step 2500 ....... ok
+Step: 2510 train CE: 2.99420 train ACC: 0.99864 test CE: 2.99395 test ACC: 0.99862
+Step: 2520 train CE: 2.99418 train ACC: 0.99864 test CE: 2.99393 test ACC: 0.99862
+Step: 2530 train CE: 2.99415 train ACC: 0.99865 test CE: 2.99391 test ACC: 0.99862
+Step: 2540 train CE: 2.99413 train ACC: 0.99865 test CE: 2.99388 test ACC: 0.99862
+Step: 2550 train CE: 2.99411 train ACC: 0.99865 test CE: 2.99386 test ACC: 0.99862
+Step: 2560 train CE: 2.99408 train ACC: 0.99865 test CE: 2.99384 test ACC: 0.99862
+Step: 2570 train CE: 2.99406 train ACC: 0.99865 test CE: 2.99381 test ACC: 0.99862
+Step: 2580 train CE: 2.99404 train ACC: 0.99865 test CE: 2.99379 test ACC: 0.99862
+Step: 2590 train CE: 2.99401 train ACC: 0.99865 test CE: 2.99377 test ACC: 0.99862
+Step: 2600 train CE: 2.99399 train ACC: 0.99865 test CE: 2.99375 test ACC: 0.99862
+Saving model at step 2600 ....... ok
+Step: 2610 train CE: 2.99397 train ACC: 0.99865 test CE: 2.99372 test ACC: 0.99862
+Step: 2620 train CE: 2.99395 train ACC: 0.99865 test CE: 2.99370 test ACC: 0.99862
+Step: 2630 train CE: 2.99392 train ACC: 0.99865 test CE: 2.99368 test ACC: 0.99862
+Step: 2640 train CE: 2.99390 train ACC: 0.99865 test CE: 2.99366 test ACC: 0.99862
+Step: 2650 train CE: 2.99388 train ACC: 0.99865 test CE: 2.99364 test ACC: 0.99862
+Step: 2660 train CE: 2.99386 train ACC: 0.99865 test CE: 2.99362 test ACC: 0.99862
+Step: 2670 train CE: 2.99384 train ACC: 0.99865 test CE: 2.99360 test ACC: 0.99862
+Step: 2680 train CE: 2.99382 train ACC: 0.99865 test CE: 2.99357 test ACC: 0.99862
+Step: 2690 train CE: 2.99380 train ACC: 0.99865 test CE: 2.99355 test ACC: 0.99862
+Step: 2700 train CE: 2.99378 train ACC: 0.99865 test CE: 2.99353 test ACC: 0.99862
+Saving model at step 2700 ....... ok
+Step: 2710 train CE: 2.99375 train ACC: 0.99865 test CE: 2.99351 test ACC: 0.99862
+Step: 2720 train CE: 2.99373 train ACC: 0.99865 test CE: 2.99349 test ACC: 0.99862
+Step: 2730 train CE: 2.99371 train ACC: 0.99865 test CE: 2.99347 test ACC: 0.99862
+Step: 2740 train CE: 2.99369 train ACC: 0.99865 test CE: 2.99345 test ACC: 0.99862
+Step: 2750 train CE: 2.99367 train ACC: 0.99865 test CE: 2.99343 test ACC: 0.99862
+Step: 2760 train CE: 2.99365 train ACC: 0.99865 test CE: 2.99341 test ACC: 0.99862
+Step: 2770 train CE: 2.99363 train ACC: 0.99865 test CE: 2.99339 test ACC: 0.99862
+Step: 2780 train CE: 2.99361 train ACC: 0.99865 test CE: 2.99337 test ACC: 0.99862
+Step: 2790 train CE: 2.99359 train ACC: 0.99865 test CE: 2.99335 test ACC: 0.99862
+Step: 2800 train CE: 2.99357 train ACC: 0.99865 test CE: 2.99333 test ACC: 0.99862
+Saving model at step 2800 ....... ok
+Step: 2810 train CE: 2.99355 train ACC: 0.99865 test CE: 2.99332 test ACC: 0.99862
+Step: 2820 train CE: 2.99354 train ACC: 0.99865 test CE: 2.99330 test ACC: 0.99862
+Step: 2830 train CE: 2.99352 train ACC: 0.99865 test CE: 2.99328 test ACC: 0.99862
+Step: 2840 train CE: 2.99350 train ACC: 0.99865 test CE: 2.99326 test ACC: 0.99862
+Step: 2850 train CE: 2.99348 train ACC: 0.99865 test CE: 2.99324 test ACC: 0.99862
+Step: 2860 train CE: 2.99346 train ACC: 0.99865 test CE: 2.99322 test ACC: 0.99862
+Step: 2870 train CE: 2.99344 train ACC: 0.99865 test CE: 2.99320 test ACC: 0.99862
+Step: 2880 train CE: 2.99342 train ACC: 0.99865 test CE: 2.99318 test ACC: 0.99862
+Step: 2890 train CE: 2.99340 train ACC: 0.99865 test CE: 2.99317 test ACC: 0.99862
+Step: 2900 train CE: 2.99339 train ACC: 0.99865 test CE: 2.99315 test ACC: 0.99862
+Saving model at step 2900 ....... ok
+Step: 2910 train CE: 2.99337 train ACC: 0.99865 test CE: 2.99313 test ACC: 0.99862
+Step: 2920 train CE: 2.99335 train ACC: 0.99865 test CE: 2.99311 test ACC: 0.99862
+Step: 2930 train CE: 2.99333 train ACC: 0.99865 test CE: 2.99309 test ACC: 0.99862
+Step: 2940 train CE: 2.99331 train ACC: 0.99865 test CE: 2.99308 test ACC: 0.99862
+Step: 2950 train CE: 2.99329 train ACC: 0.99865 test CE: 2.99306 test ACC: 0.99862
+Step: 2960 train CE: 2.99328 train ACC: 0.99865 test CE: 2.99304 test ACC: 0.99862
+Step: 2970 train CE: 2.99326 train ACC: 0.99865 test CE: 2.99302 test ACC: 0.99862
+Step: 2980 train CE: 2.99324 train ACC: 0.99865 test CE: 2.99301 test ACC: 0.99862
+Step: 2990 train CE: 2.99322 train ACC: 0.99865 test CE: 2.99299 test ACC: 0.99862
+Step: 3000 train CE: 2.99321 train ACC: 0.99865 test CE: 2.99297 test ACC: 0.99862
+Saving model at step 3000 ....... ok
+Step: 3010 train CE: 2.99319 train ACC: 0.99865 test CE: 2.99295 test ACC: 0.99862
+Step: 3020 train CE: 2.99317 train ACC: 0.99865 test CE: 2.99294 test ACC: 0.99862
+Step: 3030 train CE: 2.99315 train ACC: 0.99865 test CE: 2.99292 test ACC: 0.99862
+Step: 3040 train CE: 2.99314 train ACC: 0.99865 test CE: 2.99290 test ACC: 0.99862
+Step: 3050 train CE: 2.99312 train ACC: 0.99865 test CE: 2.99289 test ACC: 0.99862
+Step: 3060 train CE: 2.99310 train ACC: 0.99865 test CE: 2.99287 test ACC: 0.99862
+Step: 3070 train CE: 2.99309 train ACC: 0.99865 test CE: 2.99286 test ACC: 0.99862
+Step: 3080 train CE: 2.99307 train ACC: 0.99865 test CE: 2.99284 test ACC: 0.99862
+Step: 3090 train CE: 2.99305 train ACC: 0.99865 test CE: 2.99282 test ACC: 0.99862
+Step: 3100 train CE: 2.99304 train ACC: 0.99864 test CE: 2.99281 test ACC: 0.99862
+Saving model at step 3100 ....... ok
+Step: 3110 train CE: 2.99302 train ACC: 0.99864 test CE: 2.99279 test ACC: 0.99862
+Step: 3120 train CE: 2.99300 train ACC: 0.99864 test CE: 2.99278 test ACC: 0.99862
+Step: 3130 train CE: 2.99299 train ACC: 0.99864 test CE: 2.99276 test ACC: 0.99862
+Step: 3140 train CE: 2.99297 train ACC: 0.99864 test CE: 2.99274 test ACC: 0.99862
+Step: 3150 train CE: 2.99296 train ACC: 0.99864 test CE: 2.99273 test ACC: 0.99862
+Step: 3160 train CE: 2.99294 train ACC: 0.99864 test CE: 2.99271 test ACC: 0.99862
+Step: 3170 train CE: 2.99292 train ACC: 0.99864 test CE: 2.99270 test ACC: 0.99862
+Step: 3180 train CE: 2.99291 train ACC: 0.99864 test CE: 2.99268 test ACC: 0.99862
+Step: 3190 train CE: 2.99289 train ACC: 0.99864 test CE: 2.99267 test ACC: 0.99862
+Step: 3200 train CE: 2.99288 train ACC: 0.99864 test CE: 2.99265 test ACC: 0.99862
+Saving model at step 3200 ....... ok
+Step: 3210 train CE: 2.99286 train ACC: 0.99864 test CE: 2.99263 test ACC: 0.99862
+Step: 3220 train CE: 2.99285 train ACC: 0.99865 test CE: 2.99262 test ACC: 0.99862
+Step: 3230 train CE: 2.99283 train ACC: 0.99865 test CE: 2.99260 test ACC: 0.99862
+Step: 3240 train CE: 2.99281 train ACC: 0.99865 test CE: 2.99259 test ACC: 0.99862
+Step: 3250 train CE: 2.99280 train ACC: 0.99865 test CE: 2.99258 test ACC: 0.99862
+Step: 3260 train CE: 2.99278 train ACC: 0.99865 test CE: 2.99256 test ACC: 0.99862
+Step: 3270 train CE: 2.99277 train ACC: 0.99865 test CE: 2.99255 test ACC: 0.99862
+Step: 3280 train CE: 2.99275 train ACC: 0.99865 test CE: 2.99253 test ACC: 0.99862
+Step: 3290 train CE: 2.99274 train ACC: 0.99865 test CE: 2.99252 test ACC: 0.99862
+Step: 3300 train CE: 2.99273 train ACC: 0.99865 test CE: 2.99250 test ACC: 0.99862
+Saving model at step 3300 ....... ok
+Step: 3310 train CE: 2.99271 train ACC: 0.99865 test CE: 2.99249 test ACC: 0.99862
+Step: 3320 train CE: 2.99270 train ACC: 0.99865 test CE: 2.99247 test ACC: 0.99862
+Step: 3330 train CE: 2.99268 train ACC: 0.99865 test CE: 2.99246 test ACC: 0.99862
+Step: 3340 train CE: 2.99267 train ACC: 0.99865 test CE: 2.99244 test ACC: 0.99862
+Step: 3350 train CE: 2.99265 train ACC: 0.99865 test CE: 2.99243 test ACC: 0.99862
+Step: 3360 train CE: 2.99264 train ACC: 0.99865 test CE: 2.99242 test ACC: 0.99862
+Step: 3370 train CE: 2.99262 train ACC: 0.99865 test CE: 2.99240 test ACC: 0.99862
+Step: 3380 train CE: 2.99261 train ACC: 0.99865 test CE: 2.99239 test ACC: 0.99862
+Step: 3390 train CE: 2.99260 train ACC: 0.99865 test CE: 2.99237 test ACC: 0.99862
+Step: 3400 train CE: 2.99258 train ACC: 0.99865 test CE: 2.99236 test ACC: 0.99862
+Saving model at step 3400 ....... ok
+Step: 3410 train CE: 2.99257 train ACC: 0.99865 test CE: 2.99235 test ACC: 0.99862
+Step: 3420 train CE: 2.99255 train ACC: 0.99865 test CE: 2.99233 test ACC: 0.99862
+Step: 3430 train CE: 2.99254 train ACC: 0.99865 test CE: 2.99232 test ACC: 0.99862
+Step: 3440 train CE: 2.99253 train ACC: 0.99865 test CE: 2.99231 test ACC: 0.99862
+Step: 3450 train CE: 2.99251 train ACC: 0.99865 test CE: 2.99229 test ACC: 0.99862
+Step: 3460 train CE: 2.99250 train ACC: 0.99865 test CE: 2.99228 test ACC: 0.99862
+Step: 3470 train CE: 2.99248 train ACC: 0.99865 test CE: 2.99227 test ACC: 0.99862
+Step: 3480 train CE: 2.99247 train ACC: 0.99865 test CE: 2.99225 test ACC: 0.99862
+Step: 3490 train CE: 2.99246 train ACC: 0.99865 test CE: 2.99224 test ACC: 0.99862
+Step: 3500 train CE: 2.99244 train ACC: 0.99865 test CE: 2.99223 test ACC: 0.99862
+Saving model at step 3500 ....... ok
+Step: 3510 train CE: 2.99243 train ACC: 0.99865 test CE: 2.99221 test ACC: 0.99862
+Step: 3520 train CE: 2.99242 train ACC: 0.99865 test CE: 2.99220 test ACC: 0.99862
+Step: 3530 train CE: 2.99240 train ACC: 0.99865 test CE: 2.99219 test ACC: 0.99862
+Step: 3540 train CE: 2.99239 train ACC: 0.99865 test CE: 2.99217 test ACC: 0.99862
+Step: 3550 train CE: 2.99238 train ACC: 0.99865 test CE: 2.99216 test ACC: 0.99863
+Step: 3560 train CE: 2.99237 train ACC: 0.99865 test CE: 2.99215 test ACC: 0.99862
+Step: 3570 train CE: 2.99235 train ACC: 0.99865 test CE: 2.99214 test ACC: 0.99862
+Step: 3580 train CE: 2.99234 train ACC: 0.99865 test CE: 2.99212 test ACC: 0.99862
+Step: 3590 train CE: 2.99233 train ACC: 0.99865 test CE: 2.99211 test ACC: 0.99862
+Step: 3600 train CE: 2.99231 train ACC: 0.99865 test CE: 2.99210 test ACC: 0.99862
+Saving model at step 3600 ....... ok
+Step: 3610 train CE: 2.99230 train ACC: 0.99865 test CE: 2.99209 test ACC: 0.99862
+Step: 3620 train CE: 2.99229 train ACC: 0.99865 test CE: 2.99207 test ACC: 0.99863
+Step: 3630 train CE: 2.99228 train ACC: 0.99866 test CE: 2.99206 test ACC: 0.99863
+Step: 3640 train CE: 2.99226 train ACC: 0.99865 test CE: 2.99205 test ACC: 0.99863
+Step: 3650 train CE: 2.99225 train ACC: 0.99865 test CE: 2.99204 test ACC: 0.99862
+Step: 3660 train CE: 2.99224 train ACC: 0.99866 test CE: 2.99203 test ACC: 0.99862
+Step: 3670 train CE: 2.99223 train ACC: 0.99866 test CE: 2.99201 test ACC: 0.99863
+Step: 3680 train CE: 2.99221 train ACC: 0.99865 test CE: 2.99200 test ACC: 0.99863
+Step: 3690 train CE: 2.99220 train ACC: 0.99865 test CE: 2.99199 test ACC: 0.99863
+Step: 3700 train CE: 2.99219 train ACC: 0.99865 test CE: 2.99198 test ACC: 0.99863
+Saving model at step 3700 ....... ok
+Step: 3710 train CE: 2.99218 train ACC: 0.99865 test CE: 2.99197 test ACC: 0.99863
+Step: 3720 train CE: 2.99217 train ACC: 0.99865 test CE: 2.99195 test ACC: 0.99863
+Step: 3730 train CE: 2.99215 train ACC: 0.99865 test CE: 2.99194 test ACC: 0.99863
+Step: 3740 train CE: 2.99214 train ACC: 0.99865 test CE: 2.99193 test ACC: 0.99863
+Step: 3750 train CE: 2.99213 train ACC: 0.99865 test CE: 2.99192 test ACC: 0.99863
+Step: 3760 train CE: 2.99212 train ACC: 0.99865 test CE: 2.99191 test ACC: 0.99863
+Step: 3770 train CE: 2.99211 train ACC: 0.99865 test CE: 2.99190 test ACC: 0.99862
+Step: 3780 train CE: 2.99209 train ACC: 0.99865 test CE: 2.99188 test ACC: 0.99862
+Step: 3790 train CE: 2.99208 train ACC: 0.99865 test CE: 2.99187 test ACC: 0.99862
+Step: 3800 train CE: 2.99207 train ACC: 0.99865 test CE: 2.99186 test ACC: 0.99863
+Saving model at step 3800 ....... ok
+Step: 3810 train CE: 2.99206 train ACC: 0.99865 test CE: 2.99185 test ACC: 0.99863
+Step: 3820 train CE: 2.99205 train ACC: 0.99865 test CE: 2.99184 test ACC: 0.99862
+Step: 3830 train CE: 2.99204 train ACC: 0.99866 test CE: 2.99183 test ACC: 0.99862
+Step: 3840 train CE: 2.99203 train ACC: 0.99865 test CE: 2.99182 test ACC: 0.99863
+Step: 3850 train CE: 2.99201 train ACC: 0.99865 test CE: 2.99181 test ACC: 0.99863
+Step: 3860 train CE: 2.99200 train ACC: 0.99865 test CE: 2.99179 test ACC: 0.99863
+Step: 3870 train CE: 2.99199 train ACC: 0.99865 test CE: 2.99178 test ACC: 0.99863
+Step: 3880 train CE: 2.99198 train ACC: 0.99865 test CE: 2.99177 test ACC: 0.99863
+Step: 3890 train CE: 2.99197 train ACC: 0.99865 test CE: 2.99176 test ACC: 0.99863
+Step: 3900 train CE: 2.99196 train ACC: 0.99865 test CE: 2.99175 test ACC: 0.99863
+Saving model at step 3900 ....... ok
+Step: 3910 train CE: 2.99195 train ACC: 0.99865 test CE: 2.99174 test ACC: 0.99863
+Step: 3920 train CE: 2.99194 train ACC: 0.99865 test CE: 2.99173 test ACC: 0.99863
+Step: 3930 train CE: 2.99193 train ACC: 0.99865 test CE: 2.99172 test ACC: 0.99863
+Step: 3940 train CE: 2.99191 train ACC: 0.99865 test CE: 2.99171 test ACC: 0.99863
+Step: 3950 train CE: 2.99190 train ACC: 0.99865 test CE: 2.99170 test ACC: 0.99863
+Step: 3960 train CE: 2.99189 train ACC: 0.99865 test CE: 2.99169 test ACC: 0.99863
+Step: 3970 train CE: 2.99188 train ACC: 0.99866 test CE: 2.99168 test ACC: 0.99863
+Step: 3980 train CE: 2.99187 train ACC: 0.99865 test CE: 2.99167 test ACC: 0.99863
+Step: 3990 train CE: 2.99186 train ACC: 0.99866 test CE: 2.99166 test ACC: 0.99863
+Step: 4000 train CE: 2.99185 train ACC: 0.99866 test CE: 2.99164 test ACC: 0.99863
+Saving model at step 4000 ....... ok
+Step: 4010 train CE: 2.99184 train ACC: 0.99865 test CE: 2.99163 test ACC: 0.99863
+Step: 4020 train CE: 2.99183 train ACC: 0.99866 test CE: 2.99162 test ACC: 0.99863
+Step: 4030 train CE: 2.99182 train ACC: 0.99866 test CE: 2.99161 test ACC: 0.99863
+Step: 4040 train CE: 2.99181 train ACC: 0.99865 test CE: 2.99160 test ACC: 0.99863
+Step: 4050 train CE: 2.99180 train ACC: 0.99866 test CE: 2.99159 test ACC: 0.99863
+Step: 4060 train CE: 2.99179 train ACC: 0.99866 test CE: 2.99158 test ACC: 0.99863
+Step: 4070 train CE: 2.99178 train ACC: 0.99866 test CE: 2.99157 test ACC: 0.99863
+Step: 4080 train CE: 2.99177 train ACC: 0.99866 test CE: 2.99156 test ACC: 0.99863
+Step: 4090 train CE: 2.99176 train ACC: 0.99866 test CE: 2.99155 test ACC: 0.99863
+Step: 4100 train CE: 2.99175 train ACC: 0.99866 test CE: 2.99154 test ACC: 0.99863
+Saving model at step 4100 ....... ok
+Step: 4110 train CE: 2.99173 train ACC: 0.99866 test CE: 2.99153 test ACC: 0.99863
+Step: 4120 train CE: 2.99173 train ACC: 0.99866 test CE: 2.99152 test ACC: 0.99863
+Step: 4130 train CE: 2.99171 train ACC: 0.99866 test CE: 2.99151 test ACC: 0.99863
+Step: 4140 train CE: 2.99170 train ACC: 0.99866 test CE: 2.99150 test ACC: 0.99863
+Step: 4150 train CE: 2.99170 train ACC: 0.99866 test CE: 2.99149 test ACC: 0.99862
+Step: 4160 train CE: 2.99169 train ACC: 0.99866 test CE: 2.99148 test ACC: 0.99863
+Step: 4170 train CE: 2.99168 train ACC: 0.99866 test CE: 2.99147 test ACC: 0.99862
+Step: 4180 train CE: 2.99167 train ACC: 0.99866 test CE: 2.99146 test ACC: 0.99862
+Step: 4190 train CE: 2.99166 train ACC: 0.99866 test CE: 2.99145 test ACC: 0.99862
+Step: 4200 train CE: 2.99165 train ACC: 0.99866 test CE: 2.99145 test ACC: 0.99862
+Saving model at step 4200 ....... ok
+Step: 4210 train CE: 2.99164 train ACC: 0.99866 test CE: 2.99144 test ACC: 0.99862
+Step: 4220 train CE: 2.99163 train ACC: 0.99866 test CE: 2.99143 test ACC: 0.99863
+Step: 4230 train CE: 2.99162 train ACC: 0.99866 test CE: 2.99142 test ACC: 0.99862
+Step: 4240 train CE: 2.99161 train ACC: 0.99866 test CE: 2.99141 test ACC: 0.99863
+Step: 4250 train CE: 2.99160 train ACC: 0.99866 test CE: 2.99140 test ACC: 0.99862
+Step: 4260 train CE: 2.99159 train ACC: 0.99866 test CE: 2.99139 test ACC: 0.99863
+Step: 4270 train CE: 2.99158 train ACC: 0.99866 test CE: 2.99138 test ACC: 0.99863
+Step: 4280 train CE: 2.99157 train ACC: 0.99866 test CE: 2.99137 test ACC: 0.99863
+Step: 4290 train CE: 2.99156 train ACC: 0.99866 test CE: 2.99136 test ACC: 0.99863
+Step: 4300 train CE: 2.99155 train ACC: 0.99866 test CE: 2.99135 test ACC: 0.99863
+Saving model at step 4300 ....... ok
+Step: 4310 train CE: 2.99154 train ACC: 0.99866 test CE: 2.99134 test ACC: 0.99863
+Step: 4320 train CE: 2.99153 train ACC: 0.99866 test CE: 2.99133 test ACC: 0.99863
+Step: 4330 train CE: 2.99152 train ACC: 0.99866 test CE: 2.99133 test ACC: 0.99862
+Step: 4340 train CE: 2.99151 train ACC: 0.99866 test CE: 2.99132 test ACC: 0.99863
+Step: 4350 train CE: 2.99150 train ACC: 0.99866 test CE: 2.99131 test ACC: 0.99862
+Step: 4360 train CE: 2.99149 train ACC: 0.99866 test CE: 2.99130 test ACC: 0.99863
+Step: 4370 train CE: 2.99148 train ACC: 0.99866 test CE: 2.99129 test ACC: 0.99863
+Step: 4380 train CE: 2.99147 train ACC: 0.99866 test CE: 2.99128 test ACC: 0.99862
+Step: 4390 train CE: 2.99146 train ACC: 0.99866 test CE: 2.99127 test ACC: 0.99862
+Step: 4400 train CE: 2.99146 train ACC: 0.99866 test CE: 2.99126 test ACC: 0.99862
+Saving model at step 4400 ....... ok
+Step: 4410 train CE: 2.99145 train ACC: 0.99866 test CE: 2.99125 test ACC: 0.99863
+Step: 4420 train CE: 2.99144 train ACC: 0.99866 test CE: 2.99124 test ACC: 0.99862
+Step: 4430 train CE: 2.99143 train ACC: 0.99866 test CE: 2.99124 test ACC: 0.99863
+Step: 4440 train CE: 2.99142 train ACC: 0.99866 test CE: 2.99123 test ACC: 0.99862
+Step: 4450 train CE: 2.99141 train ACC: 0.99866 test CE: 2.99122 test ACC: 0.99862
+Step: 4460 train CE: 2.99140 train ACC: 0.99866 test CE: 2.99121 test ACC: 0.99863
+Step: 4470 train CE: 2.99139 train ACC: 0.99866 test CE: 2.99120 test ACC: 0.99863
+Step: 4480 train CE: 2.99138 train ACC: 0.99866 test CE: 2.99119 test ACC: 0.99863
+Step: 4490 train CE: 2.99137 train ACC: 0.99866 test CE: 2.99118 test ACC: 0.99862
+Step: 4500 train CE: 2.99137 train ACC: 0.99866 test CE: 2.99117 test ACC: 0.99863
+Saving model at step 4500 ....... ok
+Step: 4510 train CE: 2.99136 train ACC: 0.99866 test CE: 2.99116 test ACC: 0.99862
+Step: 4520 train CE: 2.99135 train ACC: 0.99866 test CE: 2.99116 test ACC: 0.99863
+Step: 4530 train CE: 2.99134 train ACC: 0.99866 test CE: 2.99115 test ACC: 0.99863
+Step: 4540 train CE: 2.99133 train ACC: 0.99867 test CE: 2.99114 test ACC: 0.99863
+Step: 4550 train CE: 2.99132 train ACC: 0.99867 test CE: 2.99113 test ACC: 0.99863
+Step: 4560 train CE: 2.99131 train ACC: 0.99867 test CE: 2.99112 test ACC: 0.99863
+Step: 4570 train CE: 2.99131 train ACC: 0.99866 test CE: 2.99112 test ACC: 0.99863
+Step: 4580 train CE: 2.99130 train ACC: 0.99866 test CE: 2.99111 test ACC: 0.99863
+Step: 4590 train CE: 2.99129 train ACC: 0.99866 test CE: 2.99110 test ACC: 0.99863
+Step: 4600 train CE: 2.99128 train ACC: 0.99866 test CE: 2.99109 test ACC: 0.99863
+Saving model at step 4600 ....... ok
+Step: 4610 train CE: 2.99127 train ACC: 0.99866 test CE: 2.99108 test ACC: 0.99863
+Step: 4620 train CE: 2.99126 train ACC: 0.99866 test CE: 2.99107 test ACC: 0.99863
+Step: 4630 train CE: 2.99126 train ACC: 0.99866 test CE: 2.99107 test ACC: 0.99863
+Step: 4640 train CE: 2.99125 train ACC: 0.99866 test CE: 2.99106 test ACC: 0.99863
+Step: 4650 train CE: 2.99124 train ACC: 0.99866 test CE: 2.99105 test ACC: 0.99863
+Step: 4660 train CE: 2.99123 train ACC: 0.99866 test CE: 2.99104 test ACC: 0.99863
+Step: 4670 train CE: 2.99122 train ACC: 0.99866 test CE: 2.99103 test ACC: 0.99863
+Step: 4680 train CE: 2.99121 train ACC: 0.99866 test CE: 2.99103 test ACC: 0.99863
+Step: 4690 train CE: 2.99121 train ACC: 0.99866 test CE: 2.99102 test ACC: 0.99863
+Step: 4700 train CE: 2.99120 train ACC: 0.99866 test CE: 2.99101 test ACC: 0.99863
+Saving model at step 4700 ....... ok
+Step: 4710 train CE: 2.99119 train ACC: 0.99867 test CE: 2.99100 test ACC: 0.99863
+Step: 4720 train CE: 2.99118 train ACC: 0.99866 test CE: 2.99100 test ACC: 0.99863
+Step: 4730 train CE: 2.99117 train ACC: 0.99866 test CE: 2.99099 test ACC: 0.99863
+Step: 4740 train CE: 2.99117 train ACC: 0.99867 test CE: 2.99098 test ACC: 0.99863
+Step: 4750 train CE: 2.99116 train ACC: 0.99866 test CE: 2.99097 test ACC: 0.99863
+Step: 4760 train CE: 2.99115 train ACC: 0.99866 test CE: 2.99096 test ACC: 0.99863
+Step: 4770 train CE: 2.99114 train ACC: 0.99867 test CE: 2.99096 test ACC: 0.99863
+Step: 4780 train CE: 2.99113 train ACC: 0.99867 test CE: 2.99095 test ACC: 0.99863
+Step: 4790 train CE: 2.99113 train ACC: 0.99867 test CE: 2.99094 test ACC: 0.99863
+Step: 4800 train CE: 2.99112 train ACC: 0.99867 test CE: 2.99093 test ACC: 0.99863
+Saving model at step 4800 ....... ok
+Step: 4810 train CE: 2.99111 train ACC: 0.99867 test CE: 2.99092 test ACC: 0.99863
+Step: 4820 train CE: 2.99110 train ACC: 0.99867 test CE: 2.99092 test ACC: 0.99863
+Step: 4830 train CE: 2.99109 train ACC: 0.99867 test CE: 2.99091 test ACC: 0.99863
+Step: 4840 train CE: 2.99109 train ACC: 0.99867 test CE: 2.99090 test ACC: 0.99863
+Step: 4850 train CE: 2.99108 train ACC: 0.99867 test CE: 2.99090 test ACC: 0.99863
+Step: 4860 train CE: 2.99107 train ACC: 0.99867 test CE: 2.99089 test ACC: 0.99863
+Step: 4870 train CE: 2.99106 train ACC: 0.99867 test CE: 2.99088 test ACC: 0.99863
+Step: 4880 train CE: 2.99106 train ACC: 0.99867 test CE: 2.99087 test ACC: 0.99863
+Step: 4890 train CE: 2.99105 train ACC: 0.99867 test CE: 2.99087 test ACC: 0.99863
+Step: 4900 train CE: 2.99104 train ACC: 0.99867 test CE: 2.99086 test ACC: 0.99863
+Saving model at step 4900 ....... ok
+Step: 4910 train CE: 2.99103 train ACC: 0.99867 test CE: 2.99085 test ACC: 0.99863
+Step: 4920 train CE: 2.99102 train ACC: 0.99867 test CE: 2.99084 test ACC: 0.99863
+Step: 4930 train CE: 2.99102 train ACC: 0.99867 test CE: 2.99084 test ACC: 0.99863
+Step: 4940 train CE: 2.99101 train ACC: 0.99867 test CE: 2.99083 test ACC: 0.99863
+Step: 4950 train CE: 2.99100 train ACC: 0.99867 test CE: 2.99082 test ACC: 0.99863
+Step: 4960 train CE: 2.99099 train ACC: 0.99867 test CE: 2.99081 test ACC: 0.99863
+Step: 4970 train CE: 2.99099 train ACC: 0.99867 test CE: 2.99081 test ACC: 0.99863
+Step: 4980 train CE: 2.99098 train ACC: 0.99867 test CE: 2.99080 test ACC: 0.99864
+Step: 4990 train CE: 2.99097 train ACC: 0.99867 test CE: 2.99079 test ACC: 0.99864
+Step: 5000 train CE: 2.99096 train ACC: 0.99867 test CE: 2.99079 test ACC: 0.99864
+Saving model at step 5000 ....... ok
+Step: 5010 train CE: 2.99096 train ACC: 0.99867 test CE: 2.99078 test ACC: 0.99864
+Step: 5020 train CE: 2.99095 train ACC: 0.99867 test CE: 2.99077 test ACC: 0.99864
+Step: 5030 train CE: 2.99094 train ACC: 0.99867 test CE: 2.99076 test ACC: 0.99864
+Step: 5040 train CE: 2.99093 train ACC: 0.99867 test CE: 2.99076 test ACC: 0.99864
+Step: 5050 train CE: 2.99093 train ACC: 0.99867 test CE: 2.99075 test ACC: 0.99864
+Step: 5060 train CE: 2.99092 train ACC: 0.99867 test CE: 2.99074 test ACC: 0.99864
+Step: 5070 train CE: 2.99091 train ACC: 0.99867 test CE: 2.99074 test ACC: 0.99864
+Step: 5080 train CE: 2.99091 train ACC: 0.99867 test CE: 2.99073 test ACC: 0.99864
+Step: 5090 train CE: 2.99090 train ACC: 0.99867 test CE: 2.99072 test ACC: 0.99864
+Step: 5100 train CE: 2.99089 train ACC: 0.99867 test CE: 2.99071 test ACC: 0.99864
+Saving model at step 5100 ....... ok
+Step: 5110 train CE: 2.99088 train ACC: 0.99867 test CE: 2.99071 test ACC: 0.99864
+Step: 5120 train CE: 2.99088 train ACC: 0.99867 test CE: 2.99070 test ACC: 0.99864
+Step: 5130 train CE: 2.99087 train ACC: 0.99867 test CE: 2.99069 test ACC: 0.99864
+Step: 5140 train CE: 2.99086 train ACC: 0.99867 test CE: 2.99069 test ACC: 0.99864
+Step: 5150 train CE: 2.99086 train ACC: 0.99867 test CE: 2.99068 test ACC: 0.99864
+Step: 5160 train CE: 2.99085 train ACC: 0.99867 test CE: 2.99067 test ACC: 0.99864
+Step: 5170 train CE: 2.99084 train ACC: 0.99867 test CE: 2.99067 test ACC: 0.99864
+Step: 5180 train CE: 2.99084 train ACC: 0.99867 test CE: 2.99066 test ACC: 0.99864
+Step: 5190 train CE: 2.99083 train ACC: 0.99867 test CE: 2.99065 test ACC: 0.99864
+Step: 5200 train CE: 2.99082 train ACC: 0.99867 test CE: 2.99065 test ACC: 0.99864
+Saving model at step 5200 ....... ok
+Step: 5210 train CE: 2.99081 train ACC: 0.99867 test CE: 2.99064 test ACC: 0.99864
+Step: 5220 train CE: 2.99081 train ACC: 0.99867 test CE: 2.99063 test ACC: 0.99864
+Step: 5230 train CE: 2.99080 train ACC: 0.99867 test CE: 2.99063 test ACC: 0.99864
+Step: 5240 train CE: 2.99079 train ACC: 0.99867 test CE: 2.99062 test ACC: 0.99864
+Step: 5250 train CE: 2.99079 train ACC: 0.99867 test CE: 2.99061 test ACC: 0.99864
+Step: 5260 train CE: 2.99078 train ACC: 0.99867 test CE: 2.99061 test ACC: 0.99864
+Step: 5270 train CE: 2.99077 train ACC: 0.99867 test CE: 2.99060 test ACC: 0.99864
+Step: 5280 train CE: 2.99077 train ACC: 0.99867 test CE: 2.99059 test ACC: 0.99864
+Step: 5290 train CE: 2.99076 train ACC: 0.99867 test CE: 2.99059 test ACC: 0.99864
+Step: 5300 train CE: 2.99075 train ACC: 0.99867 test CE: 2.99058 test ACC: 0.99864
+Saving model at step 5300 ....... ok
+Step: 5310 train CE: 2.99075 train ACC: 0.99867 test CE: 2.99057 test ACC: 0.99864
+Step: 5320 train CE: 2.99074 train ACC: 0.99867 test CE: 2.99057 test ACC: 0.99864
+Step: 5330 train CE: 2.99073 train ACC: 0.99867 test CE: 2.99056 test ACC: 0.99864
+Step: 5340 train CE: 2.99073 train ACC: 0.99867 test CE: 2.99056 test ACC: 0.99864
+Step: 5350 train CE: 2.99072 train ACC: 0.99867 test CE: 2.99055 test ACC: 0.99864
+Step: 5360 train CE: 2.99071 train ACC: 0.99867 test CE: 2.99054 test ACC: 0.99864
+Step: 5370 train CE: 2.99071 train ACC: 0.99867 test CE: 2.99054 test ACC: 0.99864
+Step: 5380 train CE: 2.99070 train ACC: 0.99867 test CE: 2.99053 test ACC: 0.99864
+Step: 5390 train CE: 2.99069 train ACC: 0.99867 test CE: 2.99052 test ACC: 0.99864
+Step: 5400 train CE: 2.99069 train ACC: 0.99867 test CE: 2.99052 test ACC: 0.99864
+Saving model at step 5400 ....... ok
+Step: 5410 train CE: 2.99068 train ACC: 0.99867 test CE: 2.99051 test ACC: 0.99864
+Step: 5420 train CE: 2.99067 train ACC: 0.99867 test CE: 2.99050 test ACC: 0.99864
+Step: 5430 train CE: 2.99067 train ACC: 0.99867 test CE: 2.99050 test ACC: 0.99864
+Step: 5440 train CE: 2.99066 train ACC: 0.99867 test CE: 2.99049 test ACC: 0.99864
+Step: 5450 train CE: 2.99065 train ACC: 0.99867 test CE: 2.99049 test ACC: 0.99864
+Step: 5460 train CE: 2.99065 train ACC: 0.99867 test CE: 2.99048 test ACC: 0.99864
+Step: 5470 train CE: 2.99064 train ACC: 0.99867 test CE: 2.99047 test ACC: 0.99864
+Step: 5480 train CE: 2.99063 train ACC: 0.99867 test CE: 2.99047 test ACC: 0.99864
+Step: 5490 train CE: 2.99063 train ACC: 0.99867 test CE: 2.99046 test ACC: 0.99864
+Step: 5500 train CE: 2.99062 train ACC: 0.99867 test CE: 2.99045 test ACC: 0.99864
+Saving model at step 5500 ....... ok
+Step: 5510 train CE: 2.99062 train ACC: 0.99867 test CE: 2.99045 test ACC: 0.99864
+Step: 5520 train CE: 2.99061 train ACC: 0.99867 test CE: 2.99044 test ACC: 0.99864
+Step: 5530 train CE: 2.99060 train ACC: 0.99867 test CE: 2.99044 test ACC: 0.99864
+Step: 5540 train CE: 2.99060 train ACC: 0.99867 test CE: 2.99043 test ACC: 0.99864
+Step: 5550 train CE: 2.99059 train ACC: 0.99867 test CE: 2.99042 test ACC: 0.99864
+Step: 5560 train CE: 2.99058 train ACC: 0.99867 test CE: 2.99042 test ACC: 0.99864
+Step: 5570 train CE: 2.99058 train ACC: 0.99867 test CE: 2.99041 test ACC: 0.99864
+Step: 5580 train CE: 2.99057 train ACC: 0.99867 test CE: 2.99041 test ACC: 0.99864
+Step: 5590 train CE: 2.99057 train ACC: 0.99867 test CE: 2.99040 test ACC: 0.99864
+Step: 5600 train CE: 2.99056 train ACC: 0.99867 test CE: 2.99039 test ACC: 0.99864
+Saving model at step 5600 ....... ok
+Step: 5610 train CE: 2.99055 train ACC: 0.99868 test CE: 2.99039 test ACC: 0.99864
+Step: 5620 train CE: 2.99055 train ACC: 0.99868 test CE: 2.99038 test ACC: 0.99864
+Step: 5630 train CE: 2.99054 train ACC: 0.99868 test CE: 2.99038 test ACC: 0.99864
+Step: 5640 train CE: 2.99054 train ACC: 0.99868 test CE: 2.99037 test ACC: 0.99864
+Step: 5650 train CE: 2.99053 train ACC: 0.99868 test CE: 2.99036 test ACC: 0.99864
+Step: 5660 train CE: 2.99052 train ACC: 0.99868 test CE: 2.99036 test ACC: 0.99864
+Step: 5670 train CE: 2.99052 train ACC: 0.99868 test CE: 2.99035 test ACC: 0.99864
+Step: 5680 train CE: 2.99051 train ACC: 0.99868 test CE: 2.99035 test ACC: 0.99864
+Step: 5690 train CE: 2.99051 train ACC: 0.99868 test CE: 2.99034 test ACC: 0.99864
+Step: 5700 train CE: 2.99050 train ACC: 0.99868 test CE: 2.99033 test ACC: 0.99864
+Saving model at step 5700 ....... ok
+Step: 5710 train CE: 2.99049 train ACC: 0.99868 test CE: 2.99033 test ACC: 0.99864
+Step: 5720 train CE: 2.99049 train ACC: 0.99868 test CE: 2.99032 test ACC: 0.99864
+Step: 5730 train CE: 2.99048 train ACC: 0.99868 test CE: 2.99032 test ACC: 0.99864
+Step: 5740 train CE: 2.99047 train ACC: 0.99868 test CE: 2.99031 test ACC: 0.99864
+Step: 5750 train CE: 2.99047 train ACC: 0.99868 test CE: 2.99031 test ACC: 0.99864
+Step: 5760 train CE: 2.99046 train ACC: 0.99868 test CE: 2.99030 test ACC: 0.99864
+Step: 5770 train CE: 2.99046 train ACC: 0.99868 test CE: 2.99030 test ACC: 0.99864
+Step: 5780 train CE: 2.99045 train ACC: 0.99868 test CE: 2.99029 test ACC: 0.99864
+Step: 5790 train CE: 2.99045 train ACC: 0.99868 test CE: 2.99028 test ACC: 0.99865
+Step: 5800 train CE: 2.99044 train ACC: 0.99868 test CE: 2.99028 test ACC: 0.99864
+Saving model at step 5800 ....... ok
+Step: 5810 train CE: 2.99043 train ACC: 0.99868 test CE: 2.99027 test ACC: 0.99865
+Step: 5820 train CE: 2.99043 train ACC: 0.99868 test CE: 2.99027 test ACC: 0.99864
+Step: 5830 train CE: 2.99042 train ACC: 0.99868 test CE: 2.99026 test ACC: 0.99864
+Step: 5840 train CE: 2.99042 train ACC: 0.99868 test CE: 2.99026 test ACC: 0.99864
+Step: 5850 train CE: 2.99041 train ACC: 0.99868 test CE: 2.99025 test ACC: 0.99864
+Step: 5860 train CE: 2.99041 train ACC: 0.99868 test CE: 2.99024 test ACC: 0.99864
+Step: 5870 train CE: 2.99040 train ACC: 0.99868 test CE: 2.99024 test ACC: 0.99864
+Step: 5880 train CE: 2.99039 train ACC: 0.99868 test CE: 2.99023 test ACC: 0.99864
+Step: 5890 train CE: 2.99039 train ACC: 0.99868 test CE: 2.99023 test ACC: 0.99864
+Step: 5900 train CE: 2.99038 train ACC: 0.99868 test CE: 2.99022 test ACC: 0.99864
+Saving model at step 5900 ....... ok
+Step: 5910 train CE: 2.99038 train ACC: 0.99868 test CE: 2.99022 test ACC: 0.99864
+Step: 5920 train CE: 2.99037 train ACC: 0.99868 test CE: 2.99021 test ACC: 0.99865
+Step: 5930 train CE: 2.99037 train ACC: 0.99868 test CE: 2.99021 test ACC: 0.99865
+Step: 5940 train CE: 2.99036 train ACC: 0.99868 test CE: 2.99020 test ACC: 0.99865
+Step: 5950 train CE: 2.99035 train ACC: 0.99868 test CE: 2.99020 test ACC: 0.99865
+Step: 5960 train CE: 2.99035 train ACC: 0.99868 test CE: 2.99019 test ACC: 0.99865
+Step: 5970 train CE: 2.99034 train ACC: 0.99868 test CE: 2.99018 test ACC: 0.99865
+Step: 5980 train CE: 2.99034 train ACC: 0.99868 test CE: 2.99018 test ACC: 0.99865
+Step: 5990 train CE: 2.99033 train ACC: 0.99868 test CE: 2.99017 test ACC: 0.99865
+Step: 6000 train CE: 2.99033 train ACC: 0.99868 test CE: 2.99017 test ACC: 0.99865
+Saving model at step 6000 ....... ok
+Step: 6010 train CE: 2.99032 train ACC: 0.99868 test CE: 2.99016 test ACC: 0.99865
+Step: 6020 train CE: 2.99032 train ACC: 0.99868 test CE: 2.99016 test ACC: 0.99865
+Step: 6030 train CE: 2.99031 train ACC: 0.99868 test CE: 2.99015 test ACC: 0.99865
+Step: 6040 train CE: 2.99030 train ACC: 0.99868 test CE: 2.99015 test ACC: 0.99865
+Step: 6050 train CE: 2.99030 train ACC: 0.99868 test CE: 2.99014 test ACC: 0.99865
+Step: 6060 train CE: 2.99029 train ACC: 0.99868 test CE: 2.99014 test ACC: 0.99865
+Step: 6070 train CE: 2.99029 train ACC: 0.99868 test CE: 2.99013 test ACC: 0.99865
+Step: 6080 train CE: 2.99028 train ACC: 0.99868 test CE: 2.99013 test ACC: 0.99865
+Step: 6090 train CE: 2.99028 train ACC: 0.99868 test CE: 2.99012 test ACC: 0.99865
+Step: 6100 train CE: 2.99027 train ACC: 0.99868 test CE: 2.99012 test ACC: 0.99865
+Saving model at step 6100 ....... ok
+Step: 6110 train CE: 2.99027 train ACC: 0.99868 test CE: 2.99011 test ACC: 0.99865
+Step: 6120 train CE: 2.99026 train ACC: 0.99868 test CE: 2.99011 test ACC: 0.99865
+Step: 6130 train CE: 2.99026 train ACC: 0.99868 test CE: 2.99010 test ACC: 0.99865
+Step: 6140 train CE: 2.99025 train ACC: 0.99868 test CE: 2.99010 test ACC: 0.99865
+Step: 6150 train CE: 2.99025 train ACC: 0.99868 test CE: 2.99009 test ACC: 0.99865
+Step: 6160 train CE: 2.99024 train ACC: 0.99868 test CE: 2.99009 test ACC: 0.99865
+Step: 6170 train CE: 2.99023 train ACC: 0.99868 test CE: 2.99008 test ACC: 0.99865
+Step: 6180 train CE: 2.99023 train ACC: 0.99868 test CE: 2.99008 test ACC: 0.99865
+Step: 6190 train CE: 2.99022 train ACC: 0.99868 test CE: 2.99007 test ACC: 0.99865
+Step: 6200 train CE: 2.99022 train ACC: 0.99868 test CE: 2.99007 test ACC: 0.99865
+Saving model at step 6200 ....... ok
+Step: 6210 train CE: 2.99021 train ACC: 0.99868 test CE: 2.99006 test ACC: 0.99865
+Step: 6220 train CE: 2.99021 train ACC: 0.99868 test CE: 2.99006 test ACC: 0.99865
+Step: 6230 train CE: 2.99020 train ACC: 0.99868 test CE: 2.99005 test ACC: 0.99865
+Step: 6240 train CE: 2.99020 train ACC: 0.99868 test CE: 2.99005 test ACC: 0.99865
+Step: 6250 train CE: 2.99019 train ACC: 0.99868 test CE: 2.99004 test ACC: 0.99865
+Step: 6260 train CE: 2.99019 train ACC: 0.99868 test CE: 2.99004 test ACC: 0.99865
+Step: 6270 train CE: 2.99018 train ACC: 0.99868 test CE: 2.99003 test ACC: 0.99865
+Step: 6280 train CE: 2.99018 train ACC: 0.99868 test CE: 2.99003 test ACC: 0.99865
+Step: 6290 train CE: 2.99017 train ACC: 0.99868 test CE: 2.99002 test ACC: 0.99865
+Step: 6300 train CE: 2.99017 train ACC: 0.99868 test CE: 2.99002 test ACC: 0.99865
+Saving model at step 6300 ....... ok
+Step: 6310 train CE: 2.99016 train ACC: 0.99868 test CE: 2.99001 test ACC: 0.99865
+Step: 6320 train CE: 2.99016 train ACC: 0.99868 test CE: 2.99001 test ACC: 0.99865
+Step: 6330 train CE: 2.99015 train ACC: 0.99868 test CE: 2.99000 test ACC: 0.99865
+Step: 6340 train CE: 2.99015 train ACC: 0.99868 test CE: 2.99000 test ACC: 0.99865
+Step: 6350 train CE: 2.99014 train ACC: 0.99868 test CE: 2.98999 test ACC: 0.99865
+Step: 6360 train CE: 2.99014 train ACC: 0.99868 test CE: 2.98999 test ACC: 0.99865
+Step: 6370 train CE: 2.99013 train ACC: 0.99868 test CE: 2.98998 test ACC: 0.99865
+Step: 6380 train CE: 2.99013 train ACC: 0.99869 test CE: 2.98998 test ACC: 0.99865
+Step: 6390 train CE: 2.99012 train ACC: 0.99868 test CE: 2.98997 test ACC: 0.99865
+Step: 6400 train CE: 2.99012 train ACC: 0.99868 test CE: 2.98997 test ACC: 0.99865
+Saving model at step 6400 ....... ok
+Step: 6410 train CE: 2.99011 train ACC: 0.99869 test CE: 2.98996 test ACC: 0.99865
+Step: 6420 train CE: 2.99011 train ACC: 0.99868 test CE: 2.98996 test ACC: 0.99865
+Step: 6430 train CE: 2.99010 train ACC: 0.99869 test CE: 2.98995 test ACC: 0.99865
+Step: 6440 train CE: 2.99010 train ACC: 0.99869 test CE: 2.98995 test ACC: 0.99865
+Step: 6450 train CE: 2.99009 train ACC: 0.99869 test CE: 2.98994 test ACC: 0.99865
+Step: 6460 train CE: 2.99009 train ACC: 0.99869 test CE: 2.98994 test ACC: 0.99865
+Step: 6470 train CE: 2.99008 train ACC: 0.99869 test CE: 2.98993 test ACC: 0.99865
+Step: 6480 train CE: 2.99008 train ACC: 0.99869 test CE: 2.98993 test ACC: 0.99865
+Step: 6490 train CE: 2.99007 train ACC: 0.99869 test CE: 2.98992 test ACC: 0.99865
+Step: 6500 train CE: 2.99007 train ACC: 0.99869 test CE: 2.98992 test ACC: 0.99865
+Saving model at step 6500 ....... ok
+Step: 6510 train CE: 2.99006 train ACC: 0.99869 test CE: 2.98992 test ACC: 0.99865
+Step: 6520 train CE: 2.99006 train ACC: 0.99869 test CE: 2.98991 test ACC: 0.99865
+Step: 6530 train CE: 2.99005 train ACC: 0.99869 test CE: 2.98991 test ACC: 0.99865
+Step: 6540 train CE: 2.99005 train ACC: 0.99868 test CE: 2.98990 test ACC: 0.99865
+Step: 6550 train CE: 2.99004 train ACC: 0.99868 test CE: 2.98990 test ACC: 0.99865
+Step: 6560 train CE: 2.99004 train ACC: 0.99869 test CE: 2.98989 test ACC: 0.99865
+Step: 6570 train CE: 2.99003 train ACC: 0.99869 test CE: 2.98989 test ACC: 0.99865
+Step: 6580 train CE: 2.99003 train ACC: 0.99869 test CE: 2.98988 test ACC: 0.99865
+Step: 6590 train CE: 2.99002 train ACC: 0.99869 test CE: 2.98988 test ACC: 0.99865
+Step: 6600 train CE: 2.99002 train ACC: 0.99869 test CE: 2.98987 test ACC: 0.99865
+Saving model at step 6600 ....... ok
+Step: 6610 train CE: 2.99001 train ACC: 0.99869 test CE: 2.98987 test ACC: 0.99865
+Step: 6620 train CE: 2.99001 train ACC: 0.99869 test CE: 2.98986 test ACC: 0.99865
+Step: 6630 train CE: 2.99001 train ACC: 0.99869 test CE: 2.98986 test ACC: 0.99865
+Step: 6640 train CE: 2.99000 train ACC: 0.99869 test CE: 2.98986 test ACC: 0.99865
+Step: 6650 train CE: 2.99000 train ACC: 0.99869 test CE: 2.98985 test ACC: 0.99865
+Step: 6660 train CE: 2.98999 train ACC: 0.99869 test CE: 2.98985 test ACC: 0.99865
+Step: 6670 train CE: 2.98999 train ACC: 0.99869 test CE: 2.98984 test ACC: 0.99865
+Step: 6680 train CE: 2.98998 train ACC: 0.99869 test CE: 2.98984 test ACC: 0.99865
+Step: 6690 train CE: 2.98998 train ACC: 0.99869 test CE: 2.98983 test ACC: 0.99865
+Step: 6700 train CE: 2.98997 train ACC: 0.99869 test CE: 2.98983 test ACC: 0.99865
+Saving model at step 6700 ....... ok
+Step: 6710 train CE: 2.98997 train ACC: 0.99869 test CE: 2.98983 test ACC: 0.99865
+Step: 6720 train CE: 2.98996 train ACC: 0.99869 test CE: 2.98982 test ACC: 0.99865
+Step: 6730 train CE: 2.98996 train ACC: 0.99869 test CE: 2.98982 test ACC: 0.99865
+Step: 6740 train CE: 2.98995 train ACC: 0.99869 test CE: 2.98981 test ACC: 0.99865
+Step: 6750 train CE: 2.98995 train ACC: 0.99869 test CE: 2.98981 test ACC: 0.99865
+Step: 6760 train CE: 2.98994 train ACC: 0.99869 test CE: 2.98980 test ACC: 0.99865
+Step: 6770 train CE: 2.98994 train ACC: 0.99869 test CE: 2.98980 test ACC: 0.99865
+Step: 6780 train CE: 2.98993 train ACC: 0.99869 test CE: 2.98979 test ACC: 0.99865
+Step: 6790 train CE: 2.98993 train ACC: 0.99869 test CE: 2.98979 test ACC: 0.99865
+Step: 6800 train CE: 2.98993 train ACC: 0.99869 test CE: 2.98979 test ACC: 0.99865
+Saving model at step 6800 ....... ok
+Step: 6810 train CE: 2.98992 train ACC: 0.99869 test CE: 2.98978 test ACC: 0.99865
+Step: 6820 train CE: 2.98992 train ACC: 0.99869 test CE: 2.98978 test ACC: 0.99865
+Step: 6830 train CE: 2.98991 train ACC: 0.99869 test CE: 2.98977 test ACC: 0.99865
+Step: 6840 train CE: 2.98991 train ACC: 0.99869 test CE: 2.98977 test ACC: 0.99865
+Step: 6850 train CE: 2.98990 train ACC: 0.99869 test CE: 2.98976 test ACC: 0.99865
+Step: 6860 train CE: 2.98990 train ACC: 0.99869 test CE: 2.98976 test ACC: 0.99865
+Step: 6870 train CE: 2.98989 train ACC: 0.99869 test CE: 2.98976 test ACC: 0.99865
+Step: 6880 train CE: 2.98989 train ACC: 0.99869 test CE: 2.98975 test ACC: 0.99865
+Step: 6890 train CE: 2.98989 train ACC: 0.99869 test CE: 2.98975 test ACC: 0.99865
+Step: 6900 train CE: 2.98988 train ACC: 0.99869 test CE: 2.98974 test ACC: 0.99865
+Saving model at step 6900 ....... ok
+Step: 6910 train CE: 2.98988 train ACC: 0.99869 test CE: 2.98974 test ACC: 0.99865
+Step: 6920 train CE: 2.98987 train ACC: 0.99869 test CE: 2.98973 test ACC: 0.99865
+Step: 6930 train CE: 2.98987 train ACC: 0.99869 test CE: 2.98973 test ACC: 0.99865
+Step: 6940 train CE: 2.98986 train ACC: 0.99869 test CE: 2.98973 test ACC: 0.99865
+Step: 6950 train CE: 2.98986 train ACC: 0.99869 test CE: 2.98972 test ACC: 0.99865
+Step: 6960 train CE: 2.98985 train ACC: 0.99869 test CE: 2.98972 test ACC: 0.99865
+Step: 6970 train CE: 2.98985 train ACC: 0.99869 test CE: 2.98971 test ACC: 0.99865
+Step: 6980 train CE: 2.98985 train ACC: 0.99869 test CE: 2.98971 test ACC: 0.99865
+Step: 6990 train CE: 2.98984 train ACC: 0.99869 test CE: 2.98971 test ACC: 0.99865
+Step: 7000 train CE: 2.98984 train ACC: 0.99869 test CE: 2.98970 test ACC: 0.99865
+Saving model at step 7000 ....... ok
+Step: 7010 train CE: 2.98983 train ACC: 0.99869 test CE: 2.98970 test ACC: 0.99865
+Step: 7020 train CE: 2.98983 train ACC: 0.99869 test CE: 2.98969 test ACC: 0.99865
+Step: 7030 train CE: 2.98982 train ACC: 0.99869 test CE: 2.98969 test ACC: 0.99865
+Step: 7040 train CE: 2.98982 train ACC: 0.99869 test CE: 2.98968 test ACC: 0.99865
+Step: 7050 train CE: 2.98982 train ACC: 0.99869 test CE: 2.98968 test ACC: 0.99865
+Step: 7060 train CE: 2.98981 train ACC: 0.99869 test CE: 2.98968 test ACC: 0.99865
+Step: 7070 train CE: 2.98981 train ACC: 0.99869 test CE: 2.98967 test ACC: 0.99865
+Step: 7080 train CE: 2.98980 train ACC: 0.99869 test CE: 2.98967 test ACC: 0.99865
+Step: 7090 train CE: 2.98980 train ACC: 0.99869 test CE: 2.98966 test ACC: 0.99865
+Step: 7100 train CE: 2.98979 train ACC: 0.99869 test CE: 2.98966 test ACC: 0.99865
+Saving model at step 7100 ....... ok
+Step: 7110 train CE: 2.98979 train ACC: 0.99869 test CE: 2.98966 test ACC: 0.99865
+Step: 7120 train CE: 2.98979 train ACC: 0.99869 test CE: 2.98965 test ACC: 0.99865
+Step: 7130 train CE: 2.98978 train ACC: 0.99870 test CE: 2.98965 test ACC: 0.99865
+Step: 7140 train CE: 2.98978 train ACC: 0.99869 test CE: 2.98964 test ACC: 0.99865
+Step: 7150 train CE: 2.98977 train ACC: 0.99869 test CE: 2.98964 test ACC: 0.99865
+Step: 7160 train CE: 2.98977 train ACC: 0.99869 test CE: 2.98964 test ACC: 0.99865
+Step: 7170 train CE: 2.98976 train ACC: 0.99869 test CE: 2.98963 test ACC: 0.99865
+Step: 7180 train CE: 2.98976 train ACC: 0.99869 test CE: 2.98963 test ACC: 0.99865
+Step: 7190 train CE: 2.98976 train ACC: 0.99869 test CE: 2.98962 test ACC: 0.99865
+Step: 7200 train CE: 2.98975 train ACC: 0.99869 test CE: 2.98962 test ACC: 0.99865
+Saving model at step 7200 ....... ok
+Step: 7210 train CE: 2.98975 train ACC: 0.99869 test CE: 2.98962 test ACC: 0.99865
+Step: 7220 train CE: 2.98974 train ACC: 0.99869 test CE: 2.98961 test ACC: 0.99865
+Step: 7230 train CE: 2.98974 train ACC: 0.99869 test CE: 2.98961 test ACC: 0.99865
+Step: 7240 train CE: 2.98974 train ACC: 0.99869 test CE: 2.98960 test ACC: 0.99865
+Step: 7250 train CE: 2.98973 train ACC: 0.99869 test CE: 2.98960 test ACC: 0.99865
+Step: 7260 train CE: 2.98973 train ACC: 0.99869 test CE: 2.98960 test ACC: 0.99865
+Step: 7270 train CE: 2.98972 train ACC: 0.99870 test CE: 2.98959 test ACC: 0.99865
+Step: 7280 train CE: 2.98972 train ACC: 0.99869 test CE: 2.98959 test ACC: 0.99865
+Step: 7290 train CE: 2.98971 train ACC: 0.99870 test CE: 2.98958 test ACC: 0.99865
+Step: 7300 train CE: 2.98971 train ACC: 0.99870 test CE: 2.98958 test ACC: 0.99865
+Saving model at step 7300 ....... ok
+Step: 7310 train CE: 2.98971 train ACC: 0.99870 test CE: 2.98958 test ACC: 0.99865
+Step: 7320 train CE: 2.98970 train ACC: 0.99870 test CE: 2.98957 test ACC: 0.99865
+Step: 7330 train CE: 2.98970 train ACC: 0.99870 test CE: 2.98957 test ACC: 0.99865
+Step: 7340 train CE: 2.98969 train ACC: 0.99870 test CE: 2.98957 test ACC: 0.99865
+Step: 7350 train CE: 2.98969 train ACC: 0.99870 test CE: 2.98956 test ACC: 0.99865
+Step: 7360 train CE: 2.98969 train ACC: 0.99870 test CE: 2.98956 test ACC: 0.99865
+Step: 7370 train CE: 2.98968 train ACC: 0.99870 test CE: 2.98955 test ACC: 0.99865
+Step: 7380 train CE: 2.98968 train ACC: 0.99870 test CE: 2.98955 test ACC: 0.99865
+Step: 7390 train CE: 2.98967 train ACC: 0.99870 test CE: 2.98955 test ACC: 0.99865
+Step: 7400 train CE: 2.98967 train ACC: 0.99870 test CE: 2.98954 test ACC: 0.99865
+Saving model at step 7400 ....... ok
+Step: 7410 train CE: 2.98966 train ACC: 0.99869 test CE: 2.98954 test ACC: 0.99865
+Step: 7420 train CE: 2.98966 train ACC: 0.99870 test CE: 2.98954 test ACC: 0.99865
+Step: 7430 train CE: 2.98966 train ACC: 0.99870 test CE: 2.98953 test ACC: 0.99865
+Step: 7440 train CE: 2.98965 train ACC: 0.99870 test CE: 2.98953 test ACC: 0.99865
+Step: 7450 train CE: 2.98965 train ACC: 0.99870 test CE: 2.98952 test ACC: 0.99865
+Step: 7460 train CE: 2.98965 train ACC: 0.99870 test CE: 2.98952 test ACC: 0.99865
+Step: 7470 train CE: 2.98964 train ACC: 0.99870 test CE: 2.98952 test ACC: 0.99865
+Step: 7480 train CE: 2.98964 train ACC: 0.99870 test CE: 2.98951 test ACC: 0.99865
+Step: 7490 train CE: 2.98963 train ACC: 0.99870 test CE: 2.98951 test ACC: 0.99865
+Step: 7500 train CE: 2.98963 train ACC: 0.99870 test CE: 2.98951 test ACC: 0.99865
+Saving model at step 7500 ....... ok
+Step: 7510 train CE: 2.98963 train ACC: 0.99870 test CE: 2.98950 test ACC: 0.99865
+Step: 7520 train CE: 2.98962 train ACC: 0.99870 test CE: 2.98950 test ACC: 0.99865
+Step: 7530 train CE: 2.98962 train ACC: 0.99870 test CE: 2.98949 test ACC: 0.99865
+Step: 7540 train CE: 2.98961 train ACC: 0.99870 test CE: 2.98949 test ACC: 0.99865
+Step: 7550 train CE: 2.98961 train ACC: 0.99870 test CE: 2.98949 test ACC: 0.99865
+Step: 7560 train CE: 2.98961 train ACC: 0.99870 test CE: 2.98948 test ACC: 0.99865
+Step: 7570 train CE: 2.98960 train ACC: 0.99870 test CE: 2.98948 test ACC: 0.99865
+Step: 7580 train CE: 2.98960 train ACC: 0.99870 test CE: 2.98948 test ACC: 0.99865
+Step: 7590 train CE: 2.98959 train ACC: 0.99870 test CE: 2.98947 test ACC: 0.99865
+Step: 7600 train CE: 2.98959 train ACC: 0.99870 test CE: 2.98947 test ACC: 0.99865
+Saving model at step 7600 ....... ok
+Step: 7610 train CE: 2.98959 train ACC: 0.99870 test CE: 2.98947 test ACC: 0.99865
+Step: 7620 train CE: 2.98958 train ACC: 0.99870 test CE: 2.98946 test ACC: 0.99865
+Step: 7630 train CE: 2.98958 train ACC: 0.99870 test CE: 2.98946 test ACC: 0.99865
+Step: 7640 train CE: 2.98958 train ACC: 0.99870 test CE: 2.98946 test ACC: 0.99865
+Step: 7650 train CE: 2.98957 train ACC: 0.99870 test CE: 2.98945 test ACC: 0.99865
+Step: 7660 train CE: 2.98957 train ACC: 0.99870 test CE: 2.98945 test ACC: 0.99865
+Step: 7670 train CE: 2.98956 train ACC: 0.99870 test CE: 2.98944 test ACC: 0.99865
+Step: 7680 train CE: 2.98956 train ACC: 0.99870 test CE: 2.98944 test ACC: 0.99865
+Step: 7690 train CE: 2.98956 train ACC: 0.99870 test CE: 2.98944 test ACC: 0.99865
+Step: 7700 train CE: 2.98955 train ACC: 0.99870 test CE: 2.98943 test ACC: 0.99865
+Saving model at step 7700 ....... ok
+Step: 7710 train CE: 2.98955 train ACC: 0.99870 test CE: 2.98943 test ACC: 0.99865
+Step: 7720 train CE: 2.98955 train ACC: 0.99870 test CE: 2.98943 test ACC: 0.99865
+Step: 7730 train CE: 2.98954 train ACC: 0.99870 test CE: 2.98942 test ACC: 0.99865
+Step: 7740 train CE: 2.98954 train ACC: 0.99870 test CE: 2.98942 test ACC: 0.99865
+Step: 7750 train CE: 2.98953 train ACC: 0.99870 test CE: 2.98942 test ACC: 0.99865
+Step: 7760 train CE: 2.98953 train ACC: 0.99870 test CE: 2.98941 test ACC: 0.99865
+Step: 7770 train CE: 2.98953 train ACC: 0.99870 test CE: 2.98941 test ACC: 0.99865
+Step: 7780 train CE: 2.98952 train ACC: 0.99870 test CE: 2.98941 test ACC: 0.99865
+Step: 7790 train CE: 2.98952 train ACC: 0.99870 test CE: 2.98940 test ACC: 0.99865
+Step: 7800 train CE: 2.98952 train ACC: 0.99870 test CE: 2.98940 test ACC: 0.99865
+Saving model at step 7800 ....... ok
+Step: 7810 train CE: 2.98951 train ACC: 0.99870 test CE: 2.98940 test ACC: 0.99865
+Step: 7820 train CE: 2.98951 train ACC: 0.99870 test CE: 2.98939 test ACC: 0.99865
+Step: 7830 train CE: 2.98950 train ACC: 0.99870 test CE: 2.98939 test ACC: 0.99865
+Step: 7840 train CE: 2.98950 train ACC: 0.99870 test CE: 2.98939 test ACC: 0.99865
+Step: 7850 train CE: 2.98950 train ACC: 0.99870 test CE: 2.98938 test ACC: 0.99865
+Step: 7860 train CE: 2.98949 train ACC: 0.99870 test CE: 2.98938 test ACC: 0.99865
+Step: 7870 train CE: 2.98949 train ACC: 0.99870 test CE: 2.98937 test ACC: 0.99865
+Step: 7880 train CE: 2.98949 train ACC: 0.99870 test CE: 2.98937 test ACC: 0.99865
+Step: 7890 train CE: 2.98948 train ACC: 0.99870 test CE: 2.98937 test ACC: 0.99865
+Step: 7900 train CE: 2.98948 train ACC: 0.99870 test CE: 2.98936 test ACC: 0.99865
+Saving model at step 7900 ....... ok
+Step: 7910 train CE: 2.98948 train ACC: 0.99870 test CE: 2.98936 test ACC: 0.99865
+Step: 7920 train CE: 2.98947 train ACC: 0.99870 test CE: 2.98936 test ACC: 0.99865
+Step: 7930 train CE: 2.98947 train ACC: 0.99870 test CE: 2.98935 test ACC: 0.99865
+Step: 7940 train CE: 2.98946 train ACC: 0.99870 test CE: 2.98935 test ACC: 0.99865
+Step: 7950 train CE: 2.98946 train ACC: 0.99870 test CE: 2.98935 test ACC: 0.99865
+Step: 7960 train CE: 2.98946 train ACC: 0.99870 test CE: 2.98934 test ACC: 0.99865
+Step: 7970 train CE: 2.98945 train ACC: 0.99870 test CE: 2.98934 test ACC: 0.99865
+Step: 7980 train CE: 2.98945 train ACC: 0.99870 test CE: 2.98934 test ACC: 0.99865
+Step: 7990 train CE: 2.98945 train ACC: 0.99870 test CE: 2.98933 test ACC: 0.99865
+Step: 8000 train CE: 2.98944 train ACC: 0.99870 test CE: 2.98933 test ACC: 0.99865
+Saving model at step 8000 ....... ok
+Step: 8010 train CE: 2.98944 train ACC: 0.99870 test CE: 2.98933 test ACC: 0.99865
+Step: 8020 train CE: 2.98944 train ACC: 0.99870 test CE: 2.98932 test ACC: 0.99865
+Step: 8030 train CE: 2.98943 train ACC: 0.99870 test CE: 2.98932 test ACC: 0.99865
+Step: 8040 train CE: 2.98943 train ACC: 0.99870 test CE: 2.98932 test ACC: 0.99865
+Step: 8050 train CE: 2.98943 train ACC: 0.99870 test CE: 2.98931 test ACC: 0.99865
+Step: 8060 train CE: 2.98942 train ACC: 0.99870 test CE: 2.98931 test ACC: 0.99865
+Step: 8070 train CE: 2.98942 train ACC: 0.99870 test CE: 2.98931 test ACC: 0.99865
+Step: 8080 train CE: 2.98942 train ACC: 0.99870 test CE: 2.98930 test ACC: 0.99865
+Step: 8090 train CE: 2.98941 train ACC: 0.99870 test CE: 2.98930 test ACC: 0.99865
+Step: 8100 train CE: 2.98941 train ACC: 0.99870 test CE: 2.98930 test ACC: 0.99865
+Saving model at step 8100 ....... ok
+Step: 8110 train CE: 2.98940 train ACC: 0.99870 test CE: 2.98929 test ACC: 0.99865
+Step: 8120 train CE: 2.98940 train ACC: 0.99870 test CE: 2.98929 test ACC: 0.99865
+Step: 8130 train CE: 2.98940 train ACC: 0.99870 test CE: 2.98929 test ACC: 0.99865
+Step: 8140 train CE: 2.98939 train ACC: 0.99870 test CE: 2.98928 test ACC: 0.99865
+Step: 8150 train CE: 2.98939 train ACC: 0.99870 test CE: 2.98928 test ACC: 0.99865
+Step: 8160 train CE: 2.98939 train ACC: 0.99870 test CE: 2.98928 test ACC: 0.99865
+Step: 8170 train CE: 2.98938 train ACC: 0.99870 test CE: 2.98927 test ACC: 0.99865
+Step: 8180 train CE: 2.98938 train ACC: 0.99870 test CE: 2.98927 test ACC: 0.99865
+Step: 8190 train CE: 2.98938 train ACC: 0.99870 test CE: 2.98927 test ACC: 0.99865
+Step: 8200 train CE: 2.98937 train ACC: 0.99870 test CE: 2.98927 test ACC: 0.99865
+Saving model at step 8200 ....... ok
+Step: 8210 train CE: 2.98937 train ACC: 0.99870 test CE: 2.98926 test ACC: 0.99865
+Step: 8220 train CE: 2.98937 train ACC: 0.99870 test CE: 2.98926 test ACC: 0.99865
+Step: 8230 train CE: 2.98936 train ACC: 0.99870 test CE: 2.98926 test ACC: 0.99865
+Step: 8240 train CE: 2.98936 train ACC: 0.99870 test CE: 2.98925 test ACC: 0.99865
+Step: 8250 train CE: 2.98936 train ACC: 0.99870 test CE: 2.98925 test ACC: 0.99865
+Step: 8260 train CE: 2.98935 train ACC: 0.99870 test CE: 2.98925 test ACC: 0.99865
+Step: 8270 train CE: 2.98935 train ACC: 0.99870 test CE: 2.98924 test ACC: 0.99865
+Step: 8280 train CE: 2.98935 train ACC: 0.99870 test CE: 2.98924 test ACC: 0.99865
+Step: 8290 train CE: 2.98934 train ACC: 0.99870 test CE: 2.98924 test ACC: 0.99865
+Step: 8300 train CE: 2.98934 train ACC: 0.99870 test CE: 2.98923 test ACC: 0.99865
+Saving model at step 8300 ....... ok
+Step: 8310 train CE: 2.98934 train ACC: 0.99870 test CE: 2.98923 test ACC: 0.99865
+Step: 8320 train CE: 2.98933 train ACC: 0.99870 test CE: 2.98923 test ACC: 0.99865
+Step: 8330 train CE: 2.98933 train ACC: 0.99870 test CE: 2.98922 test ACC: 0.99865
+Step: 8340 train CE: 2.98933 train ACC: 0.99870 test CE: 2.98922 test ACC: 0.99865
+Step: 8350 train CE: 2.98932 train ACC: 0.99870 test CE: 2.98922 test ACC: 0.99865
+Step: 8360 train CE: 2.98932 train ACC: 0.99870 test CE: 2.98921 test ACC: 0.99865
+Step: 8370 train CE: 2.98932 train ACC: 0.99870 test CE: 2.98921 test ACC: 0.99865
+Step: 8380 train CE: 2.98931 train ACC: 0.99870 test CE: 2.98921 test ACC: 0.99865
+Step: 8390 train CE: 2.98931 train ACC: 0.99870 test CE: 2.98920 test ACC: 0.99865
+Step: 8400 train CE: 2.98931 train ACC: 0.99870 test CE: 2.98920 test ACC: 0.99866
+Saving model at step 8400 ....... ok
+Step: 8410 train CE: 2.98930 train ACC: 0.99870 test CE: 2.98920 test ACC: 0.99865
+Step: 8420 train CE: 2.98930 train ACC: 0.99870 test CE: 2.98920 test ACC: 0.99865
+Step: 8430 train CE: 2.98930 train ACC: 0.99870 test CE: 2.98919 test ACC: 0.99865
+Step: 8440 train CE: 2.98929 train ACC: 0.99870 test CE: 2.98919 test ACC: 0.99865
+Step: 8450 train CE: 2.98929 train ACC: 0.99870 test CE: 2.98919 test ACC: 0.99865
+Step: 8460 train CE: 2.98929 train ACC: 0.99870 test CE: 2.98918 test ACC: 0.99866
+Step: 8470 train CE: 2.98928 train ACC: 0.99870 test CE: 2.98918 test ACC: 0.99865
+Step: 8480 train CE: 2.98928 train ACC: 0.99870 test CE: 2.98918 test ACC: 0.99865
+Step: 8490 train CE: 2.98928 train ACC: 0.99870 test CE: 2.98917 test ACC: 0.99865
+Step: 8500 train CE: 2.98927 train ACC: 0.99870 test CE: 2.98917 test ACC: 0.99865
+Saving model at step 8500 ....... ok
+Step: 8510 train CE: 2.98927 train ACC: 0.99870 test CE: 2.98917 test ACC: 0.99865
+Step: 8520 train CE: 2.98927 train ACC: 0.99871 test CE: 2.98917 test ACC: 0.99866
+Step: 8530 train CE: 2.98926 train ACC: 0.99871 test CE: 2.98916 test ACC: 0.99865
+Step: 8540 train CE: 2.98926 train ACC: 0.99871 test CE: 2.98916 test ACC: 0.99866
+Step: 8550 train CE: 2.98926 train ACC: 0.99871 test CE: 2.98916 test ACC: 0.99865
+Step: 8560 train CE: 2.98926 train ACC: 0.99871 test CE: 2.98915 test ACC: 0.99865
+Step: 8570 train CE: 2.98925 train ACC: 0.99871 test CE: 2.98915 test ACC: 0.99865
+Step: 8580 train CE: 2.98925 train ACC: 0.99871 test CE: 2.98915 test ACC: 0.99865
+Step: 8590 train CE: 2.98925 train ACC: 0.99871 test CE: 2.98914 test ACC: 0.99865
+Step: 8600 train CE: 2.98924 train ACC: 0.99871 test CE: 2.98914 test ACC: 0.99865
+Saving model at step 8600 ....... ok
+Step: 8610 train CE: 2.98924 train ACC: 0.99871 test CE: 2.98914 test ACC: 0.99865
+Step: 8620 train CE: 2.98924 train ACC: 0.99871 test CE: 2.98914 test ACC: 0.99865
+Step: 8630 train CE: 2.98923 train ACC: 0.99871 test CE: 2.98913 test ACC: 0.99865
+Step: 8640 train CE: 2.98923 train ACC: 0.99871 test CE: 2.98913 test ACC: 0.99865
+Step: 8650 train CE: 2.98923 train ACC: 0.99871 test CE: 2.98913 test ACC: 0.99865
+Step: 8660 train CE: 2.98922 train ACC: 0.99871 test CE: 2.98912 test ACC: 0.99865
+Step: 8670 train CE: 2.98922 train ACC: 0.99871 test CE: 2.98912 test ACC: 0.99865
+Step: 8680 train CE: 2.98922 train ACC: 0.99871 test CE: 2.98912 test ACC: 0.99865
+Step: 8690 train CE: 2.98921 train ACC: 0.99871 test CE: 2.98912 test ACC: 0.99865
+Step: 8700 train CE: 2.98921 train ACC: 0.99871 test CE: 2.98911 test ACC: 0.99865
+Saving model at step 8700 ....... ok
+Step: 8710 train CE: 2.98921 train ACC: 0.99871 test CE: 2.98911 test ACC: 0.99865
+Step: 8720 train CE: 2.98920 train ACC: 0.99871 test CE: 2.98911 test ACC: 0.99865
+Step: 8730 train CE: 2.98920 train ACC: 0.99871 test CE: 2.98910 test ACC: 0.99865
+Step: 8740 train CE: 2.98920 train ACC: 0.99871 test CE: 2.98910 test ACC: 0.99865
+Step: 8750 train CE: 2.98920 train ACC: 0.99871 test CE: 2.98910 test ACC: 0.99865
+Step: 8760 train CE: 2.98919 train ACC: 0.99871 test CE: 2.98909 test ACC: 0.99865
+Step: 8770 train CE: 2.98919 train ACC: 0.99871 test CE: 2.98909 test ACC: 0.99865
+Step: 8780 train CE: 2.98919 train ACC: 0.99871 test CE: 2.98909 test ACC: 0.99865
+Step: 8790 train CE: 2.98918 train ACC: 0.99871 test CE: 2.98909 test ACC: 0.99865
+Step: 8800 train CE: 2.98918 train ACC: 0.99871 test CE: 2.98908 test ACC: 0.99865
+Saving model at step 8800 ....... ok
+Step: 8810 train CE: 2.98918 train ACC: 0.99871 test CE: 2.98908 test ACC: 0.99865
+Step: 8820 train CE: 2.98917 train ACC: 0.99871 test CE: 2.98908 test ACC: 0.99865
+Step: 8830 train CE: 2.98917 train ACC: 0.99871 test CE: 2.98907 test ACC: 0.99866
+Step: 8840 train CE: 2.98917 train ACC: 0.99871 test CE: 2.98907 test ACC: 0.99865
+Step: 8850 train CE: 2.98917 train ACC: 0.99871 test CE: 2.98907 test ACC: 0.99866
+Step: 8860 train CE: 2.98916 train ACC: 0.99871 test CE: 2.98907 test ACC: 0.99866
+Step: 8870 train CE: 2.98916 train ACC: 0.99871 test CE: 2.98906 test ACC: 0.99866
+Step: 8880 train CE: 2.98916 train ACC: 0.99871 test CE: 2.98906 test ACC: 0.99866
+Step: 8890 train CE: 2.98915 train ACC: 0.99871 test CE: 2.98906 test ACC: 0.99866
+Step: 8900 train CE: 2.98915 train ACC: 0.99871 test CE: 2.98906 test ACC: 0.99866
+Saving model at step 8900 ....... ok
+Step: 8910 train CE: 2.98915 train ACC: 0.99871 test CE: 2.98905 test ACC: 0.99866
+Step: 8920 train CE: 2.98914 train ACC: 0.99871 test CE: 2.98905 test ACC: 0.99866
+Step: 8930 train CE: 2.98914 train ACC: 0.99871 test CE: 2.98905 test ACC: 0.99866
+Step: 8940 train CE: 2.98914 train ACC: 0.99871 test CE: 2.98904 test ACC: 0.99866
+Step: 8950 train CE: 2.98913 train ACC: 0.99871 test CE: 2.98904 test ACC: 0.99866
+Step: 8960 train CE: 2.98913 train ACC: 0.99871 test CE: 2.98904 test ACC: 0.99866
+Step: 8970 train CE: 2.98913 train ACC: 0.99871 test CE: 2.98904 test ACC: 0.99866
+Step: 8980 train CE: 2.98913 train ACC: 0.99871 test CE: 2.98903 test ACC: 0.99866
+Step: 8990 train CE: 2.98912 train ACC: 0.99871 test CE: 2.98903 test ACC: 0.99866
+Step: 9000 train CE: 2.98912 train ACC: 0.99871 test CE: 2.98903 test ACC: 0.99866
+Saving model at step 9000 ....... ok
+Step: 9010 train CE: 2.98912 train ACC: 0.99871 test CE: 2.98902 test ACC: 0.99866
+Step: 9020 train CE: 2.98911 train ACC: 0.99871 test CE: 2.98902 test ACC: 0.99866
+Step: 9030 train CE: 2.98911 train ACC: 0.99871 test CE: 2.98902 test ACC: 0.99866
+Step: 9040 train CE: 2.98911 train ACC: 0.99871 test CE: 2.98902 test ACC: 0.99866
+Step: 9050 train CE: 2.98911 train ACC: 0.99871 test CE: 2.98901 test ACC: 0.99866
+Step: 9060 train CE: 2.98910 train ACC: 0.99871 test CE: 2.98901 test ACC: 0.99866
+Step: 9070 train CE: 2.98910 train ACC: 0.99871 test CE: 2.98901 test ACC: 0.99866
+Step: 9080 train CE: 2.98910 train ACC: 0.99871 test CE: 2.98900 test ACC: 0.99866
+Step: 9090 train CE: 2.98909 train ACC: 0.99871 test CE: 2.98900 test ACC: 0.99866
+Step: 9100 train CE: 2.98909 train ACC: 0.99871 test CE: 2.98900 test ACC: 0.99866
+Saving model at step 9100 ....... ok
+Step: 9110 train CE: 2.98909 train ACC: 0.99871 test CE: 2.98900 test ACC: 0.99866
+Step: 9120 train CE: 2.98909 train ACC: 0.99871 test CE: 2.98899 test ACC: 0.99866
+Step: 9130 train CE: 2.98908 train ACC: 0.99871 test CE: 2.98899 test ACC: 0.99866
+Step: 9140 train CE: 2.98908 train ACC: 0.99871 test CE: 2.98899 test ACC: 0.99866
+Step: 9150 train CE: 2.98908 train ACC: 0.99871 test CE: 2.98899 test ACC: 0.99866
+Step: 9160 train CE: 2.98907 train ACC: 0.99871 test CE: 2.98898 test ACC: 0.99866
+Step: 9170 train CE: 2.98907 train ACC: 0.99871 test CE: 2.98898 test ACC: 0.99866
+Step: 9180 train CE: 2.98907 train ACC: 0.99871 test CE: 2.98898 test ACC: 0.99866
+Step: 9190 train CE: 2.98906 train ACC: 0.99871 test CE: 2.98898 test ACC: 0.99866
+Step: 9200 train CE: 2.98906 train ACC: 0.99871 test CE: 2.98897 test ACC: 0.99866
+Saving model at step 9200 ....... ok
+Step: 9210 train CE: 2.98906 train ACC: 0.99871 test CE: 2.98897 test ACC: 0.99866
+Step: 9220 train CE: 2.98906 train ACC: 0.99871 test CE: 2.98897 test ACC: 0.99866
+Step: 9230 train CE: 2.98905 train ACC: 0.99871 test CE: 2.98897 test ACC: 0.99866
+Step: 9240 train CE: 2.98905 train ACC: 0.99871 test CE: 2.98896 test ACC: 0.99866
+Step: 9250 train CE: 2.98905 train ACC: 0.99871 test CE: 2.98896 test ACC: 0.99866
+Step: 9260 train CE: 2.98905 train ACC: 0.99871 test CE: 2.98896 test ACC: 0.99866
+Step: 9270 train CE: 2.98904 train ACC: 0.99871 test CE: 2.98895 test ACC: 0.99866
+Step: 9280 train CE: 2.98904 train ACC: 0.99871 test CE: 2.98895 test ACC: 0.99865
+Step: 9290 train CE: 2.98904 train ACC: 0.99871 test CE: 2.98895 test ACC: 0.99865
+Step: 9300 train CE: 2.98903 train ACC: 0.99871 test CE: 2.98895 test ACC: 0.99866
+Saving model at step 9300 ....... ok
+Step: 9310 train CE: 2.98903 train ACC: 0.99871 test CE: 2.98894 test ACC: 0.99866
+Step: 9320 train CE: 2.98903 train ACC: 0.99871 test CE: 2.98894 test ACC: 0.99865
+Step: 9330 train CE: 2.98903 train ACC: 0.99871 test CE: 2.98894 test ACC: 0.99866
+Step: 9340 train CE: 2.98902 train ACC: 0.99871 test CE: 2.98894 test ACC: 0.99866
+Step: 9350 train CE: 2.98902 train ACC: 0.99871 test CE: 2.98893 test ACC: 0.99866
+Step: 9360 train CE: 2.98902 train ACC: 0.99871 test CE: 2.98893 test ACC: 0.99866
+Step: 9370 train CE: 2.98901 train ACC: 0.99871 test CE: 2.98893 test ACC: 0.99866
+Step: 9380 train CE: 2.98901 train ACC: 0.99871 test CE: 2.98892 test ACC: 0.99866
+Step: 9390 train CE: 2.98901 train ACC: 0.99871 test CE: 2.98892 test ACC: 0.99866
+Step: 9400 train CE: 2.98901 train ACC: 0.99871 test CE: 2.98892 test ACC: 0.99866
+Saving model at step 9400 ....... ok
+Step: 9410 train CE: 2.98900 train ACC: 0.99871 test CE: 2.98892 test ACC: 0.99866
+Step: 9420 train CE: 2.98900 train ACC: 0.99871 test CE: 2.98891 test ACC: 0.99866
+Step: 9430 train CE: 2.98900 train ACC: 0.99871 test CE: 2.98891 test ACC: 0.99866
+Step: 9440 train CE: 2.98899 train ACC: 0.99871 test CE: 2.98891 test ACC: 0.99866
+Step: 9450 train CE: 2.98899 train ACC: 0.99871 test CE: 2.98891 test ACC: 0.99866
+Step: 9460 train CE: 2.98899 train ACC: 0.99871 test CE: 2.98890 test ACC: 0.99866
+Step: 9470 train CE: 2.98899 train ACC: 0.99871 test CE: 2.98890 test ACC: 0.99866
+Step: 9480 train CE: 2.98898 train ACC: 0.99871 test CE: 2.98890 test ACC: 0.99865
+Step: 9490 train CE: 2.98898 train ACC: 0.99871 test CE: 2.98890 test ACC: 0.99866
+Step: 9500 train CE: 2.98898 train ACC: 0.99871 test CE: 2.98889 test ACC: 0.99866
+Saving model at step 9500 ....... ok
+Step: 9510 train CE: 2.98898 train ACC: 0.99871 test CE: 2.98889 test ACC: 0.99865
+Step: 9520 train CE: 2.98897 train ACC: 0.99871 test CE: 2.98889 test ACC: 0.99866
+Step: 9530 train CE: 2.98897 train ACC: 0.99871 test CE: 2.98889 test ACC: 0.99866
+Step: 9540 train CE: 2.98897 train ACC: 0.99871 test CE: 2.98888 test ACC: 0.99865
+Step: 9550 train CE: 2.98896 train ACC: 0.99871 test CE: 2.98888 test ACC: 0.99865
+Step: 9560 train CE: 2.98896 train ACC: 0.99871 test CE: 2.98888 test ACC: 0.99865
+Step: 9570 train CE: 2.98896 train ACC: 0.99871 test CE: 2.98888 test ACC: 0.99865
+Step: 9580 train CE: 2.98896 train ACC: 0.99871 test CE: 2.98887 test ACC: 0.99866
+Step: 9590 train CE: 2.98895 train ACC: 0.99871 test CE: 2.98887 test ACC: 0.99865
+Step: 9600 train CE: 2.98895 train ACC: 0.99871 test CE: 2.98887 test ACC: 0.99865
+Saving model at step 9600 ....... ok
+Step: 9610 train CE: 2.98895 train ACC: 0.99871 test CE: 2.98887 test ACC: 0.99865
+Step: 9620 train CE: 2.98895 train ACC: 0.99871 test CE: 2.98886 test ACC: 0.99865
+Step: 9630 train CE: 2.98894 train ACC: 0.99871 test CE: 2.98886 test ACC: 0.99865
+Step: 9640 train CE: 2.98894 train ACC: 0.99871 test CE: 2.98886 test ACC: 0.99865
+Step: 9650 train CE: 2.98894 train ACC: 0.99871 test CE: 2.98886 test ACC: 0.99865
+Step: 9660 train CE: 2.98894 train ACC: 0.99871 test CE: 2.98885 test ACC: 0.99865
+Step: 9670 train CE: 2.98893 train ACC: 0.99871 test CE: 2.98885 test ACC: 0.99865
+Step: 9680 train CE: 2.98893 train ACC: 0.99871 test CE: 2.98885 test ACC: 0.99865
+Step: 9690 train CE: 2.98893 train ACC: 0.99871 test CE: 2.98885 test ACC: 0.99865
+Step: 9700 train CE: 2.98892 train ACC: 0.99871 test CE: 2.98885 test ACC: 0.99865
+Saving model at step 9700 ....... ok
+Step: 9710 train CE: 2.98892 train ACC: 0.99871 test CE: 2.98884 test ACC: 0.99865
+Step: 9720 train CE: 2.98892 train ACC: 0.99871 test CE: 2.98884 test ACC: 0.99865
+Step: 9730 train CE: 2.98892 train ACC: 0.99871 test CE: 2.98884 test ACC: 0.99865
+Step: 9740 train CE: 2.98891 train ACC: 0.99871 test CE: 2.98884 test ACC: 0.99866
+Step: 9750 train CE: 2.98891 train ACC: 0.99871 test CE: 2.98883 test ACC: 0.99866
+Step: 9760 train CE: 2.98891 train ACC: 0.99871 test CE: 2.98883 test ACC: 0.99866
+Step: 9770 train CE: 2.98891 train ACC: 0.99871 test CE: 2.98883 test ACC: 0.99866
+Step: 9780 train CE: 2.98890 train ACC: 0.99871 test CE: 2.98883 test ACC: 0.99866
+Step: 9790 train CE: 2.98890 train ACC: 0.99871 test CE: 2.98882 test ACC: 0.99866
+Step: 9800 train CE: 2.98890 train ACC: 0.99871 test CE: 2.98882 test ACC: 0.99866
+Saving model at step 9800 ....... ok
+Step: 9810 train CE: 2.98889 train ACC: 0.99871 test CE: 2.98882 test ACC: 0.99866
+Step: 9820 train CE: 2.98889 train ACC: 0.99871 test CE: 2.98881 test ACC: 0.99866
+Step: 9830 train CE: 2.98889 train ACC: 0.99871 test CE: 2.98881 test ACC: 0.99866
+Step: 9840 train CE: 2.98889 train ACC: 0.99871 test CE: 2.98881 test ACC: 0.99866
+Step: 9850 train CE: 2.98888 train ACC: 0.99871 test CE: 2.98881 test ACC: 0.99866
+Step: 9860 train CE: 2.98888 train ACC: 0.99871 test CE: 2.98881 test ACC: 0.99866
+Step: 9870 train CE: 2.98888 train ACC: 0.99871 test CE: 2.98880 test ACC: 0.99866
+Step: 9880 train CE: 2.98888 train ACC: 0.99871 test CE: 2.98880 test ACC: 0.99866
+Step: 9890 train CE: 2.98887 train ACC: 0.99871 test CE: 2.98880 test ACC: 0.99866
+Step: 9900 train CE: 2.98887 train ACC: 0.99871 test CE: 2.98880 test ACC: 0.99866
+Saving model at step 9900 ....... ok
+Step: 9910 train CE: 2.98887 train ACC: 0.99871 test CE: 2.98879 test ACC: 0.99866
+Step: 9920 train CE: 2.98887 train ACC: 0.99871 test CE: 2.98879 test ACC: 0.99866
+Step: 9930 train CE: 2.98886 train ACC: 0.99871 test CE: 2.98879 test ACC: 0.99866
+Step: 9940 train CE: 2.98886 train ACC: 0.99871 test CE: 2.98879 test ACC: 0.99866
+Step: 9950 train CE: 2.98886 train ACC: 0.99871 test CE: 2.98878 test ACC: 0.99866
+Step: 9960 train CE: 2.98886 train ACC: 0.99871 test CE: 2.98878 test ACC: 0.99866
+Step: 9970 train CE: 2.98885 train ACC: 0.99871 test CE: 2.98878 test ACC: 0.99866
+Step: 9980 train CE: 2.98885 train ACC: 0.99871 test CE: 2.98878 test ACC: 0.99866
+Step: 9990 train CE: 2.98885 train ACC: 0.99871 test CE: 2.98877 test ACC: 0.99866
+Done training!
+Model final accuracy: 0.99866
+Model stored in /Users/mir/tf-models/mimo-1-2.ckpt-10000
