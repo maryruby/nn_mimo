@@ -141,9 +141,10 @@ def train_network(train_data, test_data, params, output_fd):
     test_feed_dict = {x_: X_test_matrix, y_0_: Y_test_0, y_1_: Y_test_1, y_2_: Y_test_2, y_3_: Y_test_3}
     test_ce = sess.run(general_loss_, test_feed_dict)
     test_ber = bit_error_rate([output_0_, output_1_, output_2_, output_3_], sess, test_feed_dict, ideal_output_test)
-    logger.info('Params: %s max step: %d train CE: %.5f train BER: %.5f test CE: %.5f test BER: %.5f' % (json.dumps(params), i, train_ce, train_acc, test_ce, test_acc))
-    print >> output_fd, '%s\t%d\t%.5f\t%.5f\t%.5f\t%.5f' % (json.dumps(params), step, train_ce, train_ber, test_ce, test_ber)
+    logger.info('Params: %s max step: %d train CE: %.5f train BER: %.5f test CE: %.5f test BER: %.5f' % (json.dumps(params), i, train_ce, train_ber, test_ce, test_ber))
+    print >> output_fd, '%s\t%d\t%.5f\t%.5f\t%.5f\t%.5f' % (json.dumps(params), i, train_ce, train_ber, test_ce, test_ber)
     logger.info('Done for params %s', params)
+    output_fd.flush()
 
 
 def convert_row(x):
@@ -176,7 +177,7 @@ def main():
     with open('train_results.tsv', 'w') as output_fd:
         for n_shared_exponent in xrange(3, 10):
             for n_hidden_exponent in xrange(2, 7):
-                params = {'n_shared': 2 ** n_shared_exponent, 'n_hidden': 2 ** n_shared_exponent}
+                params = {'n_shared': 2 ** n_shared_exponent, 'n_hidden': 2 ** n_hidden_exponent}
                 logger.debug('Training for params: %s', params)
                 train_network((X_matrix, Y_matrix, ideal_output_train), (X_test_matrix, Y_test_matrix, ideal_output_test), params, output_fd)
 
