@@ -118,8 +118,8 @@ def main():
     logger.info('Done training!')
 
     test_feed_dict = {x_: X_test_matrix}
-            for j in range(len(y_)): 
-                test_feed_dict[y_[j]: ideal_output_test[:,j]]
+    for j in range(len(y_)): 
+        test_feed_dict[y_[j]: ideal_output_test[:,j]]
     ber = bit_error_rate(outputs, sess, test_feed_dict, ideal_output_test, treshold)
     logger.info('Model final BER: %.5f' % ber)
 
