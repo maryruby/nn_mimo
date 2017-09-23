@@ -174,8 +174,8 @@ def main():
     
     logger.info('Data is ready!')
 
-    with open('train_results.tsv', 'w') as output_fd:
-        for n_shared_exponent in xrange(3, 10):
+    with open('train_results_continue.tsv', 'w') as output_fd:
+        for n_shared_exponent in xrange(6, 10):
             for n_hidden_exponent in xrange(2, 7):
                 params = {'n_shared': 2 ** n_shared_exponent, 'n_hidden': 2 ** n_hidden_exponent}
                 logger.debug('Training for params: %s', params)
