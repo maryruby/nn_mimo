@@ -15,9 +15,9 @@ model_filename = '/Users/mir/tf-models/mimo-2-1'
 
 def read_data(x_filename, y_filename):
     X = pd.read_csv(x_filename, header = None).as_matrix().T
-    ideal_output_data = pd.read_csv(y_filename, header = None).as_matrix()
+    Y = pd.read_csv(y_filename, header = None).as_matrix().T
     
-    return X, ideal_output_data
+    return X, Y
 
 
 def main():
@@ -25,11 +25,11 @@ def main():
     sess = tf.Session()
 
     logger.info('Reading train data...')
-    X_matrix, ideal_output_train = read_data('data/1/y.csv', 'data/1/b.csv')
+    X_matrix, Y_matrix = read_data('data/1/y.csv', 'data/1/b.csv')
 
     
     logger.info('Reading test data...')
-    X_test_matrix, ideal_output_test = read_data('~/y.csv1', '~/b.csv1')
+    X_test_matrix, Y_test_matrix = read_data('data/1/ytest.csv', 'data/1/btest.csv')
     
     logger.info('Creating model...')
 
@@ -57,7 +57,9 @@ def main():
         outputs.append(tf.contrib.layers.fully_connected(inners[i], n_output, 
                                                 activation_fn=activation_output,
                                                 biases_initializer=tf.zeros_initializer()))
-        loss.append(tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_[i], logits = output[i])))
+        loss.append(tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
+            labels=y_[i],
+            logits=outputs[i])))
         
 
     general_loss_ = tf.reduce_sum(loss)
@@ -81,33 +83,25 @@ def main():
     # max_iterations = 13200
     max_iterations = 10000
     batch_size = 100
-    tresold = 0.5
+    treshold = 0.5
     for i in xrange(min_iterations, max_iterations):
         perm = np.random.permutation(X_matrix.shape[0])
         X_matrix_p = X_matrix[perm, :]
-        Y_p = ideal_output_train[perm, :]
+        Y_p = Y_matrix[perm, :]
         
         for b in xrange(X_matrix.shape[0] / batch_size):
             batch_x = X_matrix_p[batch_size * b:batch_size * (b + 1),:]
-            batch_y= Y_p[batch_size * b:batch_size * (b + 1),:]
-            feed_dict ={ x_: batch_x}
-            for j in range(len(y_)): 
-                feed_dict[y_[i]: batch_y_[:,i]]
-
+            batch_y = Y_p[batch_size * b:batch_size * (b + 1),:]
+            feed_dict = make_feed_dict(x_, y_, batch_x, batch_y)
             sess.run(train_, feed_dict=feed_dict)
         if i % 10 == 0:
-            train_feed_dict = {x_: X_matrix}
-            for j in range(len(y_)): 
-                feed_dict[y_[j]: ideal_output_train[:,j]]
+            train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
+            train_ber = bit_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
 
-            train_ber = bit_error_rate(outputs, sess, train_feed_dict, ideal_output_train, treshold)
-            test_feed_dict = {x_: X_test_matrix}
-            for j in range(len(y_)): 
-                test_feed_dict[y_[j]: ideal_output_test[:,j]]
-
+            test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
             test_ce = sess.run(general_loss_, test_feed_dict)
-            test_ber = bit_error_rate(outputs, sess, test_feed_dict, ideal_output_test, treshold)
+            test_ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
             logger.info('Step: %d train CE: %.5f train BER: %.5f test CE: %.5f test BER: %.5f' % (i, train_ce, train_ber, test_ce, test_ber))
                     
         if i % 100 == 0 and i > min_iterations:
@@ -117,28 +111,33 @@ def main():
 
     logger.info('Done training!')
 
-    test_feed_dict = {x_: X_test_matrix}
-    for j in range(len(y_)): 
-        test_feed_dict[y_[j]: ideal_output_test[:,j]]
-    ber = bit_error_rate(outputs, sess, test_feed_dict, ideal_output_test, treshold)
+    test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
+    ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
     logger.info('Model final BER: %.5f' % ber)
 
     save_path = saver.save(sess, model_filename, global_step = max_iterations)
     logger.info('Model stored in %s' % save_path)
 
 
+def make_feed_dict(x_, y_, X, Y):
+    feed_dict = {x_: X}
+    for j in range(len(y_)): 
+        feed_dict[y_[j]] = Y[:,[j]]#.reshape(Y.shape[0], 1)
+    return feed_dict
+
+
 def convert_row(x, treshold):
-    return (x>= treshold).as_type(int)
+    return (x>= treshold).astype(int)
 
 
-def bit_error_rate(nn_out_layers, session, feed_dict, ideal_output_test, treshold=0.5):
+def bit_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
     nn_outputs = session.run(nn_out_layers, feed_dict)
 
     predicted_y_matrix = np.hstack(map(
         lambda matrix: np.apply_along_axis(partial(convert_row, treshold = treshold), 1, matrix), 
         nn_outputs)).T
-    total_elems = (ideal_output_test.shape[0] * ideal_output_test.shape[1])
-    return np.sum(predicted_y_matrix != ideal_output_test) / float(total_elems)
+    total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
+    return np.sum(predicted_y_matrix != Y_matrix) / float(total_elems)
 
 
 if __name__ == '__main__':
