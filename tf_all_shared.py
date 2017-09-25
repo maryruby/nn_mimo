@@ -82,7 +82,7 @@ def main():
         if i % 10 == 0:
             train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
-            cber = [column_bit_error_rate(i, output, sess, train_feed_dict, Y_matrix, threshold) for i in xrange(n_bits)]
+            cber = [column_bit_error_rate(c, output, sess, train_feed_dict, Y_matrix, threshold) for c in xrange(n_bits)]
             logger.info('TRAIN step: %d column BER: [%s] (mean: %.5f)' % (i, ','.join('%.5f' % c for c in cber), np.mean(cber)))
             # train_ber = bit_error_rate(output, sess, train_feed_dict, Y_matrix, threshold)
             train_rer = row_error_rate(output, sess, train_feed_dict, Y_matrix, threshold)
@@ -90,7 +90,7 @@ def main():
 
             val_feed_dict = make_feed_dict(x_, y_, X_val_matrix, Y_val_matrix)
             val_ce = sess.run(general_loss_, val_feed_dict)
-            val_cber = [column_bit_error_rate(i, output, sess, val_feed_dict, Y_val_matrix, threshold) for i in xrange(n_bits)]
+            val_cber = [column_bit_error_rate(c, output, sess, val_feed_dict, Y_val_matrix, threshold) for c in xrange(n_bits)]
             logger.info('VALIDATION step: %d column BER: [%s] (mean: %.5f)' % (i, ','.join('%.5f' % c for c in val_cber), np.mean(val_cber)))
             # val_ber = bit_error_rate(output, sess, val_feed_dict, Y_val_matrix, threshold)
             val_rer = row_error_rate(output, sess, val_feed_dict, Y_val_matrix, threshold)
