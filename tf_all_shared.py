@@ -82,15 +82,19 @@ def main():
         if i % 10 == 0:
             train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
-            train_ber = bit_error_rate(output, sess, train_feed_dict, Y_matrix, treshold)
+            cber = [column_bit_error_rate(i, output, sess, train_feed_dict, Y_matrix, treshold) for i in xrange(n_bits)]
+            logger.info('TRAIN step: %d column BER: %s (mean: %.5f)' % (i, ['%.5f' % c for c in cber], np.mean(cber)))
+            # train_ber = bit_error_rate(output, sess, train_feed_dict, Y_matrix, treshold)
             train_rer = row_error_rate(output, sess, train_feed_dict, Y_matrix, treshold)
-            logger.info('TRAIN step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, train_ce, train_ber, train_rer))
+            logger.info('TRAIN step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, train_ce, np.mean(cber), train_rer))
 
             val_feed_dict = make_feed_dict(x_, y_, X_val_matrix, Y_val_matrix)
             val_ce = sess.run(general_loss_, val_feed_dict)
-            val_ber = bit_error_rate(output, sess, val_feed_dict, Y_val_matrix, treshold)
+            val_cber = [column_bit_error_rate(i, output, sess, val_feed_dict, Y_val_matrix, treshold) for i in xrange(n_bits)]
+            logger.info('VALIDATION step: %d column BER: %s (mean: %.5f)' % (i, ['%.5f' % c for c in val_cber], np.mean(val_cber)))
+            # val_ber = bit_error_rate(output, sess, val_feed_dict, Y_val_matrix, treshold)
             val_rer = row_error_rate(output, sess, val_feed_dict, Y_val_matrix, treshold)
-            logger.info('VALIDATION step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, val_ce, val_ber, val_rer))
+            logger.info('VALIDATION step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, val_ce, np.mean(val_cber), val_rer))
                     
         if i % 100 == 0 and i > min_iterations:
             logger.info('Saving model at step %d .......' % i,)
@@ -125,6 +129,14 @@ def bit_error_rate(nn_out_layer, session, feed_dict, Y_matrix, treshold=0.5):
     predicted_y_matrix = convert_row(nn_output, treshold)
     total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
     return np.sum(predicted_y_matrix != Y_matrix) / float(total_elems)
+
+
+def column_bit_error_rate(i, nn_out_layer, session, feed_dict, Y_matrix, treshold=0.5):
+    nn_output = session.run(nn_out_layer, feed_dict)[:, [i]]
+    predicted_y_matrix = convert_row(nn_output, treshold)
+    Y = Y_matrix[:, [i]]
+    total_elems = (Y.shape[0] * Y.shape[1])
+    return np.sum(predicted_y_matrix != Y) / float(total_elems)
 
 
 def row_error_rate(nn_out_layer, session, feed_dict, Y_matrix, treshold=0.5):
