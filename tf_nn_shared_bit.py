@@ -26,10 +26,9 @@ def main():
 
     logger.info('Reading train data...')
     X_matrix, Y_matrix = read_data('data/1/y.csv', 'data/1/b.csv')
-
     
-    logger.info('Reading test data...')
-    X_test_matrix, Y_test_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    logger.info('Reading validation data...')
+    X_val_matrix, Y_val_matrix = read_data('data/1/ytest.csv', 'data/1/btest.csv')
     
     logger.info('Creating model...')
 
@@ -80,8 +79,7 @@ def main():
     # saver.restore(sess, '%s-%s' % (model_filename, min_iterations))
 
     logger.info('Training...')
-    # max_iterations = 13200
-    max_iterations = 10000
+    max_iterations = 1000
     batch_size = 100
     treshold = 0.5
     for i in xrange(min_iterations, max_iterations):
@@ -97,12 +95,15 @@ def main():
         if i % 10 == 0:
             train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
+            train_ber = bit_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
             train_rer = row_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
+            logger.info('TRAIN step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, train_ce, train_ber, train_rer))
 
-            test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
-            test_ce = sess.run(general_loss_, test_feed_dict)
-            test_rer = row_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
-            logger.info('Step: %d train CE: %.5f train RER: %.5f test CE: %.5f test RER: %.5f' % (i, train_ce, train_rer, test_ce, test_rer))
+            val_feed_dict = make_feed_dict(x_, y_, X_val_matrix, Y_val_matrix)
+            val_ce = sess.run(general_loss_, val_feed_dict)
+            val_ber = bit_error_rate(outputs, sess, val_feed_dict, Y_val_matrix, treshold)
+            val_rer = row_error_rate(outputs, sess, val_feed_dict, Y_val_matrix, treshold)
+            logger.info('VALIDATION step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, val_ce, val_ber, val_rer))
                     
         if i % 100 == 0 and i > min_iterations:
             logger.info('Saving model at step %d .......' % i,)
@@ -111,7 +112,12 @@ def main():
 
     logger.info('Done training!')
 
+    logger.info('Reading final test data...')
+    X_test_matrix, Y_test_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+
     test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
+    ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
+    logger.info('Model final BER: %.5f' % ber)
     rer = row_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
     logger.info('Model final RER: %.5f' % rer)
 
@@ -122,12 +128,22 @@ def main():
 def make_feed_dict(x_, y_, X, Y):
     feed_dict = {x_: X}
     for j in range(len(y_)): 
-        feed_dict[y_[j]] = Y[:,[j]]#.reshape(Y.shape[0], 1)
+        feed_dict[y_[j]] = Y[:,[j]]
     return feed_dict
 
 
 def convert_row(x, treshold):
     return (x>= treshold).astype(int)
+
+
+def bit_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
+    nn_outputs = session.run(nn_out_layers, feed_dict)
+
+    predicted_y_matrix = np.hstack(map(
+        lambda matrix: np.apply_along_axis(partial(convert_row, treshold = treshold), 1, matrix), 
+        nn_outputs))
+    total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
+    return np.sum(predicted_y_matrix != Y_matrix) / float(total_elems)
 
 
 def row_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
@@ -137,7 +153,7 @@ def row_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
         lambda matrix: np.apply_along_axis(partial(convert_row, treshold = treshold), 1, matrix), 
         nn_outputs))
     total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
-    return 1.0 - np.sum(np.all(np.equal(predicted_y_matrix, Y_matrix), 1)) / float(total_elems)
+    return np.sum(np.any(np.not_equal(predicted_y_matrix, Y_matrix), 1)) / float(total_elems)
 
 
 if __name__ == '__main__':
