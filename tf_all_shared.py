@@ -5,12 +5,13 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from functools import partial
+import argparse
 
 
 logger = logging.getLogger(__name__)
 
 
-model_filename = 'models/mimo-all-shared-1'
+model_filename_template = 'models/mimo-all-shared-%d-%d'
 
 
 def read_data(x_filename, y_filename):
@@ -20,7 +21,7 @@ def read_data(x_filename, y_filename):
     return X, Y
 
 
-def main():
+def main(n_shared, n_hidden, max_iterations, lr, eps):
     # saver = tf.train.Saver()
     sess = tf.Session()
 
@@ -33,8 +34,6 @@ def main():
     logger.info('Creating model...')
 
     n_bits = 8
-    n_shared = 8
-    n_hidden = 4
     x_ = tf.placeholder(dtype = tf.float32, shape = (None, n_bits))
     y_ = tf.placeholder(dtype = tf.float32, shape = (None, n_bits))
 
@@ -50,8 +49,7 @@ def main():
                                                biases_initializer=tf.zeros_initializer())
     general_loss_ = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels=y_, logits=output))
 
-    learning_rate = 0.01
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+    optimizer = tf.train.GradientDescentOptimizer(lr)
     train_ = optimizer.minimize(general_loss_)
 
     init = tf.global_variables_initializer()
@@ -66,9 +64,10 @@ def main():
     # saver.restore(sess, '%s-%s' % (model_filename, min_iterations))
 
     logger.info('Training...')
-    max_iterations = 1000
-    batch_size = 100
+    # max_iterations = 1000
+    batch_size = 300
     threshold = 0.5
+    prev_ce = None
     for i in xrange(min_iterations, max_iterations):
         perm = np.random.permutation(X_matrix.shape[0])
         X_matrix_p = X_matrix[perm, :]
@@ -95,10 +94,15 @@ def main():
             # val_ber = bit_error_rate(output, sess, val_feed_dict, Y_val_matrix, threshold)
             val_rer = row_error_rate(output, sess, val_feed_dict, Y_val_matrix, threshold)
             logger.info('VALIDATION step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, val_ce, np.mean(val_cber), val_rer))
+            if prev_ce and abs(train_ce - prev_ce) < eps:
+                logger.info('Converged at %d' % i)
+                max_iterations = i
+                break
+            prev_ce = train_ce
                     
         if i % 100 == 0 and i > min_iterations:
             logger.info('Saving model at step %d .......' % i,)
-            save_path = saver.save(sess, model_filename, global_step = i)
+            save_path = saver.save(sess, model_filename_template % (n_shared, n_hidden), global_step = i)
             logger.info('ok')
 
     logger.info('Done training!')
@@ -107,12 +111,14 @@ def main():
     X_test_matrix, Y_test_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
 
     test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
-    ber = bit_error_rate(output, sess, test_feed_dict, Y_test_matrix, threshold)
-    logger.info('Model final BER: %.5f' % ber)
+    test_cber = [column_bit_error_rate(c, output, sess, test_feed_dict, Y_test_matrix, threshold) for c in xrange(n_bits)]
+    logger.info('Model final column BER: [%s] (mean: %.5f)' % (','.join('%.5f' % c for c in test_cber), np.mean(test_cber)))
+    # ber = bit_error_rate(output, sess, test_feed_dict, Y_test_matrix, threshold)
+    # logger.info('Model final BER: %.5f' % ber)
     rer = row_error_rate(output, sess, test_feed_dict, Y_test_matrix, threshold)
     logger.info('Model final RER: %.5f' % rer)
 
-    save_path = saver.save(sess, model_filename, global_step = max_iterations)
+    save_path = saver.save(sess, model_filename_template % (n_shared, n_hidden), global_step = max_iterations)
     logger.info('Model stored in %s' % save_path)
 
 
@@ -148,5 +154,12 @@ def row_error_rate(nn_out_layer, session, feed_dict, Y_matrix, threshold=0.5):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s: %(message)s')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--hidden', help='Size of hidden layer', type=int, required=True)
+    parser.add_argument('--layers', help='Total hidden layers', type=int, required=True)
+    parser.add_argument('--max-iterations', help='Max iterations', type=int, default=10000)
+    parser.add_argument('--lr', help='Learning rate', type=float, default=0.01)
+    parser.add_argument('--eps', help='Convergence CE diff', type=float, default=1e-6)
+    args = parser.parse_args()
     logger.info('Start')
-    main()
+    main(args.hidden, args.layers, args.max_iterations, args.lr, args.eps)

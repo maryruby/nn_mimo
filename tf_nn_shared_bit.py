@@ -95,13 +95,17 @@ def main():
         if i % 10 == 0:
             train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
-            train_ber = bit_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
+            cber = [column_bit_error_rate(c, output, sess, train_feed_dict, Y_matrix, threshold) for c in xrange(n_bits)]
+            train_ber = np.mean(cber)
+            logger.info('TRAIN step: %d column BER: [%s] (mean: %.5f)' % (i, ','.join('%.5f' % c for c in cber), cber))
             train_rer = row_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
             logger.info('TRAIN step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, train_ce, train_ber, train_rer))
 
             val_feed_dict = make_feed_dict(x_, y_, X_val_matrix, Y_val_matrix)
             val_ce = sess.run(general_loss_, val_feed_dict)
-            val_ber = bit_error_rate(outputs, sess, val_feed_dict, Y_val_matrix, treshold)
+            val_cber = [column_bit_error_rate(c, output, sess, val_feed_dict, Y_val_matrix, threshold) for c in xrange(n_bits)]
+            val_ber = np.mean(val_cber)
+            logger.info('VALIDATION step: %d column BER: [%s] (mean: %.5f)' % (i, ','.join('%.5f' % c for c in val_cber), val_ber))
             val_rer = row_error_rate(outputs, sess, val_feed_dict, Y_val_matrix, treshold)
             logger.info('VALIDATION step: %d CE: %.5f BER: %.5f RER: %.5f' % (i, val_ce, val_ber, val_rer))
                     
@@ -116,8 +120,11 @@ def main():
     X_test_matrix, Y_test_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
 
     test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
-    ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
-    logger.info('Model final BER: %.5f' % ber)
+    test_cber = [column_bit_error_rate(c, output, sess, test_feed_dict, Y_test_matrix, threshold) for c in xrange(n_bits)]
+    logger.info('Model final column BER: [%s] (mean: %.5f)' % (','.join('%.5f' % c for c in test_cber), np.mean(test_cber)))
+
+    # ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
+    # logger.info('Model final BER: %.5f' % ber)
     rer = row_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
     logger.info('Model final RER: %.5f' % rer)
 
@@ -144,6 +151,14 @@ def bit_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
         nn_outputs))
     total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
     return np.sum(predicted_y_matrix != Y_matrix) / float(total_elems)
+
+
+def column_bit_error_rate(column, nn_out_layer, session, feed_dict, Y_matrix, threshold=0.5):
+    nn_output = session.run(nn_out_layer, feed_dict)[:, [column]]
+    predicted_y_matrix = convert_row(nn_output, threshold)
+    Y = Y_matrix[:, [column]]
+    total_elems = (Y.shape[0] * Y.shape[1])
+    return np.sum(predicted_y_matrix != Y) / float(total_elems)
 
 
 def row_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
