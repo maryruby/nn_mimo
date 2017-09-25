@@ -57,7 +57,7 @@ def main():
         outputs.append(tf.contrib.layers.fully_connected(inners[i], n_output, 
                                                 activation_fn=activation_output,
                                                 biases_initializer=tf.zeros_initializer()))
-        loss.append(tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
+        loss.append(tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(
             labels=y_[i],
             logits=outputs[i])))
         
