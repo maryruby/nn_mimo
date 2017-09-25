@@ -26,10 +26,10 @@ def main(n_shared, n_hidden, max_iterations, lr, eps):
     sess = tf.Session()
 
     logger.info('Reading train data...')
-    X_matrix, Y_matrix = read_data('data/1/y.csv', 'data/1/b.csv')
+    X_matrix, Y_matrix = read_data('data/1/y_10_7.csv', 'data/1/b_10_7.csv')
     
     logger.info('Reading validation data...')
-    X_val_matrix, Y_val_matrix = read_data('data/1/ytest.csv', 'data/1/btest.csv')
+    X_val_matrix, Y_val_matrix = read_data('data/1/y.csv', 'data/1/b.csv')
     
     logger.info('Creating model...')
 
