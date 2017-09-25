@@ -10,7 +10,7 @@ from functools import partial
 logger = logging.getLogger(__name__)
 
 
-model_filename = '/Users/mir/tf-models/mimo-2-1'
+model_filename = 'models/mimo-2-1'
 
 
 def read_data(x_filename, y_filename):
@@ -29,7 +29,7 @@ def main():
 
     
     logger.info('Reading test data...')
-    X_test_matrix, Y_test_matrix = read_data('data/1/ytest.csv', 'data/1/btest.csv')
+    X_test_matrix, Y_test_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
     
     logger.info('Creating model...')
 
@@ -97,12 +97,12 @@ def main():
         if i % 10 == 0:
             train_feed_dict = make_feed_dict(x_, y_, X_matrix, Y_matrix)
             train_ce = sess.run(general_loss_, train_feed_dict)
-            train_ber = bit_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
+            train_rer = row_error_rate(outputs, sess, train_feed_dict, Y_matrix, treshold)
 
             test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
             test_ce = sess.run(general_loss_, test_feed_dict)
-            test_ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
-            logger.info('Step: %d train CE: %.5f train BER: %.5f test CE: %.5f test BER: %.5f' % (i, train_ce, train_ber, test_ce, test_ber))
+            test_rer = row_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
+            logger.info('Step: %d train CE: %.5f train RER: %.5f test CE: %.5f test RER: %.5f' % (i, train_ce, train_rer, test_ce, test_rer))
                     
         if i % 100 == 0 and i > min_iterations:
             logger.info('Saving model at step %d .......' % i,)
@@ -112,8 +112,8 @@ def main():
     logger.info('Done training!')
 
     test_feed_dict = make_feed_dict(x_, y_, X_test_matrix, Y_test_matrix)
-    ber = bit_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
-    logger.info('Model final BER: %.5f' % ber)
+    rer = row_error_rate(outputs, sess, test_feed_dict, Y_test_matrix, treshold)
+    logger.info('Model final RER: %.5f' % rer)
 
     save_path = saver.save(sess, model_filename, global_step = max_iterations)
     logger.info('Model stored in %s' % save_path)
@@ -130,14 +130,14 @@ def convert_row(x, treshold):
     return (x>= treshold).astype(int)
 
 
-def bit_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
+def row_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
     nn_outputs = session.run(nn_out_layers, feed_dict)
 
     predicted_y_matrix = np.hstack(map(
         lambda matrix: np.apply_along_axis(partial(convert_row, treshold = treshold), 1, matrix), 
-        nn_outputs)).T
+        nn_outputs))
     total_elems = (Y_matrix.shape[0] * Y_matrix.shape[1])
-    return np.sum(predicted_y_matrix != Y_matrix) / float(total_elems)
+    return 1.0 - np.sum(np.all(np.equal(predicted_y_matrix, Y_matrix), 1)) / float(total_elems)
 
 
 if __name__ == '__main__':
