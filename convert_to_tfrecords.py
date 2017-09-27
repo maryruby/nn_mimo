@@ -3,17 +3,13 @@
 
 import argparse
 import numpy as np
-import pandas as pd
 import tensorflow as tf
 
 
 def read_data(x_filename, y_filename, transposed):
-    X = pd.read_csv(x_filename, header = None).as_matrix()
-    Y = pd.read_csv(y_filename, header = None).as_matrix()
-    if transposed:
-        return X.T, Y.T
-    else:
-        return X, Y
+    X = np.loadtxt(x_filename, delimiter=',', unpack=transposed)
+    Y = np.loadtxt(y_filename, delimiter=',', unpack=transposed)
+    return X, Y
 
 
 def float_list_feature(value):

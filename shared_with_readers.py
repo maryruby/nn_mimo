@@ -59,7 +59,7 @@ def inputs(filename, batch_size, num_epochs=None):
 
 def create_model(X, args):
     """Return output layer tensor"""
-    hiddens = [tf.contrib.layers.fully_connected(X, args.layer_size, activation_fn=tf.nn.relu)]
+    hiddens = [X]
     for i in xrange(args.layers - 1):
         hiddens.append(tf.contrib.layers.fully_connected(hiddens[-1], args.layer_size, activation_fn=tf.nn.relu))
     logits = tf.contrib.layers.fully_connected(hiddens[-1], N_BITS, activation_fn=tf.nn.sigmoid)
@@ -67,8 +67,9 @@ def create_model(X, args):
 
 
 def loss(logits, labels):
-  cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits, name='xentropy')
-  return tf.reduce_mean(cross_entropy, name='xentropy_mean')
+    cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits, name='xentropy')
+    return tf.reduce_mean(cross_entropy, name='xentropy_mean')
+
 
 
 def training(loss, learning_rate)
