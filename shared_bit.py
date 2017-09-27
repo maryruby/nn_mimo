@@ -33,18 +33,16 @@ def create_model(x, args):
                 tf.summary.histogram('activations', outputs[-1])
     with tf.name_scope('activations'):
         # after stack we will get shape (?, N_BITS, 1), then we squeeze it to (?, N_BITS)
-        activations = tf.squeeze(tf.stack(outputs, axis=1))
-        tf.summary.histogram('activations', activations)
-    return activations
+        predictions = tf.squeeze(tf.stack(outputs, axis=1))
+        tf.summary.histogram('activations', predictions)
+    return predictions
 
 
+# logits = predicted tensor, labels = ideal tensor;
 def create_loss(logits, labels):
     with tf.name_scope('cross_entropy'):
-        ce = tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits), axis=1)
-        tf.summary.histogram('ce', ce)
-        cross_entropy = tf.reduce_mean(tf.reduce_sum(
-            tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits), 
-            axis=1))
+        cross_entropy = tf.reduce_mean(
+            tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits), axis=1))
     tf.summary.scalar('cross_entropy', cross_entropy)
     return cross_entropy
 
@@ -53,10 +51,9 @@ def binary_error_rate(logits, labels, threshold=0.5):
     t = tf.constant(threshold)
     with tf.name_scope('ber'):
         with tf.name_scope('errors'):
-            errors = tf.not_equal(tf.greater_equal(logits, t), tf.greater_equal(labels, t))
+            errors = tf.not_equal(tf.greater_equal(logits, t), labels)
         with tf.name_scope('column_ber'):
-            column_ber = tf.reduce_mean(tf.cast(errors, tf.float32), 0)
-            tf.summary.histogram('cber', column_ber)
+            column_ber = tf.reduce_mean(tf.cast(errors, tf.float32), axis=0)
             for column in xrange(utils.N_BITS):
                 tf.summary.scalar('ber_%d' % column, column_ber[column])
     ber = tf.reduce_mean(column_ber)
@@ -64,10 +61,10 @@ def binary_error_rate(logits, labels, threshold=0.5):
     return column_ber, ber
 
 
-def training(loss, learning_rate):
+def training(loss, args):
     with tf.name_scope('train'):
         # Create the gradient descent optimizer with the given learning rate
-        optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+        optimizer = tf.train.GradientDescentOptimizer(args.learning_rate)
         # Create a variable to track the global step
         global_step = tf.Variable(0, name='global_step', trainable=False)
         tf.summary.scalar('global_step', global_step)
@@ -88,13 +85,25 @@ def main(args):
     logits = create_model(x_, args)
     loss = create_loss(logits, y_)
     cber, ber = binary_error_rate(logits, y_)
-    train_op = training(loss, args.learning_rate)
+    train_op = training(loss, args)
+
+    # Here is what my boss think I do:
+
+    # for i in xrange(max_iter):
+    #     data_x, data_y = next_train_batch()
+    #     feed_dict = {x_: data_x, y_: data_y}
+    #     _, ce = sess.run([train_op, loss], feed_dict)
+    # data_x, data_y = get_test_data()
+    # feed_dict = {x_: data_x, y_: data_y}
+    # metrics = sess.run([cber, ber], feed_dict)
+
+
+    # Here is what I actually do:
 
     init_op = tf.group(tf.global_variables_initializer(),
                        tf.local_variables_initializer())
 
     saver = tf.train.Saver()
-    sess = tf.Session()
     merged = tf.summary.merge_all()
     if tf.gfile.Exists(args.log_dir):
         tf.gfile.DeleteRecursively(args.log_dir)
@@ -115,7 +124,7 @@ def main(args):
     min_iterations = 0
     max_iterations = args.max_iterations
     batch_size = args.batch_size
-    treshold = 0.5
+    threshold = 0.5
     for epoch in xrange(min_iterations, max_iterations):
         start_time = time.time()
         perm = np.random.permutation(X_train.shape[0])
@@ -123,6 +132,7 @@ def main(args):
         Y_p = Y_train[perm, :]
 
         if epoch % 10 == 0:
+            ## unknown functions
             run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
             run_metadata = tf.RunMetadata()
         else:
@@ -167,7 +177,7 @@ def main(args):
     X_test, Y_test = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
 
     test_predictions = sess.run(logits, {x_: X_test, y_: Y_test})
-    test_predictions = (test_predictions >= treshold).astype(float)
+    test_predictions = (test_predictions >= threshold).astype(float)
     test_cber = quality.column_bit_error_rate(test_predictions, Y_test)
     test_ber = np.mean(test_cber)
     logger.info('TEST column BER: [%s] (mean: %.5f)', ','.join('%.5f' % c for c in test_cber), test_ber)
@@ -182,10 +192,9 @@ if __name__ == '__main__':
     parser.add_argument('--learning-rate', help='Initial learning rate', type=float, default=0.01)
     parser.add_argument('--max-iterations', help='Number of epochs to run trainer', type=int, default=100)
     parser.add_argument('--batch-size', help='Batch size', type=int, default=100)
-    # parser.add_argument('--train', help='Directory with the training data')
     parser.add_argument('--n-shared', help='Size of shared hidden layer', type=int, default=32)
     parser.add_argument('--n-hidden', help='Size of separate hidden layer', type=int, default=16)
-    parser.add_argument('--model-filename', help='Path to save model')
-    parser.add_argument('--log-dir', help='Path to save tesorboard logs', default='logs/tensorboard/shared-bit')
+    parser.add_argument('--model-filename', help='Path to save model', default='models/shared-bit')
+    parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/shared-bit')
     args = parser.parse_args()
     main(args)
