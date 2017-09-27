@@ -131,13 +131,6 @@ def main(args):
         X_p = X_train[perm, :]
         Y_p = Y_train[perm, :]
 
-        if epoch % 10 == 0:
-            ## unknown functions
-            run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
-            run_metadata = tf.RunMetadata()
-        else:
-            run_options = None
-            run_metadata = None
         total_batches = X_train.shape[0] / batch_size
         for b in xrange(total_batches):
             batch_x = X_p[batch_size * b:batch_size * (b + 1),:]
@@ -145,12 +138,8 @@ def main(args):
             feed_dict = {x_: batch_x, y_: batch_y}
             
             summary, _ = sess.run([merged, train_op],
-                                  feed_dict=feed_dict,
-                                  options=run_options,
-                                  run_metadata=run_metadata)
+                                  feed_dict=feed_dict)
             train_writer.add_summary(summary, epoch * total_batches + b)
-        if run_metadata:
-            train_writer.add_run_metadata(run_metadata, 'epoch %d' % epoch)
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs', epoch, duration)
 
@@ -176,11 +165,9 @@ def main(args):
     logger.info('Reading final test data...')
     X_test, Y_test = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
 
-    test_predictions = sess.run(logits, {x_: X_test, y_: Y_test})
-    test_predictions = (test_predictions >= threshold).astype(float)
-    test_cber = quality.column_bit_error_rate(test_predictions, Y_test)
-    test_ber = np.mean(test_cber)
-    logger.info('TEST column BER: [%s] (mean: %.5f)', ','.join('%.5f' % c for c in test_cber), test_ber)
+    test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
+    logger.info('TEST epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)', 
+                epoch, test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
 
     save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
     logger.info('Model stored in %s' % save_path)
