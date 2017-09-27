@@ -2,3 +2,4 @@ logs
 data/1/b_10_7.csv
 data/1/y_10_7.csv
 *.DS_Store
+*.pyc

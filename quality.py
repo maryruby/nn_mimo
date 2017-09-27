@@ -11,7 +11,7 @@ def bit_error_rate(predicted, real):
 
 def column_bit_error_rate(predicted, real):
     """Returns numpy array with BER for each column of data"""
-    return np.sum(np.not_equal(predicted, real), 1) / real.shape[1]
+    return np.sum(np.not_equal(predicted, real), 0) / float(real.shape[0])
 
 
 def row_error_rate(predicted, real):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import argparse
 import logging
 import numpy as np
 import tensorflow as tf
@@ -20,21 +21,22 @@ def create_model(x, args):
     outputs = []
     for i in range(utils.N_BITS):
         inner = tf.contrib.layers.fully_connected(shared_hidden, args.n_hidden,
-                                                  activation_fn=tf.nn_relu,
+                                                  activation_fn=tf.nn.relu,
                                                   biases_initializer=tf.zeros_initializer())
         outputs.append(tf.contrib.layers.fully_connected(inner, 1,
                                                          activation_fn=tf.nn.sigmoid,
                                                          biases_initializer=tf.zeros_initializer()))
-    return tf.stack(outputs, axis=1)
+    # after stack we will get shape (?, N_BITS, 1), then we squeeze it to (?, N_BITS)
+    return tf.squeeze(tf.stack(outputs, axis=1))
 
 
-def loss(logits, labels):
+def create_loss(logits, labels):
     return tf.reduce_mean(tf.reduce_sum(
         tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits), 
         axis=1))
 
 
-def training(loss, learning_rate)
+def training(loss, learning_rate):
     # Add a scalar summary for the snapshot loss
     tf.summary.scalar('loss', loss)
     # Create the gradient descent optimizer with the given learning rate
@@ -50,18 +52,12 @@ def training(loss, learning_rate)
 def main(args):
     sess = tf.Session()
 
-    logger.info('Reading train data...')
-    X_train, Y_train = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
-    
-    logger.info('Reading validation data...')
-    X_valid, Y_valid = read_data('data/1/y.csv', 'data/1/b.csv')
-    
     logger.info('Creating model...')
     x_ = tf.placeholder(dtype = tf.float32, shape = (None, utils.N_BITS))
     y_ = tf.placeholder(dtype = tf.float32, shape = (None, utils.N_BITS))
 
     logits = create_model(x_, args)
-    loss = loss(logits, y_)
+    loss = create_loss(logits, y_)
     train_op = training(loss, args.learning_rate)
 
     init_op = tf.group(tf.global_variables_initializer(),
@@ -69,6 +65,12 @@ def main(args):
 
     saver = tf.train.Saver()
     sess = tf.Session()
+
+    logger.info('Reading train data...')
+    X_train, Y_train = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    
+    logger.info('Reading validation data...')
+    X_valid, Y_valid = utils.read_data('data/1/y.csv', 'data/1/b.csv')
 
     logger.info('Initialize model...')
     sess.run(init_op)
@@ -90,7 +92,7 @@ def main(args):
             feed_dict = {x_: batch_x, y_: batch_y}
             sess.run(train_op, feed_dict=feed_dict)
         duration = time.time() - start_time
-        logger.debug('Epoch %d done for %.2f secs', duration)
+        logger.debug('Epoch %d done for %.2f secs', epoch, duration)
 
         if epoch % 10 == 0:
             train_predictions, train_ce = sess.run([logits, loss], {x_: X_train, y_: Y_train})
@@ -108,7 +110,7 @@ def main(args):
                         epoch, val_ce, ','.join('%.5f' % c for c in val_cber), val_ber)
             
         if epoch % 100 == 0 and epoch > min_iterations:
-            logger.info('Saving model at step %d .......' % epoch,)
+            logger.info('Saving model at step %d .......', epoch)
             save_path = saver.save(sess, args.model_filename, global_step = epoch)
             logger.info('ok')
 
@@ -134,8 +136,8 @@ if __name__ == '__main__':
     parser.add_argument('--max_iterations', help='Number of epochs to run trainer', type=int, default=100)
     parser.add_argument('--batch_size', help='Batch size', type=int, default=100)
     # parser.add_argument('--train', help='Directory with the training data')
-    parser.add_argument('--n-shared', help='Size of shared hidden layer')
-    parser.add_argument('--n-hidden', help='Size of separate hidden layer')
+    parser.add_argument('--n-shared', help='Size of shared hidden layer', type=int, default=32)
+    parser.add_argument('--n-hidden', help='Size of separate hidden layer', type=int, default=16)
     parser.add_argument('--model-filename', help='Path to save model')
     args = parser.parse_args()
     main(args)
