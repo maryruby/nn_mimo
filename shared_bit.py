@@ -76,9 +76,10 @@ def training(loss, args):
 
 
 def prepare_writers(sess, args):
-    if tf.gfile.Exists(args.log_dir):
-        tf.gfile.DeleteRecursively(args.log_dir)
-    tf.gfile.MakeDirs(args.log_dir)
+    if args.clean_logs:
+        if tf.gfile.Exists(args.log_dir):
+            tf.gfile.DeleteRecursively(args.log_dir)
+        tf.gfile.MakeDirs(args.log_dir)
     train_writer = tf.summary.FileWriter(args.log_dir + '/train', sess.graph)
     test_writer = tf.summary.FileWriter(args.log_dir + '/test')
     return train_writer, test_writer
@@ -190,5 +191,6 @@ if __name__ == '__main__':
     parser.add_argument('--n-hidden', help='Size of separate hidden layer', type=int, default=16)
     parser.add_argument('--model-filename', help='Path to save model', default='models/shared-bit')
     parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/shared-bit')
+    parser.add_argument('--clean-logs', help='Clean logs dir', action='store_true')
     args = parser.parse_args()
     main(args)
