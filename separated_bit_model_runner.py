@@ -111,14 +111,17 @@ def main(args):
     test_writer.close()
 
     logger.info('Reading final test data...')
-    X_test, Y_test = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    for i in xrange(15):
 
-    test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
-    logger.info('TEST CE: %.5f column BER: [%s] (mean: %.5f)', 
-                test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+         X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % i + 1, 'data/1/b_noise_%d.csv' % i + 1, 
+                                          transposed = False)
 
-    save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
-    logger.info('Model stored in %s' % save_path)
+        test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
+        logger.info('TEST %d CE: %.5f column BER: [%s] (mean: %.5f)', i + 1,
+                    test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+
+    # save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
+    # logger.info('Model stored in %s' % save_path)
 
 
 if __name__ == '__main__':
