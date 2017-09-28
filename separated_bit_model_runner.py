@@ -113,7 +113,7 @@ def main(args):
     logger.info('Reading final test data...')
     for i in xrange(15):
 
-         X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % i + 1, 'data/1/b_noise_%d.csv' % i + 1, 
+        X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % i + 1, 'data/1/b_noise_%d.csv' % i + 1, 
                                           transposed = False)
 
         test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
