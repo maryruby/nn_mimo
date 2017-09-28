@@ -25,7 +25,7 @@ def main():
     sess = tf.Session()
 
     logger.info('Reading train data...')
-    X_matrix, Y_matrix = read_data('data/1/y_10_7.csv', 'data/1/b_10_7.csv')
+    X_matrix, Y_matrix = read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
     
     logger.info('Reading validation data...')
     X_val_matrix, Y_val_matrix = read_data('data/1/y.csv', 'data/1/b.csv')
@@ -154,8 +154,11 @@ def bit_error_rate(nn_out_layers, session, feed_dict, Y_matrix, treshold=0.5):
 
 
 def column_bit_error_rate(column, nn_out_layer, session, feed_dict, Y_matrix, threshold=0.5):
-    nn_output = session.run(nn_out_layer, feed_dict)[:, [column]]
-    predicted_y_matrix = convert_row(nn_output, threshold)
+    nn_outputs = session.run(nn_out_layers, feed_dict)[i]
+
+    predicted_y_matrix = np.hstack(map(
+        lambda matrix: np.apply_along_axis(partial(convert_row, treshold = treshold), 1, matrix), 
+        nn_outputs))
     Y = Y_matrix[:, [column]]
     total_elems = (Y.shape[0] * Y.shape[1])
     return np.sum(predicted_y_matrix != Y) / float(total_elems)
