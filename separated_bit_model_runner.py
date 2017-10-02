@@ -35,7 +35,7 @@ def main(args):
     model = SeparatedBitModel(args, x_, y_)
     logits = model.get_predictions()
     loss = model.get_loss()
-    cber, ber = quality.tf_binary_error_rate(logits, y_)
+    cber, ber = quality.tf_binary_error_rate(logits, y_, threshold=0.0)
     train_op = model.get_training_operation()
     global_step = model.get_global_step()
 
@@ -112,8 +112,7 @@ def main(args):
 
     logger.info('Reading final test data...')
     for i in xrange(15):
-
-        X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % i + 1, 'data/1/b_noise_%d.csv' % i + 1, 
+        X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % (i + 1), 'data/1/b_noise_%d.csv' % (i + 1), 
                                           transposed = False)
 
         test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})

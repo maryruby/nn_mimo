@@ -37,7 +37,7 @@ def create_model(x, args):
                                                                      activation_fn=tf.nn.relu))
             with tf.name_scope('output_%d' % i):
                 outputs.append(tf.contrib.layers.fully_connected(hiddens[-1], 1,
-                                                                 activation_fn=tf.nn.sigmoid))
+                                                                 activation_fn=tf.identity))
                 tf.summary.histogram('predictions', outputs[-1])
     with tf.name_scope('predictions'):
         # after stack we will get shape (?, N_BITS, 1), then we squeeze it to (?, N_BITS)
