@@ -6,60 +6,13 @@ import numpy as np
 import tensorflow as tf
 import time
 
+from shared_bit_model import SharedBitModel
 import utils
 import quality
 
 
 logger = logging.getLogger(__name__)
 
-
-
-def create_model(x, args):
-    with tf.name_scope('shared_hidden'):
-        shared_hidden = tf.contrib.layers.fully_connected(x, args.n_shared,
-                                                          activation_fn=tf.nn.relu,
-                                                          biases_initializer=tf.zeros_initializer())
-    with tf.name_scope('fingers'):
-        outputs = []
-        for i in range(utils.N_BITS):
-            with tf.name_scope('hidden_%d' % i):
-                inner = tf.contrib.layers.fully_connected(shared_hidden, args.n_hidden,
-                                                          activation_fn=tf.nn.relu,
-                                                          biases_initializer=tf.zeros_initializer())
-            with tf.name_scope('output_%d' % i):
-                outputs.append(tf.contrib.layers.fully_connected(inner, 1,
-                                                                 activation_fn=tf.nn.sigmoid,
-                                                                 biases_initializer=tf.zeros_initializer()))
-                tf.summary.histogram('activations', outputs[-1])
-    with tf.name_scope('activations'):
-        # after stack we will get shape (?, N_BITS, 1), then we squeeze it to (?, N_BITS)
-        predictions = tf.squeeze(tf.stack(outputs, axis=1))
-        tf.summary.histogram('activations', predictions)
-    return predictions
-
-
-# logits = predicted tensor, labels = ideal tensor;
-def create_loss(logits, labels):
-    with tf.name_scope('cross_entropy'):
-        ce = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits), axis=0)
-        for column in xrange(utils.N_BITS):
-            tf.summary.scalar('ce_%d' % column, ce[column])
-        cross_entropy = tf.reduce_sum(ce)
-    tf.summary.scalar('cross_entropy', cross_entropy)
-    return cross_entropy
-
-
-def training(loss, args):
-    with tf.name_scope('train'):
-        # Create the gradient descent optimizer with the given learning rate
-        optimizer = tf.train.GradientDescentOptimizer(args.learning_rate)
-        # Create a variable to track the global step
-        global_step = tf.Variable(0, name='global_step', trainable=False)
-        tf.summary.scalar('global_step', global_step)
-        # Use the optimizer to apply the gradients that minimize the loss
-        # (and also increment the global step counter) as a single training step
-        train_op = optimizer.minimize(loss, global_step=global_step)
-        return train_op, global_step
 
 
 def prepare_writers(sess, args):
@@ -80,10 +33,13 @@ def main(args):
         x_ = tf.placeholder(dtype = tf.float32, shape = (None, utils.N_BITS), name='x-input')
         y_ = tf.placeholder(dtype = tf.float32, shape = (None, utils.N_BITS), name='y-input')
 
-    logits = create_model(x_, args)
-    loss = create_loss(logits, y_)
-    cber, ber = quality.tf_binary_error_rate(logits, y_)
-    train_op, global_step = training(loss, args)
+
+    model = SharedBitModel(args, x_, y_)
+    logits = model.get_predictions()
+    loss = model.get_loss()
+    cber, ber = quality.tf_binary_error_rate(logits, y_, threshold=0.0)
+    train_op = model.get_training_operation()
+    global_step = model.get_global_step()
 
     # Here is what my boss think I do:
 

@@ -40,7 +40,7 @@ def create_model(x, args):
                                                           biases_initializer=tf.zeros_initializer())
             with tf.name_scope('output_%d' % i):
                 outputs.append(tf.contrib.layers.fully_connected(inner, 1,
-                                                                 activation_fn=tf.nn.sigmoid,
+                                                                 activation_fn=tf.identity,
                                                                  biases_initializer=tf.zeros_initializer()))
                 tf.summary.histogram('activations', outputs[-1])
     with tf.name_scope('activations'):
