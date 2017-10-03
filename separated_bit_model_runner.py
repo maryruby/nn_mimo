@@ -7,6 +7,7 @@ import tensorflow as tf
 import time
 
 import utils
+import dataset
 import quality
 from separated_bit_model import SeparatedBitModel
 
@@ -60,11 +61,10 @@ def main(args):
     train_writer, test_writer = prepare_writers(sess, args)
 
     logger.info('Reading train data...')
-    X_train, Y_train = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    train_dataset = dataset.FoldedDataSet('data/1/noise/train', 15)
+    logger.info('Reading test data...')
+    test_dataset = dataset.FoldedDataSet('data/1/noise/test', 15)
     
-    logger.info('Reading validation data...')
-    X_valid, Y_valid = utils.read_data('data/1/y.csv', 'data/1/b.csv')
-
     logger.info('Initialize model...')
     sess.run(init_op)
 
@@ -81,25 +81,25 @@ def main(args):
     for epoch in xrange(min_iterations, max_iterations):
         start_time = time.time()
         
-        for batch_x, batch_y in utils.generate_batches(X_train, Y_train, args.batch_size):
-            if global_iteration % 100 == 99:
-                summary, _, global_iteration = sess.run([merged, train_op, global_step], 
-                                                        feed_dict={x_: batch_x, y_: batch_y})
+        for batch in train_dataset.batches_generator(args.batch_size):
+            if global_iteration % 1000 == 999:
+                summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
+                                                        [merged, cber, ber, loss, train_op, global_step], 
+                                                        feed_dict={x_: batch.X, y_: batch.Y})
+                logger.info('TRAIN step: %d CE: %.5f column BER: [%s] (mean: %.5f)',
+                            global_iteration, train_ce, ','.join('%.5f' % c for c in train_cber), train_ber)
                 train_writer.add_summary(summary, global_iteration)
             else:
-                _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch_x, y_: batch_y})
+                _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
-        if epoch % 10 == 0:
-            train_cber, train_ber, train_ce = sess.run([cber, ber, loss], {x_: X_train, y_: Y_train})
-            logger.info('TRAIN epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
-                        epoch, train_ce, ','.join('%.5f' % c for c in train_cber), train_ber)
-        
-            summary, val_cber, val_ber, val_ce = sess.run([merged, cber, ber, loss], {x_: X_valid, y_: Y_valid})
-            test_writer.add_summary(summary, global_iteration)
-            logger.info('VALIDATION epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)', 
-                        epoch, val_ce, ','.join('%.5f' % c for c in val_cber), val_ber)
+        if epoch % 10 == 9:
+            for f in test_dataset.folds:
+                test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: fold.X, y_: fold.Y})
+                logger.info('TEST %d CE: %.5f column BER: [%s] (mean: %.5f)', i,
+                            test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+
             
         if epoch % 100 == 0 and epoch > min_iterations:
             logger.info('Saving model at step %d .......', epoch)
@@ -109,15 +109,6 @@ def main(args):
     logger.info('Done training!')
     train_writer.close()
     test_writer.close()
-
-    logger.info('Reading final test data...')
-    for i in xrange(15):
-        X_test, Y_test = utils.read_data('data/1/Y_noise_%d.csv' % (i + 1), 'data/1/b_noise_%d.csv' % (i + 1), 
-                                          transposed = False)
-
-        test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
-        logger.info('TEST %d CE: %.5f column BER: [%s] (mean: %.5f)', i + 1,
-                    test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
 
     # save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
     # logger.info('Model stored in %s' % save_path)
