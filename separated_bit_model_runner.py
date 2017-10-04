@@ -61,7 +61,7 @@ def main(args):
     train_writer, test_writer = prepare_writers(sess, args)
 
     logger.info('Reading train data...')
-    train_dataset = dataset.FoldedDataSet('data/1/noise/train', 15)
+    train_dataset = dataset.ShuffleFoldedDataSet('data/1/noise/train', 15)
     logger.info('Reading test data...')
     test_dataset = dataset.FoldedDataSet('data/1/noise/test', 15)
     
@@ -82,7 +82,7 @@ def main(args):
         start_time = time.time()
         
         for batch in train_dataset.batches_generator(args.batch_size):
-            if global_iteration % 5000 == 4999:
+            if global_iteration % 1000 == 999:
                 summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
                                                         [merged, cber, ber, loss, train_op, global_step], 
                                                         feed_dict={x_: batch.X, y_: batch.Y})

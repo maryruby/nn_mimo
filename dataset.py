@@ -43,3 +43,16 @@ class FoldedDataSet(object):
                 yield fold_generators[random_fold].next()
             except StopIteration:
                 del fold_generators[random_fold]
+
+
+class ShuffleFoldedDataSet(DataSet):
+    def __init__(self, folds_dir, n_folds, transposed=False):
+        logger.debug('Reading dataset with %d folds', n_folds)
+        folds = []
+        for fold in xrange(n_folds):
+            logger.debug('Reading fold %d...', fold)
+            folds.append(read_dataset('%s/y_%d.csv' % (folds_dir, fold),
+                                      '%s/b_%d.csv' % (folds_dir, fold),
+                                      transposed))
+        self.X = np.vstack([f.X for f in folds])
+        self.Y = np.vstack([f.Y for f in folds])
