@@ -82,7 +82,7 @@ def main(args):
         start_time = time.time()
         
         for batch in train_dataset.batches_generator(args.batch_size):
-            if global_iteration % 1000 == 999:
+            if global_iteration % 5000 == 4999:
                 summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
                                                         [merged, cber, ber, loss, train_op, global_step], 
                                                         feed_dict={x_: batch.X, y_: batch.Y})
@@ -94,14 +94,14 @@ def main(args):
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
-        if epoch % 10 == 9:
-            for f in test_dataset.folds:
-                test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: fold.X, y_: fold.Y})
-                logger.info('TEST %d CE: %.5f column BER: [%s] (mean: %.5f)', i,
-                            test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+        # if epoch % 10 == 9:
+        for i, fold in enumerate(test_dataset.folds):
+            test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: fold.X, y_: fold.Y})
+            logger.info('TEST epoch %d SNR %d CE: %.5f column BER: [%s] (mean: %.5f)', epoch, (i + 1),
+                        test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
 
             
-        if epoch % 100 == 0 and epoch > min_iterations:
+        if epoch % 10 == 0 and epoch > min_iterations:
             logger.info('Saving model at step %d .......', epoch)
             save_path = saver.save(sess, args.model_filename, global_step = epoch)
             logger.info('ok')
