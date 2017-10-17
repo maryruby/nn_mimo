@@ -9,10 +9,10 @@ import time
 from shared_bit_model import SharedBitModel
 import utils
 import quality
+import dataset
 
 
 logger = logging.getLogger(__name__)
-
 
 
 def prepare_writers(sess, args):
@@ -62,10 +62,12 @@ def main(args):
     train_writer, test_writer = prepare_writers(sess, args)
 
     logger.info('Reading train data...')
-    train_data = dataset.read_dataset('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
+    train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/b_ml_noise_10.csv', transposed=False)
+    logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
     
     logger.info('Reading validation data...')
-    valid_data = dataset.read_dataset('data/1/y.csv', 'data/1/b.csv')
+    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/z_val_ml_noise_10.csv', transposed=False)
 
     logger.info('Initialize model...')
     sess.run(init_op)
@@ -83,11 +85,11 @@ def main(args):
     for epoch in xrange(min_iterations, max_iterations):
         start_time = time.time()
         
-        for batch in dataset.batches_generator(args.batch_size):
+        for batch in train_data.batches_generator(args.batch_size):
             if global_iteration % 1000 == 999:
                 summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
                                                         [merged, cber, ber, loss, train_op, global_step], 
-                                                        feed_dict={x_: x_: batch.X, y_: batch.Y})
+                                                        feed_dict={x_: batch.X, y_: batch.Y})
                 logger.info('TRAIN step: %d CE: %.5f column BER: [%s] (mean: %.5f)',
                             global_iteration, train_ce, ','.join('%.5f' % c for c in train_cber), train_ber)
                 train_writer.add_summary(summary, global_iteration)
@@ -96,6 +98,12 @@ def main(args):
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
+        if epoch % 10 == 9:
+            valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
+                                                       feed_dict={x_: valid_data.X, y_: valid_data.Y})
+            logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
+                        epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
+        
         if epoch % 100 == 0 and epoch > min_iterations:
             logger.info('Saving model at step %d .......', epoch)
             save_path = saver.save(sess, args.model_filename, global_step = epoch)
