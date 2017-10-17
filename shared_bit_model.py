@@ -27,19 +27,26 @@ class SharedBitModel(BaseModel):
 
 
 def create_model(x, args):
+    shared_hiddens = [x]
+
     with tf.name_scope('shared_hidden'):
-        shared_hidden = tf.contrib.layers.fully_connected(x, args.n_shared,
+        for sh in xrange(args.shared_layers):
+            with tf.name_scope('%d' % sh):
+                shared_hiddens.append(tf.contrib.layers.fully_connected(shared_hiddens[-1], args.n_shared,
                                                           activation_fn=tf.nn.relu,
-                                                          biases_initializer=tf.zeros_initializer())
+                                                          biases_initializer=tf.zeros_initializer()))
     with tf.name_scope('fingers'):
         outputs = []
         for i in range(utils.N_BITS):
             with tf.name_scope('hidden_%d' % i):
-                inner = tf.contrib.layers.fully_connected(shared_hidden, args.n_hidden,
+                inners = [shared_hiddens[-1]]
+                for shf in xrange(args.finger_layers):
+                    with tf.name_scope('%d' % shf):
+                        inners.append(tf.contrib.layers.fully_connected(inners[-1], args.n_hidden,
                                                           activation_fn=tf.nn.relu,
-                                                          biases_initializer=tf.zeros_initializer())
+                                                          biases_initializer=tf.zeros_initializer()))
             with tf.name_scope('output_%d' % i):
-                outputs.append(tf.contrib.layers.fully_connected(inner, 1,
+                outputs.append(tf.contrib.layers.fully_connected(inners[-1], 1,
                                                                  activation_fn=tf.identity,
                                                                  biases_initializer=tf.zeros_initializer()))
                 tf.summary.histogram('activations', outputs[-1])
