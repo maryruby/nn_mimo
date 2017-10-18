@@ -63,11 +63,11 @@ def main(args):
 
     logger.info('Reading train data...')
     # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-    train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/b_ml_noise_10.csv', transposed=False)
+    train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
     logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
     
     logger.info('Reading validation data...')
-    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/z_val_ml_noise_10.csv', transposed=False)
+    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
 
     logger.info('Initialize model...')
     sess.run(init_op)

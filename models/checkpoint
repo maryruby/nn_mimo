@@ -1,3 +1,5 @@
-model_checkpoint_path: "mimo-separated-bit-8-16-noise-shuffle-20"
-all_model_checkpoint_paths: "mimo-separated-bit-8-16-noise-shuffle-10"
-all_model_checkpoint_paths: "mimo-separated-bit-8-16-noise-shuffle-20"
+model_checkpoint_path: "mimo-shared-bit-2x32-4x16-ml-400"
+all_model_checkpoint_paths: "mimo-shared-bit-2x32-4x16-ml-100"
+all_model_checkpoint_paths: "mimo-shared-bit-2x32-4x16-ml-200"
+all_model_checkpoint_paths: "mimo-shared-bit-2x32-4x16-ml-300"
+all_model_checkpoint_paths: "mimo-shared-bit-2x32-4x16-ml-400"
