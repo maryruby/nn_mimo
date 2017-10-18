@@ -135,6 +135,7 @@ if __name__ == '__main__':
     parser.add_argument('--shared-layers', help='Number of shared hidden layers', type=int, default=1)
     parser.add_argument('--n-hidden', help='Size of separate hidden layer', type=int, default=16)
     parser.add_argument('--finger-layers', help='Number of layers in finger', type=int, default=1)
+    parser.add_argument('--l2', help='Regularization coef', type=float, default=0.0)
     parser.add_argument('--model-filename', help='Path to save model', default='models/shared-bit')
     parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/shared-bit')
     parser.add_argument('--clean-logs', help='Clean logs dir', action='store_true')
