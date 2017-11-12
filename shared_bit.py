@@ -63,7 +63,7 @@ def main(args):
 
     logger.info('Reading train data...')
     # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-    train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=False)
+    train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=True)
     logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
     
     logger.info('Reading validation data...')
@@ -121,7 +121,7 @@ def main(args):
     with open('noised_bits_db_8x128_8x32.txt', 'w') as f:
         for t in xrange(13):
             logger.info('Reading final test data...%d', t)
-            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=False)
+            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=True)
 
             test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
             logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
