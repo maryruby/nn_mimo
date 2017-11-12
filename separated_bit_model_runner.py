@@ -61,10 +61,13 @@ def main(args):
     train_writer, test_writer = prepare_writers(sess, args)
 
     logger.info('Reading train data...')
-    train_dataset = dataset.ShuffleFoldedDataSet('data/1/noise/train', 15)
-    logger.info('Reading test data...')
-    test_dataset = dataset.FoldedDataSet('data/1/noise/test', 15)
+    train_dataset = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
     
+    logger.info('Reading test data...')
+    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
+
+    #test_dataset = dataset.FoldedDataSet('data/1/ML_noise/test', 15)
+
     logger.info('Initialize model...')
     sess.run(init_op)
 
@@ -95,10 +98,15 @@ def main(args):
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
         # if epoch % 10 == 9:
-        for i, fold in enumerate(test_dataset.folds):
-            test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: fold.X, y_: fold.Y})
-            logger.info('TEST epoch %d SNR %d CE: %.5f column BER: [%s] (mean: %.5f)', epoch, (i + 1),
-                        test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+        #for i, fold in enumerate(test_dataset.folds):
+        #    test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: fold.X, y_: fold.Y})
+        #    logger.info('TEST epoch %d SNR %d CE: %.5f column BER: [%s] (mean: %.5f)', epoch, (i + 1),
+        #               test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+
+        valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
+                                                feed_dict={x_: valid_data.X, y_: valid_data.Y})
+        logger.info('VALID CE: %.5f column BER: [%s] (mean: %.5f)',
+                       valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
 
             
         if epoch % 10 == 0 and epoch > min_iterations:
@@ -109,6 +117,19 @@ def main(args):
     logger.info('Done training!')
     train_writer.close()
     test_writer.close()
+
+    
+    with open('noised_bits_db_sep_18_32.txt', 'w') as f:
+        for t in xrange(13):
+            logger.info('Reading final test data...%d', t)
+            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=False)
+
+            test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
+            logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
+                    test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+            print >> f, ','.join('%.5f' % c for c in test_cber)
+            logger.info('I am fine!')
+
 
     # save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
     # logger.info('Model stored in %s' % save_path)
@@ -125,8 +146,8 @@ if __name__ == '__main__':
     parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/separated-bit')
     parser.add_argument('--clean-logs', help='Clean logs dir', action='store_true')
 
-    parser.add_argument('--n-layers', help='Total hidden layers', type=int, default=4)
-    parser.add_argument('--n-hidden', help='Size of each hidden layer', type=int, default=16)
+    parser.add_argument('--n-layers', help='Total hidden layers', type=int, default=18)
+    parser.add_argument('--n-hidden', help='Size of each hidden layer', type=int, default=32)
     
     args = parser.parse_args()
     main(args)

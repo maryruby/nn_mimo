@@ -63,7 +63,7 @@ def main(args):
 
     logger.info('Reading train data...')
     # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-    train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
+    train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=False)
     logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
     
     logger.info('Reading validation data...')
@@ -86,7 +86,7 @@ def main(args):
         start_time = time.time()
         
         for batch in train_data.batches_generator(args.batch_size):
-            if global_iteration % 1000 == 999:
+            if global_iteration % 5000 == 4999:
                 summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
                                                         [merged, cber, ber, loss, train_op, global_step], 
                                                         feed_dict={x_: batch.X, y_: batch.Y})
@@ -98,13 +98,13 @@ def main(args):
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
-        if epoch % 10 == 9:
+        if epoch % 5 == 4:
             valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
                                                        feed_dict={x_: valid_data.X, y_: valid_data.Y})
             logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
                         epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
         
-        if epoch % 100 == 0 and epoch > min_iterations:
+        if epoch % 25 == 0 and epoch > min_iterations:
             logger.info('Saving model at step %d .......', epoch)
             save_path = saver.save(sess, args.model_filename, global_step = epoch)
             logger.info('ok')
@@ -113,12 +113,21 @@ def main(args):
     train_writer.close()
     test_writer.close()
 
-    logger.info('Reading final test data...')
-    X_test, Y_test = utils.read_data('data/1/y_big_test.csv', 'data/1/b_big_test.csv')
+    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
+    valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
+                                                feed_dict={x_: valid_data.X, y_: valid_data.Y})
+    logger.info('VALID CE: %.5f column BER: [%s] (mean: %.5f)',
+                       valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
+    with open('noised_bits_db_8x128_8x32.txt', 'w') as f:
+        for t in xrange(13):
+            logger.info('Reading final test data...%d', t)
+            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=False)
 
-    test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
-    logger.info('TEST CE: %.5f column BER: [%s] (mean: %.5f)', 
-                test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+            test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
+            logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
+                    test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
+            print >> f, ','.join('%.5f' % c for c in test_cber)
+            logger.info('I am fine!')
 
     save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
     logger.info('Model stored in %s' % save_path)

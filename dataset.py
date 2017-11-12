@@ -12,7 +12,7 @@ class DataSet(object):
         self.X = X
         self.Y = Y
 
-    def batches_generator(self, batch_size=100):
+    def batches_generator(self, batch_size=1000):
         for b_x, b_y in utils.generate_batches(self.X, self.Y, batch_size):
             yield DataSet(b_x, b_y)
 
@@ -34,7 +34,7 @@ class FoldedDataSet(object):
                                            transposed))
 
 
-    def batches_generator(self, batch_size=100):
+    def batches_generator(self, batch_size=1000):
         fold_generators = map(lambda fold: fold.batches_generator(batch_size), self.folds)
 
         while len(fold_generators) > 0:
