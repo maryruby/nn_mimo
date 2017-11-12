@@ -88,9 +88,6 @@ def main(args):
         
         for batch in train_data.batches_generator(args.batch_size):
             predicted = sess.run(logits, feed_dict={x_: batch.X, y_: batch.Y, training_: True})
-            print predicted
-            print predicted.shape
-            exit(1)
             if global_iteration % 1000 == 999:
                 summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
                                                         [merged, cber, ber, loss, train_op, global_step], 

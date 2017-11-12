@@ -81,6 +81,7 @@ def main(args):
     
     max_iterations = args.max_epochs
     global_iteration = 0
+    prev_train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
     logger.info('Training...')
     for epoch in xrange(min_iterations, max_iterations):
         start_time = time.time()
@@ -97,6 +98,13 @@ def main(args):
                 _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
         duration = time.time() - start_time
         logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
+
+        if args.convergence is not None and epoch % 10 == 0:
+            train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
+            if abs(prev_train_ce - train_ce) < args.convergence:
+                logger.info('CONVERGED after %d epochs! Prev CE: %.5f current CE: %.5f', epoch, prev_train_ce, train_ce)
+                break
+            prev_train_ce = train_ce
 
         if epoch % 5 == 4:
             valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
@@ -139,6 +147,7 @@ if __name__ == '__main__':
     parser.add_argument('--learning-rate', help='Initial learning rate', type=float, default=0.01)
     parser.add_argument('--min-epoch', help='Epoch to load model from', type=int, default=0)
     parser.add_argument('--max-epochs', help='Number of epochs to run trainer', type=int, default=100)
+    parser.add_argument('-c', '--convergence', help='Min CE change to converge', type=float)
     parser.add_argument('--batch-size', help='Batch size', type=int, default=100)
     parser.add_argument('--n-shared', help='Size of shared hidden layer', type=int, default=32)
     parser.add_argument('--shared-layers', help='Number of shared hidden layers', type=int, default=1)

@@ -38,30 +38,37 @@ def create_model(x, args, train_input):
             tf.summary.histogram('activations', conv1)
             tf.summary.scalar('sparsity', tf.nn.zero_fraction(x))
 
-        shared = conv1
+        # conv1 shape will be (?, 4, 8), but we need to flatten last two dimensions
+        shared_hiddens = [tf.reshape(conv1, [tf.shape(conv1)[0], 8 / args.conv1_size * args.conv1_kernels])]
+        print shared_hiddens[-1].get_shape()
 
         with tf.name_scope('shared'):
             for sh in xrange(args.shared_layers):
                 with tf.name_scope('%d' % sh):
-                    shared = tf.layers.dense(shared, args.n_shared, activation=tf.nn.relu)
-                    shared = tf.layers.dropout(inputs=shared,
+                    fully1 = tf.contrib.layers.fully_connected(shared_hiddens[-1], args.n_shared, activation_fn=tf.nn.relu)
+                    do1 = tf.layers.dropout(inputs=fully1,
                                                rate=args.shared_dropout,
                                                training=train_input)
+                    shared_hiddens.append(do1)
 
 
         with tf.name_scope('fingers'):
             outputs = []
             for i in range(utils.N_BITS):
                 with tf.name_scope('hidden_%d' % i):
-                    inner = shared
+                    inners = [shared_hiddens[-1]]
                     for shf in xrange(args.finger_layers):
                         with tf.name_scope('%d' % shf):
-                            fully = tf.layers.dense(inner, args.n_hidden, activation=tf.nn.relu)
-                            inner = tf.layers.dropout(inputs=fully,
+                            fully2 = tf.contrib.layers.fully_connected(inners[-1], args.n_hidden, activation_fn=tf.nn.relu)
+                            do2 = tf.layers.dropout(inputs=fully2,
                                                       rate=args.finger_dropout,
                                                       training=train_input)
+                            inners.append(do2)
+
+                print len(inners)
                 with tf.name_scope('output_%d' % i):
-                    outputs.append(tf.layers.dense(inner, 1, activation=tf.identity))
+                    fully3 = tf.contrib.layers.fully_connected(inners[-1], 1, activation_fn=tf.identity)
+                    outputs.append(fully3)
                     tf.summary.histogram('activations', outputs[-1])
         with tf.name_scope('activations'):
             # after stack we will get shape (?, N_BITS, 1), then we squeeze it to (?, N_BITS)
