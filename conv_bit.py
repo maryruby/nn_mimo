@@ -63,8 +63,8 @@ def main(args):
     train_writer, test_writer = prepare_writers(sess, args)
 
     logger.info('Reading train data...')
-    # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-    train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
+    train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=True)
+    # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=True)
     logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
     
     logger.info('Reading validation data...')
