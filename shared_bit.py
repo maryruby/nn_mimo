@@ -58,87 +58,84 @@ def main(args):
                        tf.local_variables_initializer())
 
     saver = tf.train.Saver()
-    merged = tf.summary.merge_all()
-    train_writer, test_writer = prepare_writers(sess, args)
-
-    logger.info('Reading train data...')
-    # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-    train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=True)
-    logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
-    
-    logger.info('Reading validation data...')
-    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
-
     logger.info('Initialize model...')
     sess.run(init_op)
 
-    min_iterations = 0
     if args.min_epoch > 0:
-        min_iterations = args.min_epoch
         model_filename = '%s-%s' % (args.model_filename, args.min_epoch)
         logger.info('Restore model of %d epoch from %s', args.min_epoch, model_filename)
         saver.restore(sess, model_filename)
+
+    if args.min_epoch >= args.max_epoch:
+        logger.info('Do not train, just apply model...')
+    else:
+        merged = tf.summary.merge_all()
+        train_writer, test_writer = prepare_writers(sess, args)
+
+        logger.info('Reading train data...')
+        # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
+        train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=False)
+        logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
+        
+        logger.info('Reading validation data...')
+        valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
+        
+        global_iteration = 0
+        logger.info('Training...')
+        for epoch in xrange(args.min_epoch, args.max_epoch):
+            start_time = time.time()
+            
+            for batch in train_data.batches_generator(args.batch_size):
+                if global_iteration % 5000 == 4999:
+                    summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
+                                                            [merged, cber, ber, loss, train_op, global_step], 
+                                                            feed_dict={x_: batch.X, y_: batch.Y})
+                    logger.info('TRAIN step: %d CE: %.5f column BER: [%s] (mean: %.5f)',
+                                global_iteration, train_ce, ','.join('%.5f' % c for c in train_cber), train_ber)
+                    train_writer.add_summary(summary, global_iteration)
+                else:
+                    _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
+            duration = time.time() - start_time
+            logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
+
+            if epoch % 5 == 4:
+                valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
+                                                           feed_dict={x_: valid_data.X, y_: valid_data.Y})
+                logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
+                            epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
+            
+            if epoch % 25 == 0 and epoch > min_iterations:
+                logger.info('Saving model at step %d .......', epoch)
+                save_path = saver.save(sess, args.model_filename, global_step = epoch)
+                logger.info('ok')
+
+        logger.info('Done training!')
+        train_writer.close()
+        test_writer.close()
+
+        valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
+        valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
+                                                    feed_dict={x_: valid_data.X, y_: valid_data.Y})
+        logger.info('VALID CE: %.5f column BER: [%s] (mean: %.5f)',
+                           valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
+        save_path = saver.save(sess, args.model_filename, global_step = args.max_epoch)
+        logger.info('Model stored in %s', save_path)
     
-    max_iterations = args.max_epochs
-    global_iteration = 0
-    prev_train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
-    logger.info('Training...')
-    for epoch in xrange(min_iterations, max_iterations):
-        start_time = time.time()
-        
-        for batch in train_data.batches_generator(args.batch_size):
-            if global_iteration % 5000 == 4999:
-                summary, train_cber, train_ber, train_ce, _, global_iteration = sess.run(
-                                                        [merged, cber, ber, loss, train_op, global_step], 
-                                                        feed_dict={x_: batch.X, y_: batch.Y})
-                logger.info('TRAIN step: %d CE: %.5f column BER: [%s] (mean: %.5f)',
-                            global_iteration, train_ce, ','.join('%.5f' % c for c in train_cber), train_ber)
-                train_writer.add_summary(summary, global_iteration)
-            else:
-                _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
-        duration = time.time() - start_time
-        logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
-
-        if args.convergence is not None and epoch % 10 == 0:
-            train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
-            if abs(prev_train_ce - train_ce) < args.convergence:
-                logger.info('CONVERGED after %d epochs! Prev CE: %.5f current CE: %.5f', epoch, prev_train_ce, train_ce)
-                break
-            prev_train_ce = train_ce
-
-        if epoch % 5 == 4:
-            valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
-                                                       feed_dict={x_: valid_data.X, y_: valid_data.Y})
-            logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
-                        epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
-        
-        if epoch % 25 == 0 and epoch > min_iterations:
-            logger.info('Saving model at step %d .......', epoch)
-            save_path = saver.save(sess, args.model_filename, global_step = epoch)
-            logger.info('ok')
-
-    logger.info('Done training!')
-    train_writer.close()
-    test_writer.close()
-
-    valid_data = dataset.read_dataset('data/1/ML_noise/y_val_ml_noise_10.csv', 'data/1/ML_noise/b_val_ml_noise_10.csv', transposed=False)
-    valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
-                                                feed_dict={x_: valid_data.X, y_: valid_data.Y})
-    logger.info('VALID CE: %.5f column BER: [%s] (mean: %.5f)',
-                       valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
-    with open('noised_bits_db_8x128_8x32.txt', 'w') as f:
+    logger.info('Apply model on noised test data')
+    test_filename = args.test_filename
+    if not test_filename:
+        test_filename = 'noised_bits_db_%dx%d_%dx%d.txt' % (args.shared_layers, args.n_shared, args.finger_layers, args.n_hidden)
+    logger.info('Write results in %s', test_filename)
+    with open(test_filename, 'w') as f:
         for t in xrange(13):
             logger.info('Reading final test data...%d', t)
-            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=True)
+            X_test, Y_test = utils.read_data('data/1/db/Y_noise_db_%d.csv' % t, 'data/1/db/b_noise_db_%d.csv' % t, transposed=False)
 
             test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
             logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
                     test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
-            print >> f, ','.join('%.5f' % c for c in test_cber)
-            logger.info('I am fine!')
-
-    save_path = saver.save(sess, args.model_filename, global_step = max_iterations)
-    logger.info('Model stored in %s' % save_path)
+            print >> f, ','.join('%.5f' % c for c in test_cber) + ',' + test_ber
+    logger.info('I am done!')
 
 
 if __name__ == '__main__':
@@ -146,8 +143,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--learning-rate', help='Initial learning rate', type=float, default=0.01)
     parser.add_argument('--min-epoch', help='Epoch to load model from', type=int, default=0)
-    parser.add_argument('--max-epochs', help='Number of epochs to run trainer', type=int, default=100)
-    parser.add_argument('-c', '--convergence', help='Min CE change to converge', type=float)
+    parser.add_argument('--max-epoch', help='Number of epochs to run trainer', type=int, default=100)
     parser.add_argument('--batch-size', help='Batch size', type=int, default=100)
     parser.add_argument('--n-shared', help='Size of shared hidden layer', type=int, default=32)
     parser.add_argument('--shared-layers', help='Number of shared hidden layers', type=int, default=1)
@@ -157,5 +153,6 @@ if __name__ == '__main__':
     parser.add_argument('--model-filename', help='Path to save model', default='models/shared-bit')
     parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/shared-bit')
     parser.add_argument('--clean-logs', help='Clean logs dir', action='store_true')
+    parser.add_argument('--test-filename', help='Path to save noised test result')
     args = parser.parse_args()
     main(args)
