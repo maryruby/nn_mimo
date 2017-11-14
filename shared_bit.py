@@ -142,7 +142,7 @@ def main(args):
             test_cber, test_ber, test_ce = sess.run([cber, ber, loss], {x_: X_test, y_: Y_test})
             logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
                     test_ce, ','.join('%.5f' % c for c in test_cber), test_ber)
-            print >> f, ','.join('%.5f' % c for c in test_cber) + ',' + test_ber
+            print >> f, ','.join('%.5f' % c for c in test_cber)
     logger.info('I am done!')
 
 
