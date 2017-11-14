@@ -73,8 +73,8 @@ def main(args):
         train_writer, test_writer = prepare_writers(sess, args)
 
         logger.info('Reading train data...')
-        # train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/z_ml_noise_10.csv', transposed=False)
-        train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=False)
+        train_data = dataset.read_dataset('data/1/ML_noise/y_ml_noise_10.csv', 'data/1/ML_noise/b_ml_noise_10.csv', transposed=False)
+        # train_data = dataset.read_dataset('data/1/y_10_7.csv', 'data/1/b_10_7.csv', transposed=False)
         logger.info('shape x %s, shape y %s', train_data.X.shape, train_data.Y.shape)
         
         logger.info('Reading validation data...')
@@ -82,6 +82,7 @@ def main(args):
         
         global_iteration = 0
         logger.info('Training...')
+        prev_train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
         for epoch in xrange(args.min_epoch, args.max_epoch):
             start_time = time.time()
             
@@ -98,13 +99,20 @@ def main(args):
             duration = time.time() - start_time
             logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
+            if args.convergence is not None and epoch % 10 == 0:
+                train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
+                if abs(prev_train_ce - train_ce) < args.convergence:
+                    logger.info('CONVERGED after %d epochs! Prev CE: %.5f current CE: %.5f', epoch, prev_train_ce, train_ce)
+                    break
+                prev_train_ce = train_ce
+
             if epoch % 5 == 4:
                 valid_cber, valid_ber, valid_ce = sess.run([cber, ber, loss], 
                                                            feed_dict={x_: valid_data.X, y_: valid_data.Y})
                 logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
                             epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), valid_ber)
             
-            if epoch % 25 == 0 and epoch > min_iterations:
+            if epoch % 25 == 0 and epoch > args.min_epoch:
                 logger.info('Saving model at step %d .......', epoch)
                 save_path = saver.save(sess, args.model_filename, global_step = epoch)
                 logger.info('ok')
@@ -144,6 +152,7 @@ if __name__ == '__main__':
     parser.add_argument('--learning-rate', help='Initial learning rate', type=float, default=0.01)
     parser.add_argument('--min-epoch', help='Epoch to load model from', type=int, default=0)
     parser.add_argument('--max-epoch', help='Number of epochs to run trainer', type=int, default=100)
+    parser.add_argument('-c', '--convergence', help='Min CE change to converge', type=float)
     parser.add_argument('--batch-size', help='Batch size', type=int, default=100)
     parser.add_argument('--n-shared', help='Size of shared hidden layer', type=int, default=32)
     parser.add_argument('--shared-layers', help='Number of shared hidden layers', type=int, default=1)
