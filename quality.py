@@ -16,13 +16,13 @@ def column_bit_error_rate(predicted, real):
     return np.sum(np.not_equal(predicted, real), 0) / float(real.shape[0])
 
 
-def row_error_rate(predicted, real):
+def symbol_error_rate(predicted, real):
     """Returns rate of correctly predicted rows"""
     total_elems = (real.shape[0] * real.shape[1])
     return np.sum(np.any(np.not_equal(predicted, real), 1)) / float(total_elems)
 
 
-def tf_binary_error_rate(logits, labels, threshold=0.5):
+def tf_binary_error_rate(logits, labels, threshold=0.0):
     t = tf.constant(threshold)
     with tf.name_scope('ber'):
         with tf.name_scope('errors'):

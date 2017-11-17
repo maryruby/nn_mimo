@@ -119,7 +119,7 @@ def metrics(x_, y_, X, Y, loss, out_layer, sess, threshold=0.5):
     predicted = make_predicted_matrix(out_layer, sess, feed_dict, threshold)
     cber = quality.column_bit_error_rate(predicted, Y)
     ber = np.mean(cber)
-    rer = quality.row_error_rate(predicted, Y)
+    rer = quality.symbol_error_rate(predicted, Y)
     return ce, cber, ber, rer
 
 

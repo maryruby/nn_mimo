@@ -54,7 +54,7 @@ def main(args):
         logger.info('Restore model of %d epoch from %s', args.min_epoch, model_filename)
         saver.restore(sess, model_filename)
 
-    if args.min_epoch >= args.max_epoch:
+    if args.min_epoch + 1 >= args.max_epoch:
         logger.info('Do not train, just apply model...')
     else:
         merged = tf.summary.merge_all()
@@ -71,32 +71,36 @@ def main(args):
         global_iteration = 0
         logger.info('Training...')
         prev_train_ce = sess.run(loss, feed_dict={x_: train_data.X, y_: train_data.Y})
-        for epoch in xrange(args.min_epoch, args.max_epoch):
-            start_time = time.time()
-            
-            for batch in train_data.batches_generator(args.batch_size):
-                if global_iteration % 5000 == 4999:
-                    summary, train_ce, _, global_iteration = sess.run([merged, loss, train_op, global_step], 
-                                                            feed_dict={x_: batch.X, y_: batch.Y})
-                    logger.info('TRAIN step: %d CE: %.5f', global_iteration, train_ce)
-                    train_writer.add_summary(summary, global_iteration)
-                else:
-                    _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
-            duration = time.time() - start_time
-            logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
+        try:
+            for epoch in xrange(args.min_epoch + 1, args.max_epoch):
+                start_time = time.time()
+                
+                for batch in train_data.batches_generator(args.batch_size):
+                    if args.verbose and global_iteration % 5000 == 4999:
+                        summary, train_ce, _, global_iteration = sess.run([merged, loss, train_op, global_step], 
+                                                                feed_dict={x_: batch.X, y_: batch.Y})
+                        logger.info('TRAIN step: %d CE: %.5f', global_iteration, train_ce)
+                        train_writer.add_summary(summary, global_iteration)
+                    else:
+                        _, global_iteration = sess.run([train_op, global_step], feed_dict={x_: batch.X, y_: batch.Y})
+                duration = time.time() - start_time
+                logger.debug('Epoch %d done for %.2f secs (current global iteration: %d)', epoch, duration, global_iteration)
 
-            if epoch >= 0:
-                net_outputs, valid_ce = sess.run([predictions, loss], 
-                                                 feed_dict={x_: valid_data.X, y_: valid_data.Y})
-                valid_cber = quality.column_bit_error_rate(b_tensors[net_outputs], valid_data.Y)
-                logger.info('VALID epoch: %d CE: %.5f column BER: [%s] (mean: %.5f)',
-                            epoch, valid_ce, ','.join('%.5f' % c for c in valid_cber), np.mean(valid_cber))
-            
-            if epoch % 25 == 0 and epoch > args.min_epoch:
-                logger.info('Saving model at step %d .......', epoch)
-                save_path = saver.save(sess, args.model_filename, global_step = epoch)
-                logger.info('ok')
-
+                if epoch >= 0:
+                    net_outputs, valid_ce = sess.run([predictions, loss], 
+                                                     feed_dict={x_: valid_data.X, y_: valid_data.Y})
+                    predicted = b_tensors[net_outputs]
+                    valid_cber = quality.column_bit_error_rate(predicted, valid_data.Y)
+                    valid_ser = quality.symbol_error_rate(predicted, valid_data.Y)
+                    logger.info('VALID epoch: %d CE: %.5f SER: %.7f column BER: [%s] (mean: %.5f)',
+                                epoch, valid_ser, valid_ce, ','.join('%.5f' % c for c in valid_cber), np.mean(valid_cber))
+                
+                if epoch % 10 == 0 and epoch > args.min_epoch:
+                    logger.info('Saving model at step %d .......', epoch)
+                    save_path = saver.save(sess, args.model_filename, global_step = epoch)
+                    logger.info('ok')
+        except KeyboardInterrupt:
+            logger.warn('Interrupted!')
         logger.info('Done training!')
         train_writer.close()
         test_writer.close()
@@ -107,7 +111,7 @@ def main(args):
     logger.info('Apply model on noised test data')
     test_filename = args.test_filename
     if not test_filename:
-        test_filename = 'noised_bits_db_%dx%d_%dx%d.txt' % (args.shared_layers, args.n_shared, args.finger_layers, args.n_hidden)
+        test_filename = 'noised_bits_db_%dx%d.txt' % (args.hidden_layers, args.n_hidden)
     logger.info('Write results in %s', test_filename)
     with open(test_filename, 'w') as f:
         for t in xrange(13):
@@ -116,9 +120,11 @@ def main(args):
 
             net_outputs, test_ce = sess.run([predictions, loss], 
                                             feed_dict={x_: X_test, y_: Y_test})
-            test_cber = quality.column_bit_error_rate(b_tensors[net_outputs], valid_data.Y)
-            logger.info('TEST CE %d: %.5f column BER: [%s] (mean: %.5f)', t, 
-                    test_ce, ','.join('%.5f' % c for c in test_cber), np.mean(test_cber))
+            predicted = b_tensors[net_outputs]
+            test_cber = quality.column_bit_error_rate(predicted, Y_test)
+            test_ser = quality.symbol_error_rate(predicted, Y_test)
+            logger.info('TEST CE %d: %.5f SER: %.7f column BER: [%s] (mean: %.5f)', t, 
+                    test_ce, test_ser, ','.join('%.5f' % c for c in test_cber), np.mean(test_cber))
             print >> f, ','.join('%.5f' % c for c in test_cber)
     logger.info('I am done!')
 
@@ -136,6 +142,7 @@ if __name__ == '__main__':
     parser.add_argument('--model-filename', help='Path to save model', default='models/max-likelihood')
     parser.add_argument('--log-dir', help='Path to save tensorboard logs', default='logs/tensorboard/max-likelihood')
     parser.add_argument('--clean-logs', help='Clean logs dir', action='store_true')
+    parser.add_argument('-v', '--verbose', help='Verbose (tensorboard and train outputs)', action='store_true')
     parser.add_argument('--test-filename', help='Path to save noised test result')
     args = parser.parse_args()
     main(args)
